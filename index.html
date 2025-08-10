@@ -1,415 +1,386 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vitamina K — Publicación</title>
-<meta name="description" content="Publicación viva con carrusel, stories y encuesta.">
-<meta property="og:title" content="Vitamina K — Publicación">
-<meta property="og:description" content="Publicación viva con carrusel, stories y encuesta.">
-<meta property="og:type" content="website">
-<style>
-  :root { --fg:#101216; --bg:#f7f8fb; --card:#ffffffcc; --accent:#0b5cff; --muted:#6b7280; }
-  @media (prefers-color-scheme: dark){ :root{ --fg:#eceff4; --bg:#0b0d12; --card:#0f1320cc; --accent:#7aa2ff; --muted:#9aa3b2; } }
-  *{box-sizing:border-box}
-  html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
- .wrap{min-height:100%;display:grid;place-items:center;padding:24px}
-  .card{width:clamp(320px,92vw,860px);border:1px solid #00000012;border-radius:18px;padding:22px 22px 18px;background:var(--card);backdrop-filter:saturate(1.2) blur(12px);box-shadow:0 12px 42px #00000014}
-  .brand{display:flex;gap:10px;align-items:center;margin-bottom:6px;font-weight:700;letter-spacing:.2px}
-  .headline{font-size:clamp(22px,5vw,38px);margin:8px 0 6px}
-  .kpi{font-size:clamp(26px,6.5vw,52px);font-weight:800;margin:2px 0 8px;color:var(--accent)}
-  .sub{opacity:.9;margin:0 0 12px;color:var(--muted)}
-  .muted{color:var(--muted)}
-  .bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);transform-origin:0 0;transform:scaleX(0);z-index:10}
-  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-  button, .btn{border:1px solid #00000022;background:transparent;padding:10px 14px;border-radius:12px;cursor:pointer;color:inherit;text-decoration:none}
-  button:hover, .btn:hover{border-color:#00000044}
-  .hidden{display:none}
+  <!-- META / CABECERA DEL DOCUMENTO -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Vitamina K — Publicación</title>
+  <meta name="description" content="Publicación viva con carrusel, stories y encuesta.">
+  <meta property="og:type" content="website">
 
-  /* Carrusel base */
-  .carousel{position:relative;border-radius:14px;overflow:hidden;user-select:none}
-  .track{display:flex;transition:transform .35s ease-out;will-change:transform}
-  .slide{min-width:100%;height:220px;background:#000;display:grid;place-items:center;position:relative}
-  .slide img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.02)}
-  .caption{position:absolute;left:12px;bottom:12px;right:12px;background:linear-gradient( to top, #0009, #0000 );color:#fff;padding:10px 12px;border-radius:10px;font-weight:600}
-  .nav{position:absolute;top:50%;transform:translateY(-50%);display:flex;gap:8px;width:100%;justify-content:space-between;padding:0 6px;pointer-events:none}
-  .nav button{pointer-events:auto;background:rgba(0,0,0,.35);color:#fff;border:0;border-radius:10px;padding:8px 10px}
-  .dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
-  .dot{width:8px;height:8px;border-radius:50%;background:#00000033}
-  .dot.active{background:var(--accent)}
+  <style>
+    /* ====== VARIABLES Y BASE ====== */
+    :root{--fg:#101216;--bg:#0b0d12;--card:#0f1320cc;--accent:#7aa2ff;--muted:#9aa3b2}
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
 
-  /* Stories swipe (texto sobre imagen) */
-  .stories{margin-top:12px;border:1px dashed #00000022;border-radius:14px;padding:8px}
-  .story-frame{position:relative;height:320px;border-radius:12px;overflow:hidden}
-  .story-track{display:flex;height:100%;transition:transform .3s ease-out}
-  .story{min-width:100%;position:relative;background:#000}
-  .story img{width:100%;height:100%;object-fit:cover;opacity:.88}
-  .story .label{position:absolute;left:0;top:0;padding:8px 10px;background:rgba(0,0,0,.45);color:#fff;border-bottom-right-radius:10px;font-weight:700}
-  .story .text{position:absolute;left:10px;right:10px;bottom:12px;color:#fff;font-weight:700;font-size:clamp(16px,3.5vw,24px);text-shadow:0 2px 12px #000}
-  .story-dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
-  .story-dot{flex:1;height:4px;background:#00000033;border-radius:3px}
-  .story-dot.active{background:var(--accent)}
+    /* CONTENEDOR CENTRAL DE LA PÁGINA (CENTRADO VERTICAL Y HORIZONTAL) */
+    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
 
-  /* Encuesta */
-  .poll{margin-top:14px;padding:12px;border:1px solid #00000018;border-radius:12px}
-  .poll h3{margin:0 0 8px}
-  .opt{display:flex;align-items:center;gap:8px;margin:8px 0}
-  .barline{flex:1;height:8px;background:#00000015;border-radius:6px;overflow:hidden}
-  .fill{height:100%;width:0%;background:var(--accent);transition:width .4s ease}
-  .only-once{font-size:13px}
+    /* TARJETAS GENERALES (BORDES, SOMBRA, FONDO) */
+    .card{
+      width:clamp(320px,92vw,860px);
+      border:1px solid #0002;border-radius:18px;padding:22px;
+      background:var(--card);backdrop-filter:saturate(1.2) blur(12px);
+      box-shadow:0 12px 42px #0003
+    }
 
-/* --- HERO (tarjeta tras caducar) --- */
-.card.hero{
-  width:clamp(380px,96vw,1000px);
-  padding:32px;
-  border-radius:22px;
-  background:
-    radial-gradient(1200px 600px at 10% -10%, #0b5cff18, transparent 60%),
-    radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
-    var(--card);
-}  /* ← CIERRE del bloque .card.hero */
+    /* TIPOGRAFÍA DE TÍTULOS / KPIs / SUBTÍTULOS */
+    .brand{display:flex;gap:10px;align-items:center;margin-bottom:6px;font-weight:700;letter-spacing:.2px}
+    .headline{font-size:clamp(22px,5vw,38px);margin:8px 0 6px}
+    .kpi{font-size:clamp(26px,6.5vw,52px);font-weight:800;margin:2px 0 8px;color:var(--accent)}
+    .sub{opacity:.9;margin:0 0 12px;color:var(--muted)}
+    .muted{color:var(--muted)}
 
-/* ↓ Estos son BLOQUES NUEVOS, van FUERA del bloque anterior */
-.hero-grid{
-  display:grid;
-  grid-template-columns:1fr 1.2fr;
-  gap:22px;
-  align-items:start;   /* alineado arriba */
-}
+    /* BARRA SUPERIOR DE PROGRESO (DECORATIVA) */
+    .bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);transform-origin:0 0;transform:scaleX(0);z-index:10}
 
-.hero-left{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
+    /* CONTROLES AL PIE DE LA VISTA “VIVA” (BOTONES + CONTADOR) */
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button,.btn{border:1px solid #0003;background:transparent;padding:10px 14px;border-radius:12px;cursor:pointer;color:inherit;text-decoration:none}
+    .hidden{display:none}
 
-.hero-right{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  justify-content:flex-start;
-  align-self:flex-start;   /* fuerza a empezar arriba */
-}
+    /* ====== CARRUSEL DE IMÁGENES ====== */
+    .carousel{position:relative;border-radius:14px;overflow:hidden;user-select:none;margin-bottom:10px}
+    .track{display:flex;transition:transform .35s ease-out}
+    .slide{min-width:100%;height:220px;position:relative}
+    .slide img{width:100%;height:100%;object-fit:cover;display:block}
+    .caption{position:absolute;left:12px;bottom:12px;right:12px;background:linear-gradient(to top,#0009,#0000);color:#fff;padding:10px 12px;border-radius:10px;font-weight:600}
+    .nav{position:absolute;top:50%;transform:translateY(-50%);display:flex;gap:8px;width:100%;justify-content:space-between;padding:0 6px;pointer-events:none}
+    .nav button{pointer-events:auto;background:rgba(0,0,0,.35);color:#fff;border:0;border-radius:10px;padding:8px 10px}
+    .dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+    .dot{width:8px;height:8px;border-radius:50%;background:#0005}
+    .dot.active{background:var(--accent)}
 
-.hero-right > *:first-child {
-  margin-top:0;           /* elimina margen del h2 */
-}
-  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;gap:16px} }
+    /* ====== STORIES (PANTALLAS TIPO HISTORIAS) ====== */
+    .stories{margin-top:12px;border:1px dashed #0003;border-radius:14px;padding:8px}
+    .story-frame{position:relative;height:320px;border-radius:12px;overflow:hidden}
+    .story-track{display:flex;height:100%;transition:transform .3s ease-out}
+    .story{min-width:100%;position:relative;background:#000}
+    .story img{width:100%;height:100%;object-fit:cover;opacity:.9}
+    .story .label{position:absolute;left:0;top:0;padding:8px 10px;background:rgba(0,0,0,.45);color:#fff;border-bottom-right-radius:10px;font-weight:700}
+    .story .text{position:absolute;left:10px;right:10px;bottom:12px;color:#fff;font-weight:700;font-size:clamp(16px,3.5vw,24px);text-shadow:0 2px 12px #000}
+    .story-dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+    .story-dot{flex:1;height:4px;background:#0005;border-radius:3px}
+    .story-dot.active{background:var(--accent)}
 
-  .social-logos{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-  .logo-bubble{
-    width:84px;height:84px;border-radius:20px;display:grid;place-items:center;
-    background:#fff; box-shadow:0 14px 36px #0b5cff22;border:1px solid #0001
-  }
-  .logo-bubble svg{width:44px;height:44px}
-  .logo-bubble:hover{transform:translateY(-2px);transition:transform .18s ease}
+    /* ====== ENCUESTA (UI) ====== */
+    .poll{margin-top:14px;padding:12px;border:1px solid #0003;border-radius:12px}
+    .opt{display:flex;align-items:center;gap:8px;margin:8px 0}
+    .barline{flex:1;height:8px;background:#0004;border-radius:6px;overflow:hidden}
+    .fill{height:100%;width:0%;background:var(--accent);transition:width .4s ease}
+    .opt button[disabled]{opacity:.6;cursor:not-allowed}
+    .only-once{font-size:13px}
 
-  .hero-title{font-size:clamp(22px,5vw,40px);margin:0 0 12px;font-weight:900;letter-spacing:.2px}.hero-title{font-size:clamp(22px,5vw,40px);margin:0 0 12px;font-weight:900;letter-spacing:.2px}
-  .hero-copy{color:var(--muted);margin:4px 0 16px}
-  .cta-row{display:flex;gap:10px;flex-wrap:wrap}
-  .btn.primary{background:var(--accent);color:#fff;border-color:transparent;font-weight:700;padding:12px 16px;border-radius:14px}
-  .btn.primary:hover{filter:brightness(0.96)}
-  .btn.outline{border:2px solid var(--accent);padding:12px 16px;border-radius:14px;font-weight:700}
+    /* ====== HERO FINAL (TARJETA TRAS CADUCAR / FUERA DE HORARIO) ====== */
+    .card.hero{width:clamp(380px,96vw,1000px);padding:32px;border-radius:22px;background:
+        radial-gradient(1200px 600px at 10% -10%, #0b5cff18, transparent 60%),
+        radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
+        var(--card);}
+    .hero-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:22px;align-items:start}
+    .hero-left{display:flex;flex-direction:column;gap:10px}
+    .hero-right{display:flex;flex-direction:column;gap:12px;justify-content:flex-start;align-self:flex-start}
+    .hero-title{font-size:clamp(22px,5vw,40px);margin:0 0 12px;font-weight:900;letter-spacing:.2px}
+    .social-logos{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:6px}
+    .logo-bubble{width:84px;height:84px;border-radius:20px;display:grid;place-items:center;background:#fff;box-shadow:0 14px 36px #0b5cff22;border:1px solid #0001}
+    .logo-bubble svg{width:44px;height:44px}
+    .btn.primary{background:var(--accent);color:#fff;border-color:transparent;font-weight:700;padding:12px 16px;border-radius:14px}
+    .btn.outline{border:2px solid var(--accent);padding:12px 16px;border-radius:14px;font-weight:700}
 
-  @media (prefers-reduced-motion:no-preference){
-    .card.hero{animation:heroIn .45s ease-out both}
-    @keyframes heroIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
-  }
-
-  body.show-hero{
-    background:
-      radial-gradient(1200px 700px at 20% -10%, #0b5cff22, transparent 60%),
-      radial-gradient(900px 600px at 110% 10%, #8aa9ff22, transparent 60%),
-      var(--bg);
-  }
-</style>
+    /* FONDO CUANDO SE VE LA HERO (OPCIONAL) */
+    body.show-hero{background:
+        radial-gradient(1200px 700px at 50% -10%, #0b5cff22, transparent 60%),
+        radial-gradient(900px 600px at 50% 10%, #8aa9ff22, transparent 60%),
+        var(--bg);}
+  </style>
 </head>
 <body>
-<div class="bar" id="bar"></div>
-<div class="wrap">
-  <!-- Vista VIVA -->
-  <article class="card" id="view-live">
-    <div class="brand">VITAMINA K · Publicación</div>
-    <h1 class="headline" id="title">Cesta a 90€ y sueldos a 0</h1>
-    <div class="kpi" id="kpi">+276.000 visualizaciones</div>
-    <p class="sub" id="subtitle">Píldora clara y sin humo. Desaparece en horas.</p>
+  <!-- BARRA PROGRESO SUPERIOR -->
+  <div class="bar" id="bar"></div>
 
-    <!-- Carrusel de imágenes -->
-    <section class="carousel" id="carousel">
-      <div class="track" id="track">
-        <div class="slide"><img src="https://images.unsplash.com/photo-1586201375778-3d5f48f0b35f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Factura del súper, 2025</div></div>
-        <div class="slide"><img src="https://images.unsplash.com/photo-1500576992153-027bb7fbdc32?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Cola ante cajas automáticas</div></div>
-        <div class="slide"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Salarios congelados</div></div>
-        <div class="slide"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Comparativa 2018 vs 2025</div></div>
-      </div>
-      <div class="nav">
-        <button id="prev" aria-label="Anterior">←</button>
-        <button id="next" aria-label="Siguiente">→</button>
-      </div>
-      <div class="dots" id="dots"></div>
-    </section>
+  <div class="wrap">
+    <!-- ========== VISTA “VIVA” (se ve durante la ventana/tiempo) ========== -->
+    <article class="card" id="view-live">
+      <div class="brand" id="brandEl"></div>     <!-- NOMBRE DE LA SECCIÓN/MARCA -->
+      <h1 class="headline" id="title"></h1>      <!-- TÍTULO NOTICIA -->
+      <div class="kpi" id="kpi"></div>           <!-- KPI (puedes dejarlo vacío) -->
+      <p class="sub" id="subtitle"></p>          <!-- SUBTÍTULO NOTICIA -->
 
-    <!-- Stories -->
-    <section class="stories" id="stories">
-      <div class="story-frame" id="storyFrame">
-        <div class="story-track" id="storyTrack">
-          <div class="story">
-            <img src="https://images.unsplash.com/photo-1520975693414-8f1a6c5a7d8f?q=80&w=1400&auto=format&fit=crop" alt="">
-            <div class="label">1/4</div>
-            <div class="text">Si la cesta sube, el discurso baja…</div>
-          </div>
-          <div class="story">
-            <img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=1400&auto=format&fit=crop" alt="">
-            <div class="label">2/4</div>
-            <div class="text">Dato: +22% en básicos 2021→2025</div>
-          </div>
-          <div class="story">
-            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1400&auto=format&fit=crop" alt="">
-            <div class="label">3/4</div>
-            <div class="text">Sueldo real: plano como un ECG mal</div>
-          </div>
-          <div class="story">
-            <img src="https://images.unsplash.com/photo-1542219550-37153d387c47?q=80&w=1400&auto=format&fit=crop" alt="">
-            <div class="label">4/4</div>
-            <div class="text">La política te promete. La nevera te responde.</div>
-          </div>
+      <!-- CARRUSEL DE IMÁGENES (se rellena por JS con tu contenido) -->
+      <section class="carousel" id="carousel">
+        <div class="track" id="track"></div>
+        <div class="nav">
+          <button id="prev" aria-label="Anterior">←</button>
+          <button id="next" aria-label="Siguiente">→</button>
         </div>
+        <div class="dots" id="dots"></div>
+      </section>
+
+      <!-- STORIES (se rellenan por JS con tu contenido) -->
+      <section class="stories" id="stories">
+        <div class="story-frame"><div class="story-track" id="storyTrack"></div></div>
+        <div class="story-dots" id="storyDots"></div>
+      </section>
+
+      <!-- ENCUESTA (se rellena por JS con tus opciones) -->
+      <section class="poll">
+        <h3 id="pollQ"></h3>
+        <div class="only-once muted">Voto único por dispositivo</div>
+        <div id="options"></div>
+        <div id="totals" class="muted" style="margin-top:8px"></div>
+      </section>
+
+      <!-- CONTROLES: COPIAR TEXTO PARA X + MENSAJE/CONTADOR (puedes ocultar) -->
+      <div class="controls">
+        <button id="copy">Copiar para X</button>
+        <button id="toggle">Dato ↔ Contexto</button>
+        <span id="countdown" class="muted"></span>
       </div>
-      <div class="story-dots" id="storyDots">
-        <div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div>
-      </div>
-    </section>
+    </article>
 
-    <!-- Encuesta -->
-    <section class="poll" id="poll">
-      <h3>Si las elecciones fueran hoy, a quién votarías</h3>
-      <div class="only-once muted">Voto único por dispositivo</div>
-      <div id="options"></div>
-      <div id="totals" class="muted" style="margin-top:8px"></div>
-    </section>
-
-    <div class="controls">
-      <button id="copy">Copiar para X</button>
-      <button id="toggle">Dato ↔ Contexto</button>
-      <span id="countdown" class="muted"></span>
-    </div>
-  </article>
-
-  <!-- Vista BASE (cuando caduque) -->
-  <article class="card hero hidden" id="view-default">
-    <div class="brand">VITAMINA K</div>
-    <h1 class="headline">@vitaminak.of</h1>
-    <p class="sub">No vine a caer bien, vine a no caerme nunca.</p>
-
-    <div class="hero-grid">
-      <div class="hero-left">
-        <div class="social-logos">
-          <!-- Instagram -->
-          <a class="logo-bubble" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <defs>
-                <linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
+    <!-- ========== VISTA “HERO FINAL” (cuando acaba tiempo o fuera de horario) ========== -->
+    <article class="card hero hidden" id="view-default">
+      <div class="hero-grid">
+        <!-- Columna izquierda: marca/handle/bio + iconos -->
+        <div class="hero-left">
+          <div class="brand" id="brandFinal"></div>
+          <h1 class="headline" id="handleFinal"></h1>
+          <p class="sub" id="bioFinal"></p>
+          <div class="social-logos">
+            <!-- Icono Instagram (enlace lo pone JS) -->
+            <a class="logo-bubble" id="igLogo" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/>
-                </linearGradient>
-              </defs>
-              <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
-              <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
-              <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
-            </svg>
-          </a>
-          <!-- X -->
-          <a class="logo-bubble" href="https://x.com/vitaminakof" target="_blank" rel="noopener" aria-label="X (Twitter)">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
-            </svg>
-          </a>
+                </linearGradient></defs>
+                <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
+                <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
+                <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
+              </svg>
+            </a>
+            <!-- Icono X (enlace lo pone JS) -->
+            <a class="logo-bubble" id="xLogo" target="_blank" rel="noopener" aria-label="X">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Columna derecha: CTA seguir -->
+        <div class="hero-right">
+          <h2 class="hero-title" id="ctaTitle"></h2>
+          <p class="sub" id="ctaSub"></p>
+          <div class="cta-row">
+            <a class="btn primary" id="ctaX" target="_blank" rel="noopener">Seguir en X</a>
+            <a class="btn outline"  id="ctaIG" target="_blank" rel="noopener">Seguir en Instagram</a>
+          </div>
         </div>
       </div>
+    </article>
+  </div>
 
-      <div class="hero-right">
-        <h2 class="hero-title">SÍGUEME AHORA</h2>
-        <p class="hero-copy">X · Instagram</p>
-        <div class="cta-row">
-          <a class="btn primary" href="https://x.com/vitaminakof" target="_blank" rel="noopener">Seguir en X</a>
-          <a class="btn outline" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
-        </div>
-      </div>
-    </div>
-  </article>
-</div>
+  <script>
+    /* =====================================================
+       🧩 CONTENIDO: EDITA SOLO AQUÍ
+       (aquí es donde sustituyes la noticia cada vez)
+    ===================================================== */
+    const CONTENT = {
+      // EDITA: marca/cabecera de la noticia
+      brand: "VITAMINA K · Publicación",   // Ej: “VITAMINA K · Especial”
+      title: "",                            // TÍTULO de la noticia (vacío por defecto)
+      kpi: "",                              // KPI (puedes dejar vacío y no se verá nada)
+      subtitle: "",                         // SUBTÍTULO breve (vacío por defecto)
 
-<script>
-/* ========== CONFIG EDITABLE ========== */
-const CONFIG = {
-  expiresAt: Date.now() + 06*60*60*1000,    // 10 segundos
-  shareText: "El dato que no te cuentan. #VitaminaK",
-  datoHTML: "<strong>Dato</strong>: 62% paga más por lo mismo.",
-  contextoHTML: "<strong>Contexto</strong>: 2018 vs 2025: cesta +22% con salarios planos.",
-  title: "Cesta a 90€ y sueldos a 0",
-  kpi: "+276.000 visualizaciones",
-  subtitle: "Píldora clara y sin humo. Desaparece en horas.",
-  pollKey: "vk_poll_v2",
-  pollQuestion: "Si las elecciones fueran hoy, a quién votarías",
-  pollOptions: ["PSOE","PP","Vox","Se Acabó la Fiesta","Sumar/Podemos","Otros"]
-};
-/* ========== /CONFIG ========== */
+      // EDITA: dato/contexto (texto corto, puedes dejar vacío)
+      datoHTML: "",                         // Ej: "<strong>Dato</strong>: 62%..."
+      contextoHTML: "",                     // Ej: "<strong>Contexto</strong>: …"
 
-/* Montaje básico */
-title.textContent = CONFIG.title;
-kpi.textContent = CONFIG.kpi;
-subtitle.textContent = CONFIG.subtitle;
-let showingDato = true;
+      /* === HORARIO DE PUBLICACIÓN (elige un modo) ===
+         - daily: se ve todos los días entre “start” y “end” (hora local del visitante)
+         - window: solo entre las fechas/hora indicadas en ISO (una vez)
+      */
+      mode: "daily",                        // "daily" | "window"
+      dailyWindow: { start: "00:00", end: "23:59" },   // EDITA horas locales (HH:MM)
+      // windowISO: { start: "2025-08-10T12:00:00+02:00", end: "2025-08-11T12:00:00+02:00" },
 
-/* Cuenta atrás + cambio de vista */
-const live = document.getElementById('view-live');
-const def = document.getElementById('view-default');
-const countdownEl = document.getElementById('countdown');
-function tick() {
-  const ms = CONFIG.expiresAt - Date.now();
-  if (ms <= 0) {
-    live.classList.add('hidden');
-    def.classList.remove('hidden');
-    document.body.classList.add('show-hero');
-    return;
-  }
-  const h = Math.floor(ms/3600000),
-        m = Math.floor((ms%3600000)/60000),
-        s = Math.floor((ms%60000)/1000);
-  countdownEl.textContent = `Desaparece en ${h}h ${m}m ${s}s`;
-}
-setInterval(tick, 1000); tick();
+      // EDITA: carrusel (4–6 imágenes recomendadas)
+      carousel: [
+        // { src:"assets/images/tu-foto-1.webp", caption:"Pie de foto 1" },
+        // { src:"assets/images/tu-foto-2.webp", caption:"Pie de foto 2" },
+      ],
 
-/* Barra de progreso */
-const bar = document.getElementById('bar');
-document.addEventListener('scroll', () => {
-  const max = document.body.scrollHeight - innerHeight;
-  const p = max>0 ? scrollY/max : 0;
-  bar.style.transform = `scaleX(${p})`;
-}, {passive:true});
+      // EDITA: stories (se verán como 1/4, 2/4…)
+      stories: [
+        // { img:"assets/images/story-1.webp", text:"Texto de la story 1" },
+      ],
 
-/* Dato/Contexto */
-const toggleBtn = document.getElementById('toggle');
-toggleBtn.addEventListener('click', swap);
-function swap(){
-  showingDato = !showingDato;
-  toggleBtn.textContent = showingDato ? "Dato ↔ Contexto" : "Contexto ↔ Dato";
-}
+      // EDITA: encuesta (o deja vacío para no mostrarla)
+      pollQuestion: "",                     // Ej: "¿Qué te parece…?"
+      pollOptions: [],                      // Ej: ["Sí","No","Depende"]
+      pollKey: "vk_poll_v3",                // cambia para resetear votos locales
 
-/* Copiar para X */
-const copyBtn = document.getElementById('copy');
-copyBtn.addEventListener('click', async()=>{
-  try{
-    await navigator.clipboard.writeText(`${CONFIG.shareText} ${location.href}`);
-    copyBtn.textContent = "Copiado ✓";
-    setTimeout(()=>copyBtn.textContent="Copiar para X",1400);
-  }catch(e){ alert("No se pudo copiar"); }
-});
+      // EDITA: tarjeta final (tus redes)
+      finalBrand: "VITAMINA K",
+      finalHandle: "@vitaminak.of",
+      finalBio: "No vine a caer bien, vine a no caerme nunca.",
+      ctaTitle: "SÍGUEME AHORA",
+      ctaSub: "X · Instagram",
+      xUrl: "https://x.com/vitaminakof",
+      igUrl: "https://www.instagram.com/vitaminak.of",
 
-/* Carrusel imágenes (swipe + flechas) */
-(function(){
-  const track = document.getElementById('track');
-  const slides = Array.from(track.children);
-  const dots = document.getElementById('dots');
-  const prev = document.getElementById('prev');
-  const next = document.getElementById('next');
-  let i = 0, startX=0, dx=0;
+      // EDITA: texto para botón "Copiar para X"
+      shareText: "El dato que no te cuentan. #VitaminaK"
+    };
+    /* =========================
+       /🧩 FIN CONTENIDO (NO EDITES MÁS ABAJO)
+    ========================= */
 
-  slides.forEach((_,idx)=>{
-    const d=document.createElement('div'); d.className='dot'+(idx===0?' active':''); dots.appendChild(d);
-  });
-  function setIndex(n){
-    i = Math.max(0, Math.min(slides.length-1, n));
-    track.style.transform = `translateX(${-i*100}%)`;
-    dots.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('active',k===i));
-  }
-  prev.addEventListener('click', ()=>setIndex(i-1));
-  next.addEventListener('click', ()=>setIndex(i+1));
+    /* ====== MONTAJE INICIAL DE TEXTOS ====== */
+    const brandEl = document.getElementById('brandEl');
+    const titleEl = document.getElementById('title');
+    const kpiEl = document.getElementById('kpi');
+    const subtitleEl = document.getElementById('subtitle');
+    brandEl.textContent = CONTENT.brand || "";
+    titleEl.textContent = CONTENT.title || "";
+    kpiEl.textContent = CONTENT.kpi || "";
+    subtitleEl.textContent = CONTENT.subtitle || "";
 
-  // touch
-  track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; dx=0; },{passive:true});
-  track.addEventListener('touchmove', e=>{ dx=e.touches[0].clientX - startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; }, {passive:true});
-  track.addEventListener('touchend', ()=>{ if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); });
-
-  // mouse (desktop)
-  let down=false, start=0;
-  track.addEventListener('mousedown', e=>{down=true; start=e.clientX;});
-  window.addEventListener('mouseup', ()=>{if(!down) return; down=false; if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i);});
-  window.addEventListener('mousemove', e=>{ if(!down) return; dx=e.clientX-start; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`;});
-})();
-
-/* Stories swipe */
-(function(){
-  const track = document.getElementById('storyTrack');
-  const dots = Array.from(document.getElementById('storyDots').children);
-  const total = dots.length;
-  let i=0, startX=0, dx=0, timer;
-
-  function setIndex(n){ i=Math.max(0,Math.min(total-1,n)); track.style.transform=`translateX(${-i*100}%)`; dots.forEach((d,k)=>d.classList.toggle('active',k===i)); }
-  function autoplay(){ clearTimeout(timer); timer=setTimeout(()=>{ setIndex((i+1)%total); autoplay(); }, 3500); }
-  autoplay();
-
-  track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; dx=0; clearTimeout(timer);},{passive:true});
-  track.addEventListener('touchmove', e=>{ dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; },{passive:true});
-  track.addEventListener('touchend', ()=>{ if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); autoplay(); });
-
-  dots.forEach((d,idx)=>d.addEventListener('click', ()=>{ setIndex(idx); autoplay(); }));
-})();
-
-/* Encuesta (una vez por dispositivo, localStorage) */
-(function(){
-  const optionsWrap = document.getElementById('options');
-  const totalsEl = document.getElementById('totals');
-  const KEY = CONFIG.pollKey;
-  const saved = JSON.parse(localStorage.getItem(KEY) || '{"votes":{},"voted":false}');
-  const votes = saved.votes || {};
-  CONFIG.pollOptions.forEach(opt=>{ if(!(opt in votes)) votes[opt]=0; });
-
-  function totalVotes(){ return Object.values(votes).reduce((a,b)=>a+b,0); }
-
-  function render(){
-    optionsWrap.innerHTML = "";
-    const t = totalVotes();
-    CONFIG.pollOptions.forEach(opt=>{
-      const row = document.createElement('div'); row.className='opt';
-      const btn = document.createElement('button'); btn.textContent = saved.voted ? "Votado" : "Votar";
-      btn.disabled = !!saved.voted;
-      btn.addEventListener('click', ()=> vote(opt));
-      const name = document.createElement('div'); name.style.minWidth='150px'; name.textContent = opt;
-      const bar = document.createElement('div'); bar.className='barline';
-      const fill = document.createElement('div'); fill.className='fill';
-      const pct = t ? Math.round(votes[opt]*100/t) : 0;
-      fill.style.width = pct+'%';
-      bar.appendChild(fill);
-      const perc = document.createElement('div'); perc.style.minWidth='38px'; perc.className='muted'; perc.textContent = (pct||0) + "%";
-      row.appendChild(btn); row.appendChild(name); row.appendChild(bar); row.appendChild(perc);
-      optionsWrap.appendChild(row);
+    /* Botón “Dato ↔ Contexto” (solo texto del botón; tú decides si lo usas) */
+    let showingDato = true;
+    const toggleBtn = document.getElementById('toggle');
+    toggleBtn.addEventListener('click',()=>{
+      showingDato=!showingDato;
+      toggleBtn.textContent = showingDato ? "Dato ↔ Contexto" : "Contexto ↔ Dato";
     });
-    totalsEl.textContent = `Total votos (local): ${totalVotes()}`;
-  }
 
-  function vote(option){
-    if(saved.voted) return;
-    votes[option] = (votes[option]||0) + 1;
-    saved.voted = true;
-    saved.votes = votes;
-    localStorage.setItem(KEY, JSON.stringify(saved));
-    render();
-  }
+    /* ====== HORARIO (sin cuenta atrás) ====== */
+    const live = document.getElementById('view-live');
+    const def  = document.getElementById('view-default');
+    const countdownEl = document.getElementById('countdown'); // lo dejamos vacío
+    function showView(liveOn){
+      live.classList.toggle('hidden', !liveOn);
+      def.classList.toggle('hidden',  liveOn);
+      document.body.classList.toggle('show-hero', !liveOn);
+      countdownEl.textContent = ""; // sin contador
+    }
+    function inFixedWindow(startISO, endISO){
+      const now=Date.now(), s=Date.parse(startISO), e=Date.parse(endISO);
+      if(isNaN(s)||isNaN(e)) return false; return now>=s && now<e;
+    }
+    function inDailyWindow(startHM, endHM){
+      const [sh,sm]=(startHM||"00:00").split(":").map(Number);
+      const [eh,em]=(endHM||"23:59").split(":").map(Number);
+      const now=new Date(), start=new Date(now), end=new Date(now);
+      start.setHours(sh||0, sm||0, 0, 0); end.setHours(eh||0, em||0, 0, 0);
+      if(end<=start) end.setDate(end.getDate()+1); // cruza medianoche
+      // si es de madrugada y aún no llegó start, mueve rango a “ayer→hoy”
+      if(now<start && (end-start)>12*3600*1000){ start.setDate(start.getDate()-1); end.setDate(end.getDate()-1); }
+      return now>=start && now<end;
+    }
+    function reevaluate(){
+      let liveOn=false;
+      if(CONTENT.mode==="window" && CONTENT.windowISO){
+        liveOn = inFixedWindow(CONTENT.windowISO.start, CONTENT.windowISO.end);
+      }else{
+        liveOn = inDailyWindow(CONTENT.dailyWindow?.start, CONTENT.dailyWindow?.end);
+      }
+      showView(liveOn);
+    }
+    reevaluate(); setInterval(reevaluate, 30*1000);
 
-  render();
-})();
+    /* ====== BARRA PROGRESO (DECORATIVA) ====== */
+    const bar=document.getElementById('bar');
+    document.addEventListener('scroll',()=>{const max=document.body.scrollHeight-innerHeight; const p=max>0?scrollY/max:0; bar.style.transform=`scaleX(${p})`;},{passive:true});
 
-/* Accesos menores */
-document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='d') swap(); });
-</script>
+    /* ====== COPIAR TEXTO PARA X ====== */
+    document.getElementById('copy').addEventListener('click',async()=>{
+      try{
+        await navigator.clipboard.writeText(`${CONTENT.shareText||""} ${location.href}`);
+        const b=document.getElementById('copy'); b.textContent="Copiado ✓"; setTimeout(()=>b.textContent="Copiar para X",1400);
+      }catch(e){ alert("No se pudo copiar"); }
+    });
+
+    /* ====== CARRUSEL (relleno desde CONTENT.carousel) ====== */
+    (function(){
+      const track=document.getElementById('track'), dots=document.getElementById('dots');
+      (CONTENT.carousel||[]).forEach((it,i)=>{
+        const slide=document.createElement('div'); slide.className='slide';
+        slide.innerHTML=`<img src="${it.src}" alt=""><div class="caption">${it.caption||""}</div>`;
+        track.appendChild(slide);
+        const d=document.createElement('div'); d.className='dot'+(i===0?' active':''); dots.appendChild(d);
+      });
+      if(!CONTENT.carousel?.length){document.querySelector('.carousel').classList.add('hidden');}
+      const prev=document.getElementById('prev'), next=document.getElementById('next'); let i=0,startX=0,dx=0;
+      function setIndex(n){i=Math.max(0,Math.min((CONTENT.carousel||[]).length-1,n)); track.style.transform=`translateX(${-i*100}%)`; dots.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('active',k===i));}
+      prev.addEventListener('click',()=>setIndex(i-1)); next.addEventListener('click',()=>setIndex(i+1));
+      track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX; dx=0;},{passive:true});
+      track.addEventListener('touchmove',e=>{dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${-i*100+(dx/innerWidth)*100}%)`;},{passive:true});
+      track.addEventListener('touchend',()=>{ if(Math.abs(dx)>40){ setIndex(i+(dx<0?1:-1)); } else setIndex(i); });
+    })();
+
+    /* ====== STORIES (relleno desde CONTENT.stories) ====== */
+    (function(){
+      const track=document.getElementById('storyTrack'); const dots=document.getElementById('storyDots');
+      (CONTENT.stories||[]).forEach((s,idx)=>{
+        const el=document.createElement('div'); el.className='story';
+        el.innerHTML=`<img src="${s.img}" alt=""><div class="label">${idx+1}/${CONTENT.stories.length}</div><div class="text">${s.text||""}</div>`;
+        track.appendChild(el);
+        const d=document.createElement('div'); d.className='story-dot'+(idx===0?' active':''); dots.appendChild(d);
+      });
+      if(!CONTENT.stories?.length){document.querySelector('.stories').classList.add('hidden'); return;}
+      const total=CONTENT.stories.length; let i=0, startX=0, dx=0, timer;
+      function setIndex(n){ i=Math.max(0,Math.min(total-1,n)); track.style.transform=`translateX(${-i*100}%)`; dots.querySelectorAll('.story-dot').forEach((d,k)=>d.classList.toggle('active',k===i)); }
+      function autoplay(){ clearTimeout(timer); timer=setTimeout(()=>{ setIndex((i+1)%total); autoplay(); }, 3500); }
+      autoplay();
+      track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX; dx=0; clearTimeout(timer);},{passive:true});
+      track.addEventListener('touchmove',e=>{dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${-i*100+(dx/innerWidth)*100}%)`;},{passive:true});
+      track.addEventListener('touchend',()=>{ if(Math.abs(dx)>40){ setIndex(i+(dx<0?1:-1)); } else setIndex(i); autoplay(); });
+      dots.querySelectorAll('.story-dot').forEach((d,idx)=>d.addEventListener('click',()=>{ setIndex(idx); autoplay(); }));
+    })();
+
+    /* ====== ENCUESTA (localStorage; un voto por dispositivo) ====== */
+    (function(){
+      const optionsWrap=document.getElementById('options'); const totalsEl=document.getElementById('totals'); const pollQ=document.getElementById('pollQ');
+      if(!CONTENT.pollQuestion || !CONTENT.pollOptions?.length){ document.querySelector('.poll').classList.add('hidden'); return; }
+      pollQ.textContent = CONTENT.pollQuestion;
+      const KEY = CONTENT.pollKey || 'vk_poll';
+      let saved; try{ saved=JSON.parse(localStorage.getItem(KEY) || "{}"); }catch(_){ saved={}; }
+      if(!saved || typeof saved!=='object') saved={}; if(!saved.votes) saved.votes={}; if(typeof saved.voted!=='boolean') saved.voted=false; if(!saved.choice) saved.choice="";
+      CONTENT.pollOptions.forEach(opt=>{ if(!(opt in saved.votes)) saved.votes[opt]=0; });
+      function totalVotes(){ return Object.values(saved.votes).reduce((a,b)=>a+b,0); }
+      function render(){
+        optionsWrap.innerHTML=""; const t=totalVotes();
+        CONTENT.pollOptions.forEach(opt=>{
+          const row=document.createElement('div'); row.className='opt';
+          const btn=document.createElement('button'); btn.textContent=saved.voted ? "Votado" : "Votar"; btn.disabled=!!saved.voted; btn.addEventListener('click',()=>vote(opt));
+          const name=document.createElement('div'); name.style.minWidth='150px'; name.textContent=opt;
+          const bar=document.createElement('div'); bar.className='barline'; const fill=document.createElement('div'); fill.className='fill';
+          const pct=t?Math.round((saved.votes[opt]||0)*100/t):0; fill.style.width=pct+'%'; bar.appendChild(fill);
+          const perc=document.createElement('div'); perc.style.minWidth='42px'; perc.className='muted'; perc.textContent=(pct||0)+"%";
+          row.appendChild(btn); row.appendChild(name); row.appendChild(bar); row.appendChild(perc);
+          if(saved.choice===opt){ const you=document.createElement('span'); you.className='muted'; you.style.marginLeft='6px'; you.textContent='· tu voto'; row.appendChild(you); }
+          optionsWrap.appendChild(row);
+        });
+        totalsEl.textContent = `Total votos (local): ${totalVotes()}`;
+      }
+      function vote(option){ if(saved.voted) return; if(!CONTENT.pollOptions.includes(option)) return;
+        saved.votes[option]=(saved.votes[option]||0)+1; saved.voted=true; saved.choice=option;
+        try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(_){} render();
+      }
+      render();
+    })();
+
+    /* ====== RELLENAR ENLACES/TEXTOS DE LA HERO FINAL ====== */
+    document.getElementById('brandFinal').textContent = CONTENT.finalBrand || "";
+    document.getElementById('handleFinal').textContent = CONTENT.finalHandle || "";
+    document.getElementById('bioFinal').textContent = CONTENT.finalBio || "";
+    document.getElementById('ctaTitle').textContent = CONTENT.ctaTitle || "";
+    document.getElementById('ctaSub').textContent   = CONTENT.ctaSub || "";
+    document.getElementById('ctaX').href = CONTENT.xUrl || "#";
+    document.getElementById('ctaIG').href = CONTENT.igUrl || "#";
+    document.getElementById('igLogo').href = CONTENT.igUrl || "#";
+    document.getElementById('xLogo').href  = CONTENT.xUrl || "#";
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
