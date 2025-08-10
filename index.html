@@ -2,8 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Vitamina K — Publicación</title>
 <meta name="description" content="Publicación viva con carrusel, stories y encuesta.">
 <meta property="og:title" content="Vitamina K — Publicación">
@@ -58,44 +57,51 @@
   .barline{flex:1;height:8px;background:#00000015;border-radius:6px;overflow:hidden}
   .fill{height:100%;width:0%;background:var(--accent);transition:width .4s ease}
   .only-once{font-size:13px}
-  
-/* --- HERO (tarjeta tras caducar) --- */
-.card.hero{
-  width:clamp(360px,96vw,980px);
-  padding:28px;
-  border-radius:22px;
-  background:
-    radial-gradient(1200px 600px at 10% -10%, #0b5cff18, transparent 60%),
-    radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
-    var(--card);
-}
-.hero-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:18px;align-items:center}
-@media (max-width:800px){ .hero-grid{grid-template-columns:1fr;gap:14px} }
 
-.avatar{
-  width:140px;height:140px;border-radius:20px;
-  display:grid;place-items:center;font-weight:900;font-size:40px;
-  background:linear-gradient(135deg,#0b5cff, #8aa9ff);
-  color:#fff; box-shadow:0 10px 30px #0b5cff44;
-  transform:perspective(600px) rotateY(-6deg) rotateX(3deg);
-}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #00000022;background:#ffffff40;backdrop-filter:blur(6px)}
+  /* --- HERO (tarjeta tras caducar) --- */
+  .card.hero{
+    width:clamp(360px,96vw,980px);
+    padding:28px;
+    border-radius:22px;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, #0b5cff18, transparent 60%),
+      radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
+      var(--card);
+  }
+  .hero-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:18px;align-items:center}
+  @media (max-width:800px){ .hero-grid{grid-template-columns:1fr;gap:14px} }
 
-.hero-title{font-size:clamp(20px,4.6vw,34px);margin:6px 0}
-.hero-copy{color:var(--muted);margin:6px 0 14px}
-.cta-row{display:flex;gap:10px;flex-wrap:wrap}
-.btn.primary{background:var(--accent);color:#fff;border-color:transparent}
-.btn.primary:hover{filter:brightness(0.95)}
-.hero-mini{display:flex;gap:8px;margin-top:10px}
-.pill{border:1px dashed #00000033;background:transparent;padding:8px 12px;border-radius:999px;cursor:pointer}
-.pill:hover{border-color:#00000066}
+  .avatar{
+    width:140px;height:140px;border-radius:20px;
+    display:grid;place-items:center;font-weight:900;font-size:40px;
+    background:linear-gradient(135deg,#0b5cff, #8aa9ff);
+    color:#fff; box-shadow:0 10px 30px #0b5cff44;
+    transform:perspective(600px) rotateY(-6deg) rotateX(3deg);
+  }
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #00000022;background:#ffffff40;backdrop-filter:blur(6px)}
 
-@media (prefers-reduced-motion:no-preference){
-  .card.hero{animation:heroIn .45s ease-out both}
-  @keyframes heroIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
-}
-  
+  .hero-title{font-size:clamp(20px,4.6vw,34px);margin:6px 0}
+  .hero-copy{color:var(--muted);margin:6px 0 14px}
+  .cta-row{display:flex;gap:10px;flex-wrap:wrap}
+  .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+  .btn.primary:hover{filter:brightness(0.95)}
+  .hero-mini{display:flex;gap:8px;margin-top:10px}
+  .pill{border:1px dashed #00000033;background:transparent;padding:8px 12px;border-radius:999px;cursor:pointer}
+  .pill:hover{border-color:#00000066}
+
+  @media (prefers-reduced-motion:no-preference){
+    .card.hero{animation:heroIn .45s ease-out both}
+    @keyframes heroIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  }
+
+  /* Fondo sutil cuando aparece la HERO */
+  body.show-hero{
+    background:
+      radial-gradient(1200px 700px at 20% -10%, #0b5cff22, transparent 60%),
+      radial-gradient(900px 600px at 110% 10%, #8aa9ff22, transparent 60%),
+      var(--bg);
+  }
 </style>
 </head>
 <body>
@@ -118,8 +124,8 @@
         <div class="slide"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Comparativa 2018 vs 2025</div></div>
       </div>
       <div class="nav">
-        <button id="prev" aria-label="Anterior">?</button>
-        <button id="next" aria-label="Siguiente">?</button>
+        <button id="prev" aria-label="Anterior">←</button>
+        <button id="next" aria-label="Siguiente">→</button>
       </div>
       <div class="dots" id="dots"></div>
     </section>
@@ -136,7 +142,7 @@
           <div class="story">
             <img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=1400&auto=format&fit=crop" alt="">
             <div class="label">2/4</div>
-            <div class="text">Dato: +22% en básicos 2021?2025</div>
+            <div class="text">Dato: +22% en básicos 2021→2025</div>
           </div>
           <div class="story">
             <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1400&auto=format&fit=crop" alt="">
@@ -165,7 +171,7 @@
 
     <div class="controls">
       <button id="copy">Copiar para X</button>
-      <button id="toggle">Dato ? Contexto</button>
+      <button id="toggle">Dato ↔ Contexto</button>
       <span id="countdown" class="muted"></span>
     </div>
   </article>
@@ -174,52 +180,50 @@
   <article class="card hero hidden" id="view-default">
     <div class="brand">VITAMINA K</div>
     <h1 class="headline">@vitaminak.of</h1>
-    <p class="sub">No vine a caer bien, vine a no caerme nunca. Sígueme en mis redes IG X.</p>
-   
+    <p class="sub">No vine a caer bien, vine a no caerme nunca. Sígueme en mis redes IG · X.</p>
+
     <div class="hero-grid">
-  <div class="hero-left">
-    <div class="avatar" aria-hidden="true">VK</div>
-    <div class="badges">
-      <span class="chip">#anticorrupción</span>
-      <span class="chip">#datosreales</span>
-      <span class="chip">#MadeInSpain</span>
-    </div>
-  </div>
+      <div class="hero-left">
+        <div class="avatar" aria-hidden="true">VK</div>
+        <div class="badges">
+          <span class="chip">#anticorrupción</span>
+          <span class="chip">#datosreales</span>
+          <span class="chip">#MadeInSpain</span>
+        </div>
+      </div>
 
-  <div class="hero-right">
-    <h2 class="hero-title">Lo importante explicado en pocos segundos</h2>
-    <p class="hero-copy">Publicaciones cortas, claras y con impacto. Sin ruido, sin humo, sin tiempo que perder.</p>
+      <div class="hero-right">
+        <h2 class="hero-title">Lo importante explicado en pocos segundos</h2>
+        <p class="hero-copy">Publicaciones cortas, claras y con impacto. Sin ruido, sin humo, sin tiempo que perder.</p>
 
-    <div class="cta-row">
-      <a class="btn primary" href="https://x.com/vitaminakof" target="_blank" rel="noopener">Seguir en X</a>
-      <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
-      <button class="btn" id="copy-hero">Copiar enlace</button>
-    </div>
+        <div class="cta-row">
+          <a class="btn primary" href="https://x.com/vitaminakof" target="_blank" rel="noopener">Seguir en X</a>
+          <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
+          <button class="btn" id="copy-hero">Copiar enlace</button>
+        </div>
 
-    <div class="hero-mini">
-      <button class="pill" id="notify-me">🔔 Recibir avisos</button>
-      <button class="pill" id="random-post">🎲 Ver publicación aleatoria</button>
+        <div class="hero-mini">
+          <button class="pill" id="notify-me">🔔 Recibir avisos</button>
+          <button class="pill" id="random-post">🎲 Ver publicación aleatoria</button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
   </article>
 </div>
 
 <script>
 /* ========== CONFIG EDITABLE ========== */
 const CONFIG = {
-  expiresAt: Date.now() + 10*1000,    // ahora + 6h
+  expiresAt: Date.now() + 10*1000,    // 10 segundos
   shareText: "El dato que no te cuentan. #VitaminaK",
   datoHTML: "<strong>Dato</strong>: 62% paga más por lo mismo.",
   contextoHTML: "<strong>Contexto</strong>: 2018 vs 2025: cesta +22% con salarios planos.",
   title: "Cesta a 90€ y sueldos a 0",
   kpi: "+276.000 visualizaciones",
   subtitle: "Píldora clara y sin humo. Desaparece en horas.",
-  pollKey: "vk_poll_v2",        // cambia si quieres “resetear” votos locales
+  pollKey: "vk_poll_v2",
   pollQuestion: "Si las elecciones fueran hoy, a quién votarías",
-  pollOptions: [
-    "PSOE","PP","Vox","Se Acabó la Fiesta","Sumar/Podemos","Otros"
-  ]
+  pollOptions: ["PSOE","PP","Vox","Se Acabó la Fiesta","Sumar/Podemos","Otros"]
 };
 /* ========== /CONFIG ========== */
 
@@ -244,11 +248,6 @@ function tick() {
         m = Math.floor((ms%3600000)/60000),
         s = Math.floor((ms%60000)/1000);
   countdown.textContent = `Desaparece en ${h}h ${m}m ${s}s`;
-
-}
-
-  const h = Math.floor(ms/3600000), m = Math.floor((ms%3600000)/60000), s = Math.floor((ms%60000)/1000);
-  countdown.textContent = `Desaparece en ${h}h ${m}m ${s}s`;
 }
 setInterval(tick, 1000); tick();
 
@@ -265,14 +264,14 @@ const toggleBtn = document.getElementById('toggle');
 toggleBtn.addEventListener('click', swap);
 function swap(){
   showingDato = !showingDato;
-  toggleBtn.textContent = showingDato ? "Dato ? Contexto" : "Contexto ? Dato";
+  toggleBtn.textContent = showingDato ? "Dato ↔ Contexto" : "Contexto ↔ Dato";
 }
 
 /* Copiar para X */
 copy.addEventListener('click', async()=>{
   try{
     await navigator.clipboard.writeText(`${CONFIG.shareText} ${location.href}`);
-    copy.textContent = "Copiado ?";
+    copy.textContent = "Copiado ✓";
     setTimeout(()=>copy.textContent="Copiar para X",1400);
   }catch(e){ alert("No se pudo copiar"); }
 });
@@ -284,7 +283,7 @@ copy.addEventListener('click', async()=>{
   const dots = document.getElementById('dots');
   const prev = document.getElementById('prev');
   const next = document.getElementById('next');
-  let i = 0, startX=0, dx=0, isDown=false;
+  let i = 0, startX=0, dx=0;
 
   slides.forEach((_,idx)=>{
     const d=document.createElement('div'); d.className='dot'+(idx===0?' active':''); dots.appendChild(d);
@@ -298,9 +297,9 @@ copy.addEventListener('click', async()=>{
   next.addEventListener('click', ()=>setIndex(i+1));
 
   // touch
-  track.addEventListener('touchstart', e=>{isDown=true; startX=e.touches[0].clientX; dx=0;},{passive:true});
-  track.addEventListener('touchmove', e=>{ if(!isDown) return; dx=e.touches[0].clientX - startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; }, {passive:true});
-  track.addEventListener('touchend', ()=>{ isDown=false; if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); });
+  track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; dx=0; },{passive:true});
+  track.addEventListener('touchmove', e=>{ dx=e.touches[0].clientX - startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; }, {passive:true});
+  track.addEventListener('touchend', ()=>{ if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); });
 
   // mouse (desktop)
   let down=false, start=0;
@@ -314,15 +313,15 @@ copy.addEventListener('click', async()=>{
   const track = document.getElementById('storyTrack');
   const dots = Array.from(document.getElementById('storyDots').children);
   const total = dots.length;
-  let i=0, startX=0, dx=0, isDown=false, timer;
+  let i=0, startX=0, dx=0, timer;
 
   function setIndex(n){ i=Math.max(0,Math.min(total-1,n)); track.style.transform=`translateX(${-i*100}%)`; dots.forEach((d,k)=>d.classList.toggle('active',k===i)); }
   function autoplay(){ clearTimeout(timer); timer=setTimeout(()=>{ setIndex((i+1)%total); autoplay(); }, 3500); }
   autoplay();
 
-  track.addEventListener('touchstart', e=>{isDown=true; startX=e.touches[0].clientX; dx=0; clearTimeout(timer);},{passive:true});
-  track.addEventListener('touchmove', e=>{ if(!isDown) return; dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; },{passive:true});
-  track.addEventListener('touchend', ()=>{ isDown=false; if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); autoplay(); });
+  track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; dx=0; clearTimeout(timer);},{passive:true});
+  track.addEventListener('touchmove', e=>{ dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; },{passive:true});
+  track.addEventListener('touchend', ()=>{ if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); autoplay(); });
 
   // clic en dots
   dots.forEach((d,idx)=>d.addEventListener('click', ()=>{ setIndex(idx); autoplay(); }));
@@ -374,7 +373,8 @@ copy.addEventListener('click', async()=>{
 
 /* Accesos menores */
 document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='d') swap(); });
-// --- Interacciones de la HERO ---
+
+/* --- Interacciones de la HERO --- */
 document.getElementById('copy-hero')?.addEventListener('click', async ()=>{
   try{
     await navigator.clipboard.writeText(location.href);
@@ -394,20 +394,9 @@ document.getElementById('random-post')?.addEventListener('click', ()=>{
   const pick = posts[Math.floor(Math.random()*posts.length)];
   location.href = pick;
 });
-
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
 
 
 
