@@ -208,7 +208,7 @@
 <script>
 /* ========== CONFIG EDITABLE ========== */
 const CONFIG = {
-  expiresAt: Date.now() + 1*10*00*0,    // ahora + 6h
+  expiresAt: Date.now() + 06*10*00*0,    // ahora + 6h
   shareText: "El dato que no te cuentan. #VitaminaK",
   datoHTML: "<strong>Dato</strong>: 62% paga más por lo mismo.",
   contextoHTML: "<strong>Contexto</strong>: 2018 vs 2025: cesta +22% con salarios planos.",
@@ -235,6 +235,13 @@ const def = document.getElementById('view-default');
 function tick() {
   const ms = CONFIG.expiresAt - Date.now();
   if (ms <= 0) { live.classList.add('hidden'); def.classList.remove('hidden'); return; }
+  if (ms <= 0) {
+  live.classList.add('hidden');
+  def.classList.remove('hidden');
+  document.body.classList.add('show-hero'); // <— añade esta línea
+  return;
+}
+
   const h = Math.floor(ms/3600000), m = Math.floor((ms%3600000)/60000), s = Math.floor((ms%60000)/1000);
   countdown.textContent = `Desaparece en ${h}h ${m}m ${s}s`;
 }
@@ -386,6 +393,7 @@ document.getElementById('random-post')?.addEventListener('click', ()=>{
 </script>
 </body>
 </html>
+
 
 
 
