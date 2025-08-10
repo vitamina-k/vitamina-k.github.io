@@ -60,35 +60,32 @@
 
   /* --- HERO (tarjeta tras caducar) --- */
   .card.hero{
-    width:clamp(360px,96vw,980px);
-    padding:28px;
+    width:clamp(380px,96vw,1000px);
+    padding:32px;
     border-radius:22px;
     background:
       radial-gradient(1200px 600px at 10% -10%, #0b5cff18, transparent 60%),
       radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
       var(--card);
   }
-  .hero-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:18px;align-items:center}
-  @media (max-width:800px){ .hero-grid{grid-template-columns:1fr;gap:14px} }
+  .hero-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:22px;align-items:center}
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;gap:16px} }
 
-  .avatar{
-    width:140px;height:140px;border-radius:20px;
-    display:grid;place-items:center;font-weight:900;font-size:40px;
-    background:linear-gradient(135deg,#0b5cff, #8aa9ff);
-    color:#fff; box-shadow:0 10px 30px #0b5cff44;
-    transform:perspective(600px) rotateY(-6deg) rotateX(3deg);
+  /* logos sociales circulares */
+  .social-logos{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .logo-bubble{
+    width:84px;height:84px;border-radius:20px;display:grid;place-items:center;
+    background:#fff; box-shadow:0 14px 36px #0b5cff22;border:1px solid #0001
   }
-  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-  .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #00000022;background:#ffffff40;backdrop-filter:blur(6px)}
+  .logo-bubble svg{width:44px;height:44px}
+  .logo-bubble:hover{transform:translateY(-2px);transition:transform .18s ease}
 
-  .hero-title{font-size:clamp(20px,4.6vw,34px);margin:6px 0}
-  .hero-copy{color:var(--muted);margin:6px 0 14px}
+  .hero-title{font-size:clamp(22px,5vw,40px);margin:6px 0;font-weight:900;letter-spacing:.2px}
+  .hero-copy{color:var(--muted);margin:4px 0 16px}
   .cta-row{display:flex;gap:10px;flex-wrap:wrap}
-  .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
-  .btn.primary:hover{filter:brightness(0.95)}
-  .hero-mini{display:flex;gap:8px;margin-top:10px}
-  .pill{border:1px dashed #00000033;background:transparent;padding:8px 12px;border-radius:999px;cursor:pointer}
-  .pill:hover{border-color:#00000066}
+  .btn.primary{background:var(--accent);color:#fff;border-color:transparent;font-weight:700;padding:12px 16px;border-radius:14px}
+  .btn.primary:hover{filter:brightness(0.96)}
+  .btn.outline{border:2px solid var(--accent);padding:12px 16px;border-radius:14px;font-weight:700}
 
   @media (prefers-reduced-motion:no-preference){
     .card.hero{animation:heroIn .45s ease-out both}
@@ -117,7 +114,6 @@
     <!-- Carrusel de IMÁGENES (swipe o flechas) -->
     <section class="carousel" id="carousel">
       <div class="track" id="track">
-        <!-- Cambia las URLs por imágenes reales de tu noticia -->
         <div class="slide"><img src="https://images.unsplash.com/photo-1586201375778-3d5f48f0b35f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Factura del súper, 2025</div></div>
         <div class="slide"><img src="https://images.unsplash.com/photo-1500576992153-027bb7fbdc32?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Cola ante cajas automáticas</div></div>
         <div class="slide"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Salarios congelados</div></div>
@@ -176,35 +172,47 @@
     </div>
   </article>
 
-  <!-- Vista BASE (cuando caduque) -->
+  <!-- Vista BASE (cuando caduque) — HERO renovada -->
   <article class="card hero hidden" id="view-default">
     <div class="brand">VITAMINA K</div>
     <h1 class="headline">@vitaminak.of</h1>
-    <p class="sub">No vine a caer bien, vine a no caerme nunca. Sígueme en mis redes IG · X.</p>
+    <p class="sub">No vine a caer bien, vine a no caerme nunca.</p>
 
     <div class="hero-grid">
       <div class="hero-left">
-        <div class="avatar" aria-hidden="true">VK</div>
-        <div class="badges">
-          <span class="chip">#anticorrupción</span>
-          <span class="chip">#datosreales</span>
-          <span class="chip">#MadeInSpain</span>
+        <!-- LOGOS sociales (sustituyen al “VK” y quitan hashtags) -->
+        <div class="social-logos">
+          <!-- Logo Instagram -->
+          <a class="logo-bubble" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/>
+                </linearGradient>
+              </defs>
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
+              <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
+              <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
+            </svg>
+          </a>
+          <!-- Logo X -->
+          <a class="logo-bubble" href="https://x.com/vitaminakof" target="_blank" rel="noopener" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
+            </svg>
+          </a>
         </div>
       </div>
 
       <div class="hero-right">
-        <h2 class="hero-title">Lo importante explicado en pocos segundos</h2>
-        <p class="hero-copy">Publicaciones cortas, claras y con impacto. Sin ruido, sin humo, sin tiempo que perder.</p>
+        <!-- CTA breve y potente -->
+        <h2 class="hero-title">SÍGUEME AHORA</h2>
+        <p class="hero-copy">X · Instagram</p>
 
+        <!-- Dos CTAs principales (solo seguir) -->
         <div class="cta-row">
           <a class="btn primary" href="https://x.com/vitaminakof" target="_blank" rel="noopener">Seguir en X</a>
-          <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
-          <button class="btn" id="copy-hero">Copiar enlace</button>
-        </div>
-
-        <div class="hero-mini">
-          <button class="pill" id="notify-me">🔔 Recibir avisos</button>
-          <button class="pill" id="random-post">🎲 Ver publicación aleatoria</button>
+          <a class="btn outline" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
         </div>
       </div>
     </div>
@@ -331,72 +339,3 @@ copy.addEventListener('click', async()=>{
 (function(){
   const optionsWrap = document.getElementById('options');
   const totalsEl = document.getElementById('totals');
-  const KEY = CONFIG.pollKey;
-  const saved = JSON.parse(localStorage.getItem(KEY) || '{"votes":{},"voted":false}');
-  const votes = saved.votes;
-  CONFIG.pollOptions.forEach(opt=>{ if(!(opt in votes)) votes[opt]=0; });
-
-  function totalVotes(){ return Object.values(votes).reduce((a,b)=>a+b,0); }
-
-  function render(){
-    optionsWrap.innerHTML = "";
-    const t = totalVotes();
-    CONFIG.pollOptions.forEach(opt=>{
-      const row = document.createElement('div'); row.className='opt';
-      const btn = document.createElement('button'); btn.textContent = saved.voted ? "Votado" : "Votar";
-      btn.disabled = !!saved.voted;
-      btn.addEventListener('click', ()=> vote(opt));
-      const name = document.createElement('div'); name.style.minWidth='150px'; name.textContent = opt;
-      const bar = document.createElement('div'); bar.className='barline';
-      const fill = document.createElement('div'); fill.className='fill';
-      const pct = t ? Math.round(votes[opt]*100/t) : 0;
-      fill.style.width = pct+'%';
-      bar.appendChild(fill);
-      const perc = document.createElement('div'); perc.style.minWidth='38px'; perc.className='muted'; perc.textContent = (pct||0) + "%";
-      row.appendChild(btn); row.appendChild(name); row.appendChild(bar); row.appendChild(perc);
-      optionsWrap.appendChild(row);
-    });
-    totalsEl.textContent = `Total votos (local): ${totalVotes()}`;
-  }
-
-  function vote(option){
-    if(saved.voted) return;
-    votes[option] = (votes[option]||0) + 1;
-    saved.voted = true;
-    saved.votes = votes;
-    localStorage.setItem(KEY, JSON.stringify(saved));
-    render();
-  }
-
-  render();
-})();
-
-/* Accesos menores */
-document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='d') swap(); });
-
-/* --- Interacciones de la HERO --- */
-document.getElementById('copy-hero')?.addEventListener('click', async ()=>{
-  try{
-    await navigator.clipboard.writeText(location.href);
-    const btn = document.getElementById('copy-hero');
-    btn.textContent = "Enlace copiado ✓";
-    setTimeout(()=>btn.textContent="Copiar enlace",1400);
-  }catch(e){ alert("No se pudo copiar"); }
-});
-
-document.getElementById('notify-me')?.addEventListener('click', ()=>{
-  alert("Pronto: avisos cuando publiquemos algo nuevo. Por ahora, sígueme en X/IG 😉");
-});
-
-document.getElementById('random-post')?.addEventListener('click', ()=>{
-  // Si en el futuro creas más páginas (publicacion-2.html, etc), añádelas aquí:
-  const posts = ["index.html" /*,"publicacion-2.html","publicacion-3.html"*/];
-  const pick = posts[Math.floor(Math.random()*posts.length)];
-  location.href = pick;
-});
-</script>
-</body>
-</html>
-
-
-
