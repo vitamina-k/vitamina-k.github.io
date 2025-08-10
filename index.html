@@ -133,14 +133,37 @@
   </article>
 
   <!-- Vista BASE (cuando caduque) -->
-  <article class="card hidden" id="view-default">
+  <article class="card hero hidden" id="view-default">
     <div class="brand">VITAMINA K</div>
     <h1 class="headline">@vitaminak.of</h1>
-    <p class="sub">Análisis directo, sin humo. Sígueme en X e IG.</p>
-    <div class="controls">
-      <a class="btn" href="https://x.com/tuusuario" target="_blank" rel="noopener">X</a>
-      <a class="btn" href="https://instagram.com/tuusuario" target="_blank" rel="noopener">Instagram</a>
+    <p class="sub">No vine a caer bien, vine a no caerme nunca. Sígueme en mis redes IG X.</p>
+   
+    <div class="hero-grid">
+  <div class="hero-left">
+    <div class="avatar" aria-hidden="true">VK</div>
+    <div class="badges">
+      <span class="chip">#anticorrupción</span>
+      <span class="chip">#datosreales</span>
+      <span class="chip">#MadeInSpain</span>
     </div>
+  </div>
+
+  <div class="hero-right">
+    <h2 class="hero-title">Lo importante explicado en pocos segundos</h2>
+    <p class="hero-copy">Publicaciones cortas, claras y con impacto. Sin ruido, sin humo, sin tiempo que perder.</p>
+
+    <div class="cta-row">
+      <a class="btn primary" href="https://x.com/vitaminakof" target="_blank" rel="noopener">Seguir en X</a>
+      <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
+      <button class="btn" id="copy-hero">Copiar enlace</button>
+    </div>
+
+    <div class="hero-mini">
+      <button class="pill" id="notify-me">🔔 Recibir avisos</button>
+      <button class="pill" id="random-post">🎲 Ver publicación aleatoria</button>
+    </div>
+  </div>
+</div>
   </article>
 </div>
 
@@ -305,5 +328,6 @@ document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='d') swap()
 </script>
 </body>
 </html>
+
 
 
