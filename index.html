@@ -58,24 +58,36 @@
   .fill{height:100%;width:0%;background:var(--accent);transition:width .4s ease}
   .only-once{font-size:13px}
 
-  /* --- HERO (tarjeta tras caducar) --- */
-  .card.hero{
-    width:clamp(380px,96vw,1000px);
-    padding:32px;
-    border-radius:22px;
-    background:
-      radial-gradient(1200px 600px at 10% -10%, #0b5cff18, transparent 60%),
-      radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
-      var(--card);
+/* --- HERO (tarjeta tras caducar) --- */
+.card.hero{
+  width:clamp(380px,96vw,1000px);
+  padding:32px;
+  border-radius:22px;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #0b5cff18, transparent 60%),
+    radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
+    var(--card);
+}  /* ← CIERRE del bloque .card.hero */
 
-  .hero-left{ display:flex; flex-direction:column; gap:10px; }
-.hero-right{ display:flex; flex-direction:column; gap:12px; justify-content:flex-start; }
-  }
-  .hero-grid{
+/* ↓ Estos son BLOQUES NUEVOS, van FUERA del bloque anterior */
+.hero-grid{
   display:grid;
   grid-template-columns:1fr 1.2fr;
   gap:22px;
-  align-items:start;         /* ⬅ arriba, todos a la misma línea */
+  align-items:start;   /* alineado arriba */
+}
+
+.hero-left{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.hero-right{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  justify-content:flex-start;
 }
   @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;gap:16px} }
 
@@ -387,6 +399,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='d') swap()
 </script>
 </body>
 </html>
+
 
 
 
