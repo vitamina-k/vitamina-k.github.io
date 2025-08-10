@@ -208,7 +208,7 @@
 <script>
 /* ========== CONFIG EDITABLE ========== */
 const CONFIG = {
-  expiresAt: Date.now() + 0*10*00*0,    // ahora + 6h
+  expiresAt: Date.now() + 1*10*00*0,    // ahora + 6h
   shareText: "El dato que no te cuentan. #VitaminaK",
   datoHTML: "<strong>Dato</strong>: 62% paga más por lo mismo.",
   contextoHTML: "<strong>Contexto</strong>: 2018 vs 2025: cesta +22% con salarios planos.",
@@ -362,10 +362,31 @@ copy.addEventListener('click', async()=>{
 
 /* Accesos menores */
 document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='d') swap(); });
+// --- Interacciones de la HERO ---
+document.getElementById('copy-hero')?.addEventListener('click', async ()=>{
+  try{
+    await navigator.clipboard.writeText(location.href);
+    const btn = document.getElementById('copy-hero');
+    btn.textContent = "Enlace copiado ✓";
+    setTimeout(()=>btn.textContent="Copiar enlace",1400);
+  }catch(e){ alert("No se pudo copiar"); }
+});
+
+document.getElementById('notify-me')?.addEventListener('click', ()=>{
+  alert("Pronto: avisos cuando publiquemos algo nuevo. Por ahora, sígueme en X/IG 😉");
+});
+
+document.getElementById('random-post')?.addEventListener('click', ()=>{
+  // Si en el futuro creas más páginas (publicacion-2.html, etc), añádelas aquí:
+  const posts = ["index.html" /*,"publicacion-2.html","publicacion-3.html"*/];
+  const pick = posts[Math.floor(Math.random()*posts.length)];
+  location.href = pick;
+});
 
 </script>
 </body>
 </html>
+
 
 
 
