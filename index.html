@@ -89,6 +89,7 @@
   gap:12px;
   justify-content:flex-start;
 }
+  .hero-right > *:first-child { margin-top:0; }
   @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;gap:16px} }
 
   .social-logos{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
@@ -99,7 +100,7 @@
   .logo-bubble svg{width:44px;height:44px}
   .logo-bubble:hover{transform:translateY(-2px);transition:transform .18s ease}
 
-  .hero-title{font-size:clamp(22px,5vw,40px);margin:6px 0;font-weight:900;letter-spacing:.2px}
+  .hero-title{font-size:clamp(22px,5vw,40px);margin:0 0 12px;font-weight:900;letter-spacing:.2px}.hero-title{font-size:clamp(22px,5vw,40px);margin:0 0 12px;font-weight:900;letter-spacing:.2px}
   .hero-copy{color:var(--muted);margin:4px 0 16px}
   .cta-row{display:flex;gap:10px;flex-wrap:wrap}
   .btn.primary{background:var(--accent);color:#fff;border-color:transparent;font-weight:700;padding:12px 16px;border-radius:14px}
@@ -399,6 +400,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='d') swap()
 </script>
 </body>
 </html>
+
 
 
 
