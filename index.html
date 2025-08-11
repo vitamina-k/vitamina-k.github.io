@@ -196,35 +196,49 @@
       <p class="sub">Sígueme en IG y X. Publicaciones cortas, claras y con impacto.</p>
 
       <div class="hero-grid">
-        <div class="hero-left">
-          <div class="avatar" aria-hidden="true">VK</div>
-          <div class="badges">
-            <span class="chip">#datosreales</span>
-            <span class="chip">#sinHumo</span>
-            <span class="chip">#MadeInSpain</span>
-          </div>
-        </div>
+    <!-- Izquierda: logos (sustituye los href por tus enlaces si quieres) -->
+        <div>
+        <div class="social-row">
+        <a class="logo-bubble" id="igLogo" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/>
+            </linearGradient></defs>
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
+          </svg>
+        </a>
 
-        <div class="hero-right">
-          <h2 class="hero-title">La próxima noticia temporal se está cocinando…</h2>
-          <p class="hero-copy">Mientras tanto, puedes ver más y seguirme en Instagram y X.</p>
-
-          <div class="cta-row">
-            <a class="btn primary" href="https://x.com/vitaminakof" target="_blank" rel="noopener">Seguir en X</a>
-            <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
-            <button class="btn" id="copy-hero">Copiar enlace</button>
-          </div>
-
-          <div class="hero-mini">
-            <button class="pill" id="notify-me">🔔 Recibir avisos</button>
-            <button class="pill" id="random-post">🎲 Ver publicación aleatoria</button>
-          </div>
-        </div>
+        <a class="logo-bubble" id="xLogo" href="https://x.com/vitaminakof" target="_blank" rel="noopener" aria-label="X">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
+          </svg>
+        </a>
       </div>
-    </article>
-  </div>
+    </div>
 
-  <script>
+    <!-- Derecha: texto + compartir -->
+    <div>
+      <h2 class="hero-title">La próxima noticia temporal se está cocinando…</h2>
+      <p class="hero-copy">Mientras tanto, puedes ver más y seguirme en Instagram y X.</p>
+
+      <div class="cta-row">
+        <a class="btn primary" href="https://x.com/vitaminakof" target="_blank" rel="noopener">Seguir en X</a>
+        <a class="btn outline"  href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
+      </div>
+
+      <!-- Compartir -->
+      <div class="share">
+        <button class="btn primary" id="share-native">Compartir ahora</button>
+        <a class="btn outline" id="share-x"  target="_blank" rel="noopener">Compartir en X</a>
+        <a class="btn outline" id="share-wa" target="_blank" rel="noopener">WhatsApp</a>
+        <button class="btn" id="copy-hero">Copiar enlace</button>
+        <span class="mini">Gracias por difundir 🙌</span>
+      </div>
+    </div>
+  </div>
+</article>
     /* ====== CONFIG EDITABLE (cambia SOLO aquí) ======
        Aquí actualizas título, KPI, subtítulo, el texto de dato/contexto,
        el tiempo de vida (cuenta atrás) y la encuesta.
