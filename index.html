@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
   <!-- ===== META ===== -->
-  <meta charset="UTF-8"> <!-- UTF-8 para que salgan bien acentos/Ã± -->
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Vitamina K â€” PublicaciÃ³n</title>
-  <meta name="description" content="PublicaciÃ³n viva con carrusel, stories y encuesta.">
-  <meta property="og:title" content="Vitamina K â€” PublicaciÃ³n">
-  <meta property="og:description" content="PublicaciÃ³n viva con carrusel, stories y encuesta.">
+  <title>Vitamina K — Publicación</title>
+  <meta name="description" content="Publicación viva con carrusel, stories y encuesta.">
+  <meta property="og:title" content="Vitamina K — Publicación">
+  <meta property="og:description" content="Publicación viva con carrusel, stories y encuesta.">
   <meta property="og:type" content="website">
 
   <style>
@@ -24,7 +24,7 @@
 
     /* Layout centrado */
     .wrap{
-      /* ðŸ§© No edites: mantiene la tarjeta centrada vertical y horizontal */
+      /* 🧩 No edites: mantiene la tarjeta centrada vertical y horizontal */
       min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
     }
 
@@ -87,7 +87,7 @@
 
     /* ===== HERO (tarjeta final) ===== */
     .card.hero{
-      /* ðŸ§© Tarjeta que aparece al finalizar la cuenta atrÃ¡s */
+      /* 🧩 Tarjeta que aparece al finalizar la cuenta atrás */
       width:clamp(360px,96vw,980px);
       padding:28px; border-radius:22px;
       background:
@@ -116,7 +116,7 @@
     .pill{border:1px dashed #00000033;background:transparent;padding:8px 12px;border-radius:999px;cursor:pointer}
     .pill:hover{border-color:#00000066}
 
-    /* Fondo cuando se muestra la HERO (estÃ©tico) */
+    /* Fondo cuando se muestra la HERO (estético) */
     body.show-hero{
       background:
         radial-gradient(1200px 700px at 50% -10%, #0b5cff22, transparent 60%),
@@ -136,38 +136,36 @@
   <div class="wrap">
     <!-- ===== Vista VIVA (mientras dura) ===== -->
     <article class="card" id="view-live">
-      <!-- ðŸ§© EDITA: marca y textos principales de la noticia -->
-      <div class="brand" id="brandEl">VITAMINA K Â· PublicaciÃ³n</div> <!-- tÃ­tulo de secciÃ³n -->
-      <h1 class="headline" id="title"> <!-- ðŸ§© EDITA: TÃ­tulo de la noticia -->
-        <!-- Ejemplo: "Gasolina a 2â‚¬, sueldos a 0" -->
-      </h1>
-      <div class="kpi" id="kpi"><!-- ðŸ§© EDITA: KPI opcional, deja vacÃ­o si no quieres mostrarlo --></div>
-      <p class="sub" id="subtitle"><!-- ðŸ§© EDITA: SubtÃ­tulo corto de la noticia --></p>
+      <!-- 🧩 EDITA: marca y textos principales de la noticia -->
+      <div class="brand" id="brandEl">VITAMINA K · Publicación</div> <!-- título de sección -->
+      <h1 class="headline" id="title"><!-- 🧩 EDITA: Título de la noticia --></h1>
+      <div class="kpi" id="kpi"><!-- 🧩 EDITA: KPI opcional, deja vacío si no quieres mostrarlo --></div>
+      <p class="sub" id="subtitle"><!-- 🧩 EDITA: Subtítulo corto de la noticia --></p>
 
-      <!-- ðŸ§© EDITA: Carrusel de imÃ¡genes (sustituye las URLs) -->
+      <!-- 🧩 EDITA: Carrusel de imágenes (sustituye las URLs) -->
       <section class="carousel" id="carousel">
         <div class="track" id="track">
           <!-- Reemplaza SOLO las URLs y los captions; estructura igual -->
-          <div class="slide"><img src="https://images.unsplash.com/photo-1586201375778-3d5f48f0b35f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Factura del sÃºper, 2025</div></div>
-          <div class="slide"><img src="https://images.unsplash.com/photo-1500576992153-027bb7fbdc32?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Cola ante cajas automÃ¡ticas</div></div>
+          <div class="slide"><img src="https://images.unsplash.com/photo-1586201375778-3d5f48f0b35f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Factura del súper, 2025</div></div>
+          <div class="slide"><img src="https://images.unsplash.com/photo-1500576992153-027bb7fbdc32?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Cola ante cajas automáticas</div></div>
           <div class="slide"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Salarios congelados</div></div>
           <div class="slide"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Comparativa 2018 vs 2025</div></div>
         </div>
         <div class="nav">
-          <button id="prev" aria-label="Anterior">â†</button>
-          <button id="next" aria-label="Siguiente">â†’</button>
+          <button id="prev" aria-label="Anterior">←</button>
+          <button id="next" aria-label="Siguiente">→</button>
         </div>
         <div class="dots" id="dots"></div>
       </section>
 
-      <!-- ðŸ§© EDITA: Stories (imÃ¡genes + textos cortos). Puedes dejarlo tal cual o cambiar URLs/textos -->
+      <!-- 🧩 EDITA: Stories -->
       <section class="stories" id="stories">
         <div class="story-frame" id="storyFrame">
           <div class="story-track" id="storyTrack">
-            <div class="story"><img src="https://images.unsplash.com/photo-1520975693414-8f1a6c5a7d8f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">1/4</div><div class="text">Si la cesta sube, el discurso bajaâ€¦</div></div>
-            <div class="story"><img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">2/4</div><div class="text">Dato: +22% en bÃ¡sicos 2021â†’2025</div></div>
+            <div class="story"><img src="https://images.unsplash.com/photo-1520975693414-8f1a6c5a7d8f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">1/4</div><div class="text">Si la cesta sube, el discurso baja…</div></div>
+            <div class="story"><img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">2/4</div><div class="text">Dato: +22% en básicos 2021→2025</div></div>
             <div class="story"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">3/4</div><div class="text">Sueldo real: plano como un ECG</div></div>
-            <div class="story"><img src="https://images.unsplash.com/photo-1542219550-37153d387c47?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">4/4</div><div class="text">La polÃ­tica promete. La nevera responde.</div></div>
+            <div class="story"><img src="https://images.unsplash.com/photo-1542219550-37153d387c47?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">4/4</div><div class="text">La política promete. La nevera responde.</div></div>
           </div>
         </div>
         <div class="story-dots" id="storyDots">
@@ -175,31 +173,30 @@
         </div>
       </section>
 
-      <!-- ðŸ§© EDITA: Encuesta (pregunta/opciones dentro de CONFIG) -->
+      <!-- 🧩 EDITA: Encuesta -->
       <section class="poll" id="poll">
         <h3 id="pollQ"><!-- se rellena desde CONFIG.pollQuestion --></h3>
-        <div class="only-once muted">Voto Ãºnico por dispositivo</div>
+        <div class="only-once muted">Voto único por dispositivo</div>
         <div id="options"></div>
         <div id="totals" class="muted" style="margin-top:8px"></div>
       </section>
 
       <div class="controls">
         <button id="copy">Copiar para X</button>
-        <button id="toggle">Dato â†” Contexto</button>
-        <span id="countdown" class="muted"></span> <!-- contador visible mientras dura -->
+        <button id="toggle">Dato ↔ Contexto</button>
+        <span id="countdown" class="muted"></span>
       </div>
     </article>
 
     <!-- ===== Vista BASE (HERO final, cuando termina) ===== -->
     <article class="card hero hidden" id="view-default">
-      <!-- ðŸ§© EDITA: Esta es la tarjeta que quieres mejorar tras caducar -->
-      <div class="brand">VITAMINA K</div> <!-- puedes cambiar el texto -->
-      <h1 class="headline">@vitaminak.of</h1> <!-- tu handle -->
-      <p class="sub">SÃ­gueme en IG y X. Publicaciones cortas, claras y con impacto.</p>
+      <!-- 🧩 EDITA: Esta es la tarjeta que quieres mejorar tras caducar -->
+      <div class="brand">VITAMINA K</div>
+      <h1 class="headline">@vitaminak.of</h1>
+      <p class="sub">Sígueme en IG y X. Publicaciones cortas, claras y con impacto.</p>
 
       <div class="hero-grid">
         <div class="hero-left">
-          <!-- ðŸ§© Puedes quitar el bloque avatar/badges si no lo quieres -->
           <div class="avatar" aria-hidden="true">VK</div>
           <div class="badges">
             <span class="chip">#datosreales</span>
@@ -209,27 +206,18 @@
         </div>
 
         <div class="hero-right">
-          <!-- ðŸ§© EDITA: TÃ­tulo/Copy del CTA de la tarjeta final -->
-          <h2 class="hero-title">La prÃ³xima noticia temporal se estÃ¡ cocinandoâ€¦</h2>
-          <p class="hero-copy">Mientras tanto, puedes ver mÃ¡s y seguirme en Instagram y X.</p>
+          <h2 class="hero-title">La próxima noticia temporal se está cocinando…</h2>
+          <p class="hero-copy">Mientras tanto, puedes ver más y seguirme en Instagram y X.</p>
 
-          <!-- ðŸ§© EDITA: Enlaces de redes -->
           <div class="cta-row">
             <a class="btn primary" href="https://x.com/vitaminakof" target="_blank" rel="noopener">Seguir en X</a>
             <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
             <button class="btn" id="copy-hero">Copiar enlace</button>
           </div>
 
-          <!-- ðŸ§© EDITA: Puedes aÃ±adir aquÃ­ iconos/logos clicables si prefieres logos grandes -->
-          <!-- Ejemplo:
-          <div class="cta-row">
-            <a href="https://www.instagram.com/vitaminak.of" target="_blank" class="btn">Instagram</a>
-            <a href="https://x.com/vitaminakof" target="_blank" class="btn">X</a>
-          </div> -->
-
           <div class="hero-mini">
-            <button class="pill" id="notify-me">ðŸ”” Recibir avisos</button>
-            <button class="pill" id="random-post">ðŸŽ² Ver publicaciÃ³n aleatoria</button>
+            <button class="pill" id="notify-me">🔔 Recibir avisos</button>
+            <button class="pill" id="random-post">🎲 Ver publicación aleatoria</button>
           </div>
         </div>
       </div>
@@ -237,37 +225,35 @@
   </div>
 
   <script>
-    /* ====== CONFIG EDITABLE (cambia SOLO aquÃ­) ======
-       AquÃ­ actualizas tÃ­tulo, KPI, subtÃ­tulo, el texto de dato/contexto,
-       el tiempo de vida (cuenta atrÃ¡s) y la encuesta.
+    /* ====== CONFIG EDITABLE (cambia SOLO aquí) ======
+       Aquí actualizas título, KPI, subtítulo, el texto de dato/contexto,
+       el tiempo de vida (cuenta atrás) y la encuesta.
     */
     const CONFIG = {
-      // ðŸ§© EDITA: Textos principales de la noticia
-      title: "",                 // Ej: "Gasolina a 2â‚¬ y sueldos a 0"
-      kpi: "",                   // Ej: "+276.000 visualizaciones" (dÃ©jalo "" para ocultarlo)
-      subtitle: "",              // Ej: "PÃ­ldora clara y sin humo. Desaparece en horas."
-      shareText: "El dato que no te cuentan. #VitaminaK", // lo que copia el botÃ³n "Copiar para X"
+      // 🧩 EDITA: Textos principales de la noticia
+      title: "",
+      kpi: "",
+      subtitle: "",
+      shareText: "El dato que no te cuentan. #VitaminaK",
 
-      // ðŸ§© EDITA: CuÃ¡nto dura la publicaciÃ³n (cuenta atrÃ¡s)
-      // OpciÃ³n 1: horas (mÃ¡s fÃ¡cil):
-      expiresHours: 6,           // nÃºmero de horas que debe durar
-      // OpciÃ³n 2: segundos (para pruebas rÃ¡pidas). Si pones un nÃºmero, tiene prioridad:
-      expiresSeconds: null,      // Ej: 10 â†’ 10 segundos. DÃ©jalo en null para ignorar.
+      // 🧩 EDITA: Duración
+      expiresHours: 6,
+      expiresSeconds: null,
 
-      // ðŸ§© EDITA: Dato y Contexto (textos cortos para alternar con el botÃ³n)
-      datoHTML: "<strong>Dato</strong>: â€¦",
-      contextoHTML: "<strong>Contexto</strong>: â€¦",
+      // 🧩 EDITA: Dato y Contexto
+      datoHTML: "<strong>Dato</strong>: …",
+      contextoHTML: "<strong>Contexto</strong>: …",
 
-      // ðŸ§© EDITA: Encuesta
-      pollKey: "vk_poll_v3",     // cambia el nombre para â€œresetearâ€ votos locales
-      pollQuestion: "",          // Pregunta (dÃ©jalo "" para ocultar encuesta)
-      pollOptions: [             // Opciones (vacÃ­a â†’ oculta encuesta)
-        // "PSOE","PP","Vox","Se AcabÃ³ la Fiesta","Sumar/Podemos","Otros"
+      // 🧩 EDITA: Encuesta
+      pollKey: "vk_poll_v3",
+      pollQuestion: "",
+      pollOptions: [
+        // "PSOE","PP","Vox","Se Acabó la Fiesta","Sumar/Podemos","Otros"
       ],
     };
     /* ===== FIN CONFIG EDITABLE ===== */
 
-    /* ===== Montaje bÃ¡sico de textos ===== */
+    /* ===== Montaje básico de textos ===== */
     const titleEl = document.getElementById('title');
     const kpiEl = document.getElementById('kpi');
     const subtitleEl = document.getElementById('subtitle');
@@ -278,7 +264,11 @@
 
     let showingDato = true;
 
-    /* ===== Cuenta atrÃ¡s + cambio de vista ===== */
+    /* ===== Cuenta atrás + cambio de vista ===== */
+    const live = document.getElementById('view-live');
+    const def  = document.getElementById('view-default');
+    const countdown = document.getElementById('countdown');
+
     const expiresAt = Date.now() + 5 * 1000; // ahora + 5 segundos
 
     function tick(){
@@ -305,12 +295,11 @@
       bar.style.transform = `scaleX(${p})`;
     }, {passive:true});
 
-    /* ===== Dato/Contexto (solo cambia el texto del botÃ³n) ===== */
+    /* ===== Dato/Contexto (solo cambia el texto del botón) ===== */
     const toggleBtn = document.getElementById('toggle');
     toggleBtn.addEventListener('click', ()=>{
       showingDato = !showingDato;
-      toggleBtn.textContent = showingDato ? "Dato â†” Contexto" : "Contexto â†” Dato";
-      // (Si quieres mostrar los textos dentro de la pÃ¡gina, dime y te agrego un Ã¡rea que cambie con esto)
+      toggleBtn.textContent = showingDato ? "Dato ↔ Contexto" : "Contexto ↔ Dato";
     });
 
     /* ===== Copiar para X ===== */
@@ -318,12 +307,12 @@
     copyBtn.addEventListener('click', async ()=>{
       try{
         await navigator.clipboard.writeText(`${CONFIG.shareText} ${location.href}`);
-        copyBtn.textContent = "Copiado âœ“";
+        copyBtn.textContent = "Copiado ✓";
         setTimeout(()=>copyBtn.textContent="Copiar para X",1400);
       }catch(e){ alert("No se pudo copiar"); }
     });
 
-    /* ===== Carrusel imÃ¡genes ===== */
+    /* ===== Carrusel imágenes ===== */
     (function(){
       const track = document.getElementById('track');
       const slides = Array.from(track.children);
@@ -345,7 +334,7 @@
       prev.addEventListener('click', ()=>setIndex(i-1));
       next.addEventListener('click', ()=>setIndex(i+1));
 
-      // Touch (mÃ³vil)
+      // Touch (móvil)
       track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; dx=0; }, {passive:true});
       track.addEventListener('touchmove',  e=>{ dx=e.touches[0].clientX - startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; }, {passive:true});
       track.addEventListener('touchend',   ()=>{ if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); });
@@ -424,7 +413,7 @@
           row.appendChild(btn); row.appendChild(name); row.appendChild(bar); row.appendChild(perc);
 
           if(saved.choice === opt){
-            const you = document.createElement('span'); you.className='you'; you.textContent="Â· tu voto"; row.appendChild(you);
+            const you = document.createElement('span'); you.className='you'; you.textContent="· tu voto"; row.appendChild(you);
           }
 
           optionsEl.appendChild(row);
@@ -454,13 +443,13 @@
     copyHero?.addEventListener('click', async ()=>{
       try{
         await navigator.clipboard.writeText(location.href);
-        copyHero.textContent = "Enlace copiado âœ“";
+        copyHero.textContent = "Enlace copiado ✓";
         setTimeout(()=>copyHero.textContent="Copiar enlace",1400);
       }catch(e){ alert("No se pudo copiar"); }
     });
 
     document.getElementById('notify-me')?.addEventListener('click', ()=>{
-      alert("Pronto: avisos cuando publiquemos algo nuevo. Por ahora, sÃ­gueme en X/IG ðŸ˜‰");
+      alert("Pronto: avisos cuando publiquemos algo nuevo. Por ahora, sígueme en X/IG 😉");
     });
 
     document.getElementById('random-post')?.addEventListener('click', ()=>{
