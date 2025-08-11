@@ -4,7 +4,7 @@
   <!-- ===== META ===== -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LA NOTICIA</title>
+  <title>VITAMINA K</title>
   <meta name="description" content="Publicación viva con carrusel, stories y encuesta.">
   <meta property="og:title" content="Vitamina K — Publicación">
   <meta property="og:description" content="Publicación viva con carrusel, stories y encuesta.">
@@ -200,7 +200,46 @@
       .card.hero{animation:heroIn .45s ease-out both}
       @keyframes heroIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
     }
-  </style>
+ .center {
+  text-align: center;
+}
+
+.hero-final {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.social-center {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.logo-bubble {
+  width: 96px;
+  height: 96px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  box-shadow: 0 14px 36px #0b5cff22;
+  border: 1px solid #0001;
+  transition: transform .15s ease;
+}
+
+.logo-bubble:hover {
+  transform: translateY(-2px);
+}
+
+.logo-bubble svg {
+  width: 50px;
+  height: 50px;
+}
+
+</style>
 </head>
 <body>
   <div class="bar" id="bar"></div>
@@ -209,7 +248,7 @@
     <!-- ===== Vista VIVA (mientras dura) ===== -->
     <article class="card" id="view-live">
       <!-- 🧩 EDITA: marca y textos principales de la noticia -->
-      <div class="brand" id="brandEl">VITAMINA K · Publicación</div> <!-- título de sección -->
+      <div class="brand" id="brandEl">La noticia</div> <!-- título de sección -->
       <h1 class="headline" id="title"><!-- 🧩 EDITA: Título de la noticia --></h1>
       <div class="kpi" id="kpi"><!-- 🧩 EDITA: KPI opcional, deja vacío si no quieres mostrarlo --></div>
       <p class="sub" id="subtitle"><!-- 🧩 EDITA: Subtítulo corto de la noticia --></p>
@@ -260,35 +299,32 @@
       </div>
     </article>
 
-    <!-- ===== Vista BASE (HERO final, cuando termina) ===== -->
-<article class="card hero hidden" id="view-default" style="text-align:center">
-  <h1 style="font-size: 2rem; margin-bottom: 12px;">@vitaminak.of</h1>
-  <p style="max-width: 580px; margin: 0 auto 24px; color: var(--muted);">
-    Si no puedes ver la noticia es porque en esta web tienen una temporalidad.  
-    Pero no te preocupes, puedes seguir viendo más en mis redes sociales.
-  </p>
+  <!-- ===== Vista BASE (HERO final, cuando termina) ===== -->
+<article class="card hero hidden" id="view-default">
+  <div class="hero-final">
+    <h1 class="headline center">@vitaminak.of</h1>
+    <p class="sub center">Si no puedes ver la noticia es porque en esta web tienen una temporalidad. 
+      Pero no te preocupes, puedes seguir viendo más en mis redes sociales.
+    </p>
 
-  <div class="social-row" style="justify-content: center; margin-top: 20px;">
-    <a class="logo-bubble" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#f58529"/>
-            <stop offset="50%" stop-color="#dd2a7b"/>
-            <stop offset="100%" stop-color="#8134af"/>
-          </linearGradient>
-        </defs>
-        <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
-        <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
-        <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
-      </svg>
-    </a>
+    <div class="social-center">
+      <a class="logo-bubble" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/>
+          </linearGradient></defs>
+          <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
+          <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
+        </svg>
+      </a>
 
-    <a class="logo-bubble" href="https://x.com/vitaminakof" target="_blank" rel="noopener" aria-label="X">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
-      </svg>
-    </a>
+      <a class="logo-bubble" href="https://x.com/vitaminakof" target="_blank" rel="noopener" aria-label="X">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
+        </svg>
+      </a>
+    </div>
   </div>
 </article>
 
