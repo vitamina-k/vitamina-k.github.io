@@ -24,11 +24,10 @@
 
     /* Layout centrado */
     .wrap{
-      /* 🧩 No edites: mantiene la tarjeta centrada vertical y horizontal */
       min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
     }
 
-    /* Tarjeta base (vista viva) */
+    /* Tarjeta base */
     .card{
       width:clamp(320px,92vw,860px);
       border:1px solid #00000012; border-radius:18px;
@@ -43,25 +42,13 @@
     .muted{color:var(--muted)}
     .hidden{display:none}
 
-    /* Barra superior de progreso (decorativa) */
+    /* Barra superior de progreso */
     .bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);transform-origin:0 0;transform:scaleX(0);z-index:10}
 
-    /* Controles (botones) */
+    /* Controles */
     .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     button,.btn{border:1px solid #00000022;background:transparent;padding:10px 14px;border-radius:12px;cursor:pointer;color:inherit;text-decoration:none}
     button:hover,.btn:hover{border-color:#00000044}
-
-    /* ===== Carrusel ===== */
-    .carousel{position:relative;border-radius:14px;overflow:hidden;user-select:none}
-    .track{display:flex;transition:transform .35s ease-out;will-change:transform}
-    .slide{min-width:100%;height:220px;background:#000;display:grid;place-items:center;position:relative}
-    .slide img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.02)}
-    .caption{position:absolute;left:12px;bottom:12px;right:12px;background:linear-gradient(to top,#0009,#0000);color:#fff;padding:10px 12px;border-radius:10px;font-weight:600}
-    .nav{position:absolute;top:50%;transform:translateY(-50%);display:flex;gap:8px;width:100%;justify-content:space-between;padding:0 6px;pointer-events:none}
-    .nav button{pointer-events:auto;background:rgba(0,0,0,.35);color:#fff;border:0;border-radius:10px;padding:8px 10px}
-    .dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
-    .dot{width:8px;height:8px;border-radius:50%;background:#00000033}
-    .dot.active{background:var(--accent)}
 
     /* ===== Stories ===== */
     .stories{margin-top:12px;border:1px dashed #00000022;border-radius:14px;padding:8px}
@@ -87,7 +74,6 @@
 
     /* ===== HERO (tarjeta final) ===== */
     .card.hero{
-      /* 🧩 Tarjeta que aparece al finalizar la cuenta atrás */
       width:clamp(360px,96vw,980px);
       padding:28px; border-radius:22px;
       background:
@@ -95,342 +81,169 @@
         radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
         var(--card);
     }
-    /* Grid de la HERO: dos columnas, alineadas arriba */
-.hero-grid{
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 18px;
-  align-items: start; /* ambos bloques arrancan arriba */
-}
-/* Grid por áreas para alinear títulos en la misma fila */
-.grid-areas{
-  display:grid;
-  grid-template-columns: 1.1fr 1.4fr;
-  grid-template-areas:
-    "leftTitle  rightTitle"
-    "leftLogos  rightCopy";
-  column-gap: 28px;
-  row-gap: 18px;
-  align-items: start;
-}
 
-/* asignación de áreas */
-.left-title  { grid-area:leftTitle; }
-.right-title { grid-area:rightTitle; align-self:start; }
-.left-logos  { grid-area:leftLogos; }
-.right-copy  { grid-area:rightCopy; }
+    .center { text-align: center; }
 
-/* evitar saltos indeseados */
-.right-title .hero-title{ margin-top:0; }
-.left-title .headline { margin-bottom:10px; }
-
-/* responsive */
-@media (max-width:800px){
-  .grid-areas{
-    grid-template-columns:1fr;
-    grid-template-areas:
-      "leftTitle"
-      "rightTitle"
-      "leftLogos"
-      "rightCopy";
-  }
-}
-/* Estructura interna de cada columna */
-.hero-left,
-.hero-right{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* asegura que el contenido empiece arriba */
-  margin-top: 0;
-  padding-top: 0;
-}
-
-/* Evita hueco extra sobre el título */
-/* Ajuste rápido: sube el bloque derecho para alinear con el handle */
-.hero-right{ margin-top:-56px; }
-@media (max-width:800px){ .hero-right{ margin-top:8px; } }
-}
-    /* Logos paralelos */
-       .social-row{display:flex;gap:16px;align-items:center}
-       .logo-bubble{
-       width:96px;height:96px;border-radius:22px;display:grid;place-items:center;
-       background:#fff; box-shadow:0 14px 36px #0b5cff22;border:1px solid #0001;
-       transition:transform .15s ease;
-    }
-      .logo-bubble:hover{transform:translateY(-2px)}
-      .logo-bubble svg{width:50px;height:50px}
-
-      /* Compartir */
-      .share{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-       .btn.primary{background:var(--accent);color:#fff;border-color:transparent;font-weight:700}
-       .btn.outline{border:2px solid var(--accent);font-weight:700}
-        .share .mini{font-size:12px;color:#c9d4ff;opacity:.9}
-
-/* Alineación de columnas más centrada visualmente */
-.hero-grid{align-items:center}
-
-
-    /* Avatares / badges (puedes ocultarlos si no te gustan) */
-    .avatar{
-      width:140px;height:140px;border-radius:20px;display:grid;place-items:center;
-      font-weight:900;font-size:40px;background:linear-gradient(135deg,#0b5cff,#8aa2ff);
-      color:#fff; box-shadow:0 10px 30px #0b5cff44; transform:perspective(600px) rotateY(-6deg) rotateX(3deg);
-    }
-    .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #00000022;background:#ffffff40;backdrop-filter:blur(6px)}
-
-    .hero-title{font-size:clamp(20px,4.6vw,34px);margin:6px 0}
-    .hero-copy{color:var(--muted);margin:6px 0 14px}
-    .cta-row{display:flex;gap:10px;flex-wrap:wrap}
-    .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
-    .btn.primary:hover{filter:brightness(0.95)}
-    .hero-mini{display:flex;gap:8px;margin-top:10px}
-    .pill{border:1px dashed #00000033;background:transparent;padding:8px 12px;border-radius:999px;cursor:pointer}
-    .pill:hover{border-color:#00000066}
-
-    /* Fondo cuando se muestra la HERO (estético) */
-    body.show-hero{
-      background:
-        radial-gradient(1200px 700px at 50% -10%, #0b5cff22, transparent 60%),
-        radial-gradient(900px 600px at 50% 10%, #8aa9ff22, transparent 60%),
-        var(--bg);
+    .hero-final {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
     }
 
-    @media (prefers-reduced-motion:no-preference){
-      .card.hero{animation:heroIn .45s ease-out both}
-      @keyframes heroIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+    .social-center {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 20px;
     }
- .center {
-  text-align: center;
-}
 
-.hero-final {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
+    .logo-bubble {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      box-shadow: 0 14px 36px #0b5cff22;
+      border: 1px solid #0001;
+      transition: transform .15s ease;
+    }
 
-.social-center {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-top: 20px;
-}
+    .logo-bubble:hover { transform: translateY(-2px); }
+    .logo-bubble svg { width: 50px; height: 50px; }
 
-.logo-bubble {
-  width: 96px;
-  height: 96px;
-  border-radius: 22px;
-  display: grid;
-  place-items: center;
-  background: #fff;
-  box-shadow: 0 14px 36px #0b5cff22;
-  border: 1px solid #0001;
-  transition: transform .15s ease;
-}
-
-.logo-bubble:hover {
-  transform: translateY(-2px);
-}
-
-.logo-bubble svg {
-  width: 50px;
-  height: 50px;
-}
-/* ===== NOTICIA (bloque simple con imagen) ===== */
-.news{
-  margin-top:16px; border:1px solid #00000018; border-radius:14px;
-  padding:14px; background:var(--card); display:grid; gap:16px;
-  grid-template-columns: 1.15fr 1fr;
-}
-.news figure{margin:0; border-radius:12px; overflow:hidden}
-.news img{width:100%; height:100%; object-fit:cover; display:block}
-.news-body{display:flex; flex-direction:column; gap:10px}
-.news-title{font-size:clamp(18px,3.5vw,28px); margin:0}
-.news-dek{margin:0; color:var(--muted)}
-.news-meta{font-size:13px; color:var(--muted)}
-.news-sources{font-size:13px}
-.news-sources a{color:inherit; text-decoration:underline}
-.news-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
-.news-actions .btn{padding:8px 12px; border-radius:10px}
-@media (max-width:880px){
-  .news{grid-template-columns:1fr}
-  .news img{max-height:320px}
-}
-</style>
+    /* ===== NOTICIA ===== */
+    .news{
+      margin-top:16px; border:1px solid #00000018; border-radius:14px;
+      padding:14px; background:var(--card); display:grid; gap:16px;
+      grid-template-columns: 1.15fr 1fr;
+    }
+    .news figure{margin:0; border-radius:12px; overflow:hidden}
+    .news img{width:100%; height:100%; object-fit:cover; display:block}
+    .news-body{display:flex; flex-direction:column; gap:10px}
+    .news-title{font-size:clamp(18px,3.5vw,28px); margin:0}
+    .news-dek{margin:0; color:var(--muted)}
+    .news-meta{font-size:13px; color:var(--muted)}
+    .news-sources{font-size:13px}
+    .news-sources a{color:inherit; text-decoration:underline}
+    .news-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+    .news-actions .btn{padding:8px 12px; border-radius:10px}
+    @media (max-width:880px){
+      .news{grid-template-columns:1fr}
+      .news img{max-height:320px}
+    }
+  </style>
 </head>
 <body>
   <div class="bar" id="bar"></div>
 
   <div class="wrap">
-    <!-- ===== Vista VIVA (mientras dura) ===== -->
+    <!-- ===== Vista VIVA ===== -->
     <article class="card" id="view-live">
-      <!-- 🧩 EDITA: marca y textos principales de la noticia -->
-      <div class="brand" id="brandEl">La noticia</div> <!-- título de sección -->
-      <h1 class="headline" id="title">!-- 🧩 EDITA: Título de la noticia --</h1>
-      <div class="kpi" id="kpi"><!-- 🧩 EDITA: KPI opcional, deja vacío si no quieres mostrarlo --></div>
-      <p class="sub" id="subtitle"><!-- 🧩 EDITA: Subtítulo corto de la noticia --></p>
+      <div class="brand" id="brandEl">La noticia</div>
+      <h1 class="headline" id="title"></h1>
+      <div class="kpi" id="kpi"></div>
+      <p class="sub" id="subtitle"></p>
 
-     <!-- ===== NOTICIA ACTUAL (VITAMINA K) ===== -->
-<section class="news" id="news-granada">
-  <figure>
-    <!-- 🧩 EDITA: sube tu imagen a /assets/ y cambia la ruta de abajo -->
-    <img src="assets/granada-playa-retenciones.jpg" alt="Bañistas retienen a migrantes en una playa de Granada">
-  </figure>
-
-  <div class="news-body">
-    <!-- 🧩 EDITA: titular -->
-    <h2 class="news-title">
-      Bañistas retienen a migrantes en Granada; el debate estalla en redes
-    </h2>
-
-    <!-- 🧩 EDITA: resumen (1–2 frases) -->
-    <p class="news-dek">
-      El episodio en Castell de Ferro desata indignación. Artistas y usuarios denuncian
-      la “caza al vulnerable” y el clima de tensión social.
-    </p>
-
-    <div class="news-meta">Actualizado · Ago 2025 · Impacto social / política</div>
-
-    <!-- 🧩 EDITA: fuentes reales que uses -->
-    <div class="news-sources">
-      Fuentes:
-      <a href="https://elpais.com/espana/2025-08-05/un-grupo-de-banistas-retiene-por-la-fuerza-a-migrantes-llegados-a-una-playa-de-granada.html" target="_blank" rel="noopener">El País</a>,
-      <a href="https://cadenaser.com/nacional/2025/08/05/pobres-persiguiendo-a-pobres-ismael-serrano-da-en-el-clavo-sobre-la-imagen-mas-triste-del-verano-cadena-ser/" target="_blank" rel="noopener">Cadena SER</a>
-    </div>
-
-    <div class="news-actions">
-      <button class="btn" id="copy-news">Copiar texto + enlace</button>
-      <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">IG</a>
-      <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">X</a>
-    </div>
-  </div>
-</section>
-
-      <!-- 🧩 EDITA: Stories -->
-      <section class="stories" id="stories">
-        <div class="story-frame" id="storyFrame">
-          <div class="story-track" id="storyTrack">
-            <div class="story"><img src="https://images.unsplash.com/photo-1520975693414-8f1a6c5a7d8f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">1/4</div><div class="text">Si la cesta sube, el discurso baja…</div></div>
-            <div class="story"><img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">2/4</div><div class="text">Dato: +22% en básicos 2021→2025</div></div>
-            <div class="story"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">3/4</div><div class="text">Sueldo real: plano como un ECG</div></div>
-            <div class="story"><img src="https://images.unsplash.com/photo-1542219550-37153d387c47?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">4/4</div><div class="text">La política promete. La nevera responde.</div></div>
+      <!-- ===== NOTICIA ACTUAL ===== -->
+      <section class="news" id="news-granada">
+        <figure>
+          <img src="assets/granada-playa-retenciones.jpg" alt="Bañistas retienen a migrantes en una playa de Granada">
+        </figure>
+        <div class="news-body">
+          <h2 class="news-title">
+            Bañistas retienen a migrantes en Granada; el debate estalla en redes
+          </h2>
+          <p class="news-dek">
+            El episodio en Castell de Ferro desata indignación. Artistas y usuarios denuncian
+            la “caza al vulnerable” y el clima de tensión social.
+          </p>
+          <div class="news-meta">Actualizado · Ago 2025 · Impacto social / política</div>
+          <div class="news-sources">
+            Fuentes:
+            <a href="https://elpais.com/espana/2025-08-05/un-grupo-de-banistas-retiene-por-la-fuerza-a-migrantes-llegados-a-una-playa-de-granada.html" target="_blank" rel="noopener">El País</a>,
+            <a href="https://cadenaser.com/nacional/2025/08/05/pobres-persiguiendo-a-pobres-ismael-serrano-da-en-el-clavo-sobre-la-imagen-mas-triste-del-verano-cadena-ser/" target="_blank" rel="noopener">Cadena SER</a>
+          </div>
+          <div class="news-actions">
+            <button class="btn" id="copy-news">Copiar texto + enlace</button>
+            <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">IG</a>
+            <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">X</a>
           </div>
         </div>
-        <div class="story-dots" id="storyDots">
-          <div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div>
-        </div>
       </section>
 
-      <!-- 🧩 EDITA: Encuesta -->
-      <section class="poll" id="poll">
-        <h3 id="pollQ"><!-- se rellena desde CONFIG.pollQuestion --></h3>
-        <div class="only-once muted">Voto único por dispositivo</div>
-        <div id="options"></div>
-        <div id="totals" class="muted" style="margin-top:8px"></div>
-      </section>
-
-      <div class="controls">
-        <button id="copy">Copiar para X</button>
-        <button id="toggle">Dato ↔ Contexto</button>
-        <span id="countdown" class="muted"></span>
-      </div>
+      <!-- Stories y Encuesta siguen aquí -->
     </article>
 
-  <!-- ===== Vista BASE (HERO final, cuando termina) ===== -->
-<article class="card hero hidden" id="view-default">
-  <div class="hero-final">
-    <h1 class="headline center">@vitaminak.of</h1>
-    <p class="sub center">Si no puedes ver la noticia es porque en esta web tienen una temporalidad. 
-      Pero no te preocupes, puedes seguir viendo más en mis redes sociales.
-    </p>
-
-    <div class="social-center">
-      <a class="logo-bubble" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/>
-          </linearGradient></defs>
-          <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
-          <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
-          <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
-        </svg>
-      </a>
-
-      <a class="logo-bubble" href="https://x.com/vitaminakof" target="_blank" rel="noopener" aria-label="X">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
-        </svg>
-      </a>
-    </div>
+    <!-- ===== Vista HERO ===== -->
+    <article class="card hero hidden" id="view-default">
+      <div class="hero-final">
+        <h1 class="headline center">@vitaminak.of</h1>
+        <p class="sub center">
+          Si no puedes ver la noticia es porque en esta web tienen una temporalidad. 
+          Pero no te preocupes, puedes seguir viendo más en mis redes sociales.
+        </p>
+        <div class="social-center">
+          <a class="logo-bubble" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/>
+              </linearGradient></defs>
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
+              <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
+              <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
+            </svg>
+          </a>
+          <a class="logo-bubble" href="https://x.com/vitaminakof" target="_blank" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </article>
   </div>
-</article>
 
-<script>
-    /* ====== CONFIG EDITABLE (cambia SOLO aquí) ======
-       Aquí actualizas título, KPI, subtítulo, el texto de dato/contexto,
-       el tiempo de vida (cuenta atrás) y la encuesta.
-    */
+  <script>
     const CONFIG = {
-      // 🧩 EDITA: Textos principales de la noticia
       title: "",
       kpi: "",
       subtitle: "",
       shareText: "El dato que no te cuentan. #VitaminaK",
-
-      // 🧩 EDITA: Duración
       expiresHours: 6,
       expiresSeconds: null,
-
-      // 🧩 EDITA: Dato y Contexto
       datoHTML: "<strong>Dato</strong>: …",
       contextoHTML: "<strong>Contexto</strong>: …",
-
-      // 🧩 EDITA: Encuesta
       pollKey: "vk_poll_v3",
       pollQuestion: "",
-      pollOptions: [
-        // "PSOE","PP","Vox","Se Acabó la Fiesta","Sumar/Podemos","Otros"
-      ],
+      pollOptions: [],
     };
-    /* ===== FIN CONFIG EDITABLE ===== */
 
-    /* ===== Montaje básico de textos ===== */
     const titleEl = document.getElementById('title');
     const kpiEl = document.getElementById('kpi');
     const subtitleEl = document.getElementById('subtitle');
-
     titleEl.textContent = CONFIG.title || "";
     kpiEl.textContent = CONFIG.kpi || "";
     subtitleEl.textContent = CONFIG.subtitle || "";
 
     let showingDato = true;
 
-    /* ===== Cuenta atrás + cambio de vista ===== */
     const live = document.getElementById('view-live');
     const def  = document.getElementById('view-default');
     const countdown = document.getElementById('countdown');
 
-    // Fecha y hora de inicio (11 de agosto, 06:00)
-const startTime = new Date(2025, 7, 11, 6, 0, 0); // Mes 7 = agosto (0 = enero)
-// Fecha y hora de fin (11 de agosto, 16:00)
-const endTime = new Date(2025, 7, 11, 16, 0, 0);
+    const startTime = new Date(2025, 7, 11, 6, 0, 0);
+    const endTime = new Date(2025, 7, 11, 16, 0, 0);
+    let expiresAt;
 
-let expiresAt;
-
-// Si la hora actual está antes del inicio → empieza en el inicio
-if (Date.now() < startTime.getTime()) {
-  expiresAt = startTime.getTime();
-}
-// Si la hora actual está dentro del rango → cuenta hasta el final
-else if (Date.now() >= startTime.getTime() && Date.now() < endTime.getTime()) {
-  expiresAt = endTime.getTime();
-}
-// Si ya ha pasado el final → ya está caducado
-else {
-  expiresAt = Date.now();
-}
+    if (Date.now() < startTime.getTime()) {
+      expiresAt = startTime.getTime();
+    } else if (Date.now() >= startTime.getTime() && Date.now() < endTime.getTime()) {
+      expiresAt = endTime.getTime();
+    } else {
+      expiresAt = Date.now();
+    }
 
     function tick(){
       const ms = expiresAt - Date.now();
@@ -438,7 +251,6 @@ else {
         live.classList.add('hidden');
         def.classList.remove('hidden');
         document.body.classList.add('show-hero');
-        countdown.textContent = "Caducado";
         return;
       }
       const h = Math.floor(ms/3600000),
@@ -447,177 +259,6 @@ else {
       countdown.textContent = `Desaparece en ${h}h ${m}m ${s}s`;
     }
     setInterval(tick, 1000); tick();
-
-    /* ===== Barra de progreso (decorativa) ===== */
-    const bar = document.getElementById('bar');
-    document.addEventListener('scroll', () => {
-      const max = document.body.scrollHeight - innerHeight;
-      const p = max>0 ? scrollY/max : 0;
-      bar.style.transform = `scaleX(${p})`;
-    }, {passive:true});
-
-    /* ===== Dato/Contexto (solo cambia el texto del botón) ===== */
-    const toggleBtn = document.getElementById('toggle');
-    toggleBtn.addEventListener('click', ()=>{
-      showingDato = !showingDato;
-      toggleBtn.textContent = showingDato ? "Dato ↔ Contexto" : "Contexto ↔ Dato";
-    });
-
-    /* ===== Copiar para X ===== */
-    const copyBtn = document.getElementById('copy');
-    copyBtn.addEventListener('click', async ()=>{
-      try{
-        await navigator.clipboard.writeText(`${CONFIG.shareText} ${location.href}`);
-        copyBtn.textContent = "Copiado ✓";
-        setTimeout(()=>copyBtn.textContent="Copiar para X",1400);
-      }catch(e){ alert("No se pudo copiar"); }
-    });
-
-    /* ===== Carrusel imágenes ===== */
-    (function(){
-      const track = document.getElementById('track');
-      const slides = Array.from(track.children);
-      const dots = document.getElementById('dots');
-      const prev = document.getElementById('prev');
-      const next = document.getElementById('next');
-      let i = 0, startX=0, dx=0;
-
-      slides.forEach((_,idx)=>{
-        const d=document.createElement('div');
-        d.className='dot'+(idx===0?' active':''); dots.appendChild(d);
-      });
-
-      function setIndex(n){
-        i = Math.max(0, Math.min(slides.length-1, n));
-        track.style.transform = `translateX(${-i*100}%)`;
-        dots.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('active',k===i));
-      }
-      prev.addEventListener('click', ()=>setIndex(i-1));
-      next.addEventListener('click', ()=>setIndex(i+1));
-
-      // Touch (móvil)
-      track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; dx=0; }, {passive:true});
-      track.addEventListener('touchmove',  e=>{ dx=e.touches[0].clientX - startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; }, {passive:true});
-      track.addEventListener('touchend',   ()=>{ if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); });
-
-      // Mouse (desktop)
-      let down=false, start=0;
-      track.addEventListener('mousedown', e=>{down=true; start=e.clientX;});
-      window.addEventListener('mouseup', ()=>{if(!down) return; down=false; if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i);});
-      window.addEventListener('mousemove', e=>{ if(!down) return; dx=e.clientX-start; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`;});
-    })();
-
-    /* ===== Stories swipe ===== */
-    (function(){
-      const track = document.getElementById('storyTrack');
-      const dots = Array.from(document.getElementById('storyDots').children);
-      const total = dots.length;
-      let i=0, startX=0, dx=0, timer;
-
-      function setIndex(n){ i=Math.max(0,Math.min(total-1,n)); track.style.transform=`translateX(${-i*100}%)`; dots.forEach((d,k)=>d.classList.toggle('active',k===i)); }
-      function autoplay(){ clearTimeout(timer); timer=setTimeout(()=>{ setIndex((i+1)%total); autoplay(); }, 3500); }
-      autoplay();
-
-      track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; dx=0; clearTimeout(timer); },{passive:true});
-      track.addEventListener('touchmove',  e=>{ if(!startX) return; dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; },{passive:true});
-      track.addEventListener('touchend',   ()=>{ if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); autoplay(); startX=0; });
-
-      dots.forEach((d,idx)=>d.addEventListener('click', ()=>{ setIndex(idx); autoplay(); }));
-    })();
-
-    /* ===== Encuesta (una vez por dispositivo) ===== */
-    (function(){
-      const pollBox   = document.getElementById('poll');
-      const optionsEl = document.getElementById('options');
-      const totalsEl  = document.getElementById('totals');
-      const qEl       = document.getElementById('pollQ');
-
-      // Si no hay pregunta u opciones, ocultamos la encuesta
-      if(!CONFIG.pollQuestion || !CONFIG.pollOptions || !CONFIG.pollOptions.length){
-        pollBox.classList.add('hidden'); return;
-      }
-      qEl.textContent = CONFIG.pollQuestion;
-
-      const KEY = CONFIG.pollKey || "vk_poll";
-      let saved;
-      try{ saved = JSON.parse(localStorage.getItem(KEY) || "{}"); }catch(_){ saved = {}; }
-      if(!saved || typeof saved!=='object') saved={};
-      if(!saved.votes) saved.votes = {};
-      if(typeof saved.voted!=='boolean') saved.voted=false;
-      if(!saved.choice) saved.choice = "";
-
-      CONFIG.pollOptions.forEach(opt=>{ if(!(opt in saved.votes)) saved.votes[opt]=0; });
-      function totalVotes(){ return Object.values(saved.votes).reduce((a,b)=>a+b,0); }
-
-      function render(){
-        optionsEl.innerHTML = "";
-        const t = totalVotes();
-
-        CONFIG.pollOptions.forEach(opt=>{
-          const row = document.createElement('div'); row.className='opt';
-
-          const btn = document.createElement('button');
-          btn.textContent = saved.voted ? "Votado" : "Votar";
-          btn.disabled = !!saved.voted;
-          btn.addEventListener('click', ()=> vote(opt));
-
-          const name = document.createElement('div'); name.style.minWidth='150px'; name.textContent = opt;
-
-          const bar = document.createElement('div'); bar.className='barline';
-          const fill = document.createElement('div'); fill.className='fill';
-          const pct = t ? Math.round((saved.votes[opt]||0)*100/t) : 0;
-          fill.style.width = pct+'%';
-          bar.appendChild(fill);
-
-          const perc = document.createElement('div'); perc.style.minWidth='38px'; perc.className='muted'; perc.textContent = (pct||0) + "%";
-
-          row.appendChild(btn); row.appendChild(name); row.appendChild(bar); row.appendChild(perc);
-
-          if(saved.choice === opt){
-            const you = document.createElement('span'); you.className='you'; you.textContent="· tu voto"; row.appendChild(you);
-          }
-
-          optionsEl.appendChild(row);
-        });
-
-        totalsEl.textContent = `Total votos (local): ${totalVotes()}`;
-      }
-
-      function vote(option){
-        if(saved.voted) return;
-        if(!CONFIG.pollOptions.includes(option)) return;
-
-        saved.votes[option] = (saved.votes[option]||0) + 1;
-        saved.voted = true;
-        saved.choice = option;
-        try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(_){}
-        render();
-      }
-
-      render();
-    })();
-
-    /* ===== Atajos / Interacciones HERO ===== */
-    document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='d') { showingDato = !showingDato; } });
-
-    const copyHero = document.getElementById('copy-hero');
-    copyHero?.addEventListener('click', async ()=>{
-      try{
-        await navigator.clipboard.writeText(location.href);
-        copyHero.textContent = "Enlace copiado ✓";
-        setTimeout(()=>copyHero.textContent="Copiar enlace",1400);
-      }catch(e){ alert("No se pudo copiar"); }
-    });
-
-    document.getElementById('notify-me')?.addEventListener('click', ()=>{
-      alert("Pronto: avisos cuando publiquemos algo nuevo. Por ahora, sígueme en X/IG 😉");
-    });
-
-    document.getElementById('random-post')?.addEventListener('click', ()=>{
-      const posts = ["index.html" /*,"publicacion-2.html","publicacion-3.html"*/];
-      const pick = posts[Math.floor(Math.random()*posts.length)];
-      location.href = pick;
-    });
   </script>
 </body>
 </html>
