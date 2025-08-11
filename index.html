@@ -238,7 +238,26 @@
   width: 50px;
   height: 50px;
 }
-
+/* ===== NOTICIA (bloque simple con imagen) ===== */
+.news{
+  margin-top:16px; border:1px solid #00000018; border-radius:14px;
+  padding:14px; background:var(--card); display:grid; gap:16px;
+  grid-template-columns: 1.15fr 1fr;
+}
+.news figure{margin:0; border-radius:12px; overflow:hidden}
+.news img{width:100%; height:100%; object-fit:cover; display:block}
+.news-body{display:flex; flex-direction:column; gap:10px}
+.news-title{font-size:clamp(18px,3.5vw,28px); margin:0}
+.news-dek{margin:0; color:var(--muted)}
+.news-meta{font-size:13px; color:var(--muted)}
+.news-sources{font-size:13px}
+.news-sources a{color:inherit; text-decoration:underline}
+.news-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+.news-actions .btn{padding:8px 12px; border-radius:10px}
+@media (max-width:880px){
+  .news{grid-template-columns:1fr}
+  .news img{max-height:320px}
+}
 </style>
 </head>
 <body>
@@ -249,25 +268,45 @@
     <article class="card" id="view-live">
       <!-- 🧩 EDITA: marca y textos principales de la noticia -->
       <div class="brand" id="brandEl">La noticia</div> <!-- título de sección -->
-      <h1 class="headline" id="title"><!-- 🧩 EDITA: Título de la noticia --></h1>
+      <h1 class="headline" id="title">!-- 🧩 EDITA: Título de la noticia --</h1>
       <div class="kpi" id="kpi"><!-- 🧩 EDITA: KPI opcional, deja vacío si no quieres mostrarlo --></div>
       <p class="sub" id="subtitle"><!-- 🧩 EDITA: Subtítulo corto de la noticia --></p>
 
-      <!-- 🧩 EDITA: Carrusel de imágenes (sustituye las URLs) -->
-      <section class="carousel" id="carousel">
-        <div class="track" id="track">
-          <!-- Reemplaza SOLO las URLs y los captions; estructura igual -->
-          <div class="slide"><img src="https://images.unsplash.com/photo-1586201375778-3d5f48f0b35f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Factura del súper, 2025</div></div>
-          <div class="slide"><img src="https://images.unsplash.com/photo-1500576992153-027bb7fbdc32?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Cola ante cajas automáticas</div></div>
-          <div class="slide"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Salarios congelados</div></div>
-          <div class="slide"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Comparativa 2018 vs 2025</div></div>
-        </div>
-        <div class="nav">
-          <button id="prev" aria-label="Anterior">←</button>
-          <button id="next" aria-label="Siguiente">→</button>
-        </div>
-        <div class="dots" id="dots"></div>
-      </section>
+     <!-- ===== NOTICIA ACTUAL (VITAMINA K) ===== -->
+<section class="news" id="news-granada">
+  <figure>
+    <!-- 🧩 EDITA: sube tu imagen a /assets/ y cambia la ruta de abajo -->
+    <img src="assets/granada-playa-retenciones.jpg" alt="Bañistas retienen a migrantes en una playa de Granada">
+  </figure>
+
+  <div class="news-body">
+    <!-- 🧩 EDITA: titular -->
+    <h2 class="news-title">
+      Bañistas retienen a migrantes en Granada; el debate estalla en redes
+    </h2>
+
+    <!-- 🧩 EDITA: resumen (1–2 frases) -->
+    <p class="news-dek">
+      El episodio en Castell de Ferro desata indignación. Artistas y usuarios denuncian
+      la “caza al vulnerable” y el clima de tensión social.
+    </p>
+
+    <div class="news-meta">Actualizado · Ago 2025 · Impacto social / política</div>
+
+    <!-- 🧩 EDITA: fuentes reales que uses -->
+    <div class="news-sources">
+      Fuentes:
+      <a href="https://elpais.com/espana/2025-08-05/un-grupo-de-banistas-retiene-por-la-fuerza-a-migrantes-llegados-a-una-playa-de-granada.html" target="_blank" rel="noopener">El País</a>,
+      <a href="https://cadenaser.com/nacional/2025/08/05/pobres-persiguiendo-a-pobres-ismael-serrano-da-en-el-clavo-sobre-la-imagen-mas-triste-del-verano-cadena-ser/" target="_blank" rel="noopener">Cadena SER</a>
+    </div>
+
+    <div class="news-actions">
+      <button class="btn" id="copy-news">Copiar texto + enlace</button>
+      <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">IG</a>
+      <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">X</a>
+    </div>
+  </div>
+</section>
 
       <!-- 🧩 EDITA: Stories -->
       <section class="stories" id="stories">
