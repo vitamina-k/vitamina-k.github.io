@@ -16,7 +16,7 @@
       margin: 0;
       padding: 0;
       min-height: 100vh;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #1a1f2b 0%, #101522 100%);
       color: #ffffff;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       display: flex;
@@ -27,234 +27,133 @@
 
     /* ===== VISTA PRINCIPAL DE NOTICIA ===== */
     .news-container {
-      max-width: 800px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.15);
+      max-width: 800px; width: 100%;
+      background: rgba(255, 255, 255, 0.10);
       backdrop-filter: blur(20px);
       border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       padding: 40px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
       text-align: center;
     }
 
-    .brand-title {
-      font-size: 32px;
-      font-weight: 900;
-      margin-bottom: 10px;
-      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .brand-title{
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color:#ffffff;              /* sin degradado */
+      letter-spacing:.3px;
+      text-transform: uppercase;
     }
 
     .temporal-alert {
       display: inline-block;
-      background: rgba(255, 107, 107, 0.2);
-      border: 2px solid #ff6b6b;
-      padding: 8px 20px;
-      border-radius: 25px;
+      background: rgba(255, 193, 7, 0.15);
+      border: 1.5px solid #ffcd39;
+      padding: 6px 16px;
+      border-radius: 999px;
       font-weight: 600;
-      margin-bottom: 20px;
-      font-size: 14px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color:#ffea7a;
     }
 
     .countdown-display {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
-      color: #ffeb3b;
-      margin-bottom: 30px;
-      padding: 15px 25px;
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 15px;
+      color: #9be6ff;
+      margin-bottom: 24px;
+      padding: 12px 18px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
       display: inline-block;
     }
 
     .news-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 30px;
-      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 16px;
       text-align: left;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    .news-title {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 15px;
-      line-height: 1.3;
-    }
+    /* Imagen principal de la noticia */
+    .news-image{ margin:0 0 18px 0; border-radius:12px; overflow:hidden }
+    .news-image img{ width:100%; height:auto; display:block; object-fit:cover; }
 
-    .news-subtitle {
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
+    .news-title { font-size: 28px; font-weight: 800; margin: 0 0 12px 0; line-height: 1.28; }
+    .news-subtitle { font-size: 18px; color: rgba(255, 255, 255, 0.92); margin: 0 0 16px 0; line-height: 1.5; }
 
     .news-opinion {
-      background: rgba(255, 255, 255, 0.1);
-      border-left: 4px solid #ff6b6b;
-      padding: 20px;
-      margin: 20px 0;
+      background: rgba(255, 255, 255, 0.08);
+      border-left: 4px solid #4ecdc4;
+      padding: 16px;
+      margin: 18px 0;
       border-radius: 0 10px 10px 0;
-      font-style: italic;
       line-height: 1.6;
     }
 
-    .news-meta {
-      margin-top: 25px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      font-size: 14px;
-    }
+    .news-meta { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 14px; }
+    .sources { margin-bottom: 12px; opacity: 0.9; }
+    .sources a { color: #7dd3fc; text-decoration: none; margin-right: 12px; }
+    .sources a:hover { text-decoration: underline; }
 
-    .sources {
-      margin-bottom: 15px;
-      opacity: 0.8;
-    }
-
-    .sources a {
-      color: #4ecdc4;
-      text-decoration: none;
-      margin-right: 15px;
-    }
-
-    .sources a:hover {
-      text-decoration: underline;
-    }
-
-    .share-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
+    .share-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
     .btn {
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 10px;
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      cursor: pointer;
+      padding: 9px 16px; background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255,255,255,.25); border-radius: 10px;
+      color: white; text-decoration: none; font-weight: 600; transition: all .2s ease; cursor: pointer;
     }
-
-    .btn:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-    }
+    .btn:hover { background: rgba(255, 255, 255, 0.24); transform: translateY(-2px); }
 
     /* ===== VISTA FINAL ===== */
     .final-container {
-      max-width: 600px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.15);
+      max-width: 600px; width: 100%;
+      background: rgba(255, 255, 255, 0.10);
       backdrop-filter: blur(20px);
       border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 60px 40px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 48px 32px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
       text-align: center;
     }
 
-    .final-brand {
-      font-size: 48px;
-      font-weight: 900;
-      margin-bottom: 20px;
-      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .final-message {
-      font-size: 18px;
-      line-height: 1.6;
-      margin-bottom: 40px;
-      opacity: 0.9;
-    }
+    .final-brand { font-size: 40px; font-weight: 900; margin-bottom: 14px; color:#fff; letter-spacing:.5px; }
+    .final-message { font-size: 18px; line-height: 1.6; margin-bottom: 28px; opacity: 0.92; }
 
     .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 40px;
+      display: flex; justify-content: center; gap: 28px; margin-bottom: 32px;
     }
 
     .social-link {
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: all 0.3s ease;
+      width: 82px; height: 82px; border-radius: 18px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1.5px solid rgba(255, 255, 255, 0.28);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; transition: all 0.25s ease;
     }
+    .social-link:hover { transform: translateY(-4px) scale(1.05); background: rgba(255,255,255,.26); }
 
-    .social-link:hover {
-      transform: translateY(-5px) scale(1.1);
-      background: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    }
-
-    .social-link svg {
-      width: 40px;
-      height: 40px;
-    }
+    .social-link svg { width: 40px; height: 40px; }
 
     .cta-button {
-      display: inline-block;
-      padding: 18px 35px;
-      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-      border: none;
-      border-radius: 15px;
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      display: inline-block; padding: 15px 28px;
+      background: #4ecdc4; border: none; border-radius: 12px;
+      color: #0b0f1a; font-size: 16px; font-weight: 800; text-decoration: none;
+      transition: all 0.25s ease; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     }
+    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,0,0,.3); }
 
-    .cta-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .hidden { 
-      display: none !important; 
-    }
+    .hidden { display: none !important; }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .news-container, .final-container {
-        padding: 30px 20px;
-      }
-      
-      .news-title {
-        font-size: 24px;
-      }
-      
-      .final-brand {
-        font-size: 36px;
-      }
-      
-      .social-icons {
-        gap: 20px;
-      }
-      
-      .social-link {
-        width: 70px;
-        height: 70px;
-      }
+      .news-container, .final-container { padding: 30px 20px; }
+      .news-title { font-size: 24px; }
+      .final-brand { font-size: 32px; }
+      .social-icons { gap: 20px; }
+      .social-link { width: 72px; height: 72px; }
     }
   </style>
 </head>
@@ -262,26 +161,27 @@
 <body>
   <!-- ===== VISTA DE NOTICIA (TEMPORAL) ===== -->
   <div class="news-container" id="newsView">
-    <div class="brand-title">VitaminaK.Of</div>
-    
-    <div class="temporal-alert">
-      ⚠️ NOTICIA TEMPORAL
-    </div>
-    
-    <div class="countdown-display" id="countdown">
-      Calculando tiempo...
-    </div>
+    <div class="brand-title">VITAMINAK.OF</div>
+
+    <div class="temporal-alert">NOTICIA TEMPORAL</div>
+
+    <div class="countdown-display" id="countdown">Calculando tiempo...</div>
 
     <div class="news-card">
+      <!-- Imagen principal -->
+      <figure class="news-image">
+        <img src="assets/granada-playa-retenciones.jpg"
+             alt="Bañistas retienen a migrantes en una playa de Granada">
+      </figure>
+
       <h1 class="news-title" id="newsTitle"></h1>
-      
       <p class="news-subtitle" id="newsSubtitle"></p>
 
       <div class="news-opinion" id="newsOpinion"></div>
 
       <div class="news-meta">
         <div class="sources" id="newsSources"></div>
-        
+
         <div class="share-buttons">
           <button class="btn" id="copyBtn">📋 Copiar</button>
           <a class="btn" id="instagramBtn" target="_blank">📸 Instagram</a>
@@ -293,12 +193,11 @@
 
   <!-- ===== VISTA FINAL (CUANDO EXPIRE) ===== -->
   <div class="final-container hidden" id="finalView">
-    <div class="final-brand">VitaminaK.Of</div>
-    
+    <div class="final-brand">VITAMINAK.OF</div>
     <p class="final-message">
       Esta noticia ya no está disponible, pero puedes seguir viendo más contenido exclusivo en mis redes sociales.
     </p>
-    
+
     <div class="social-icons">
       <a href="#" class="social-link" id="finalInstagram" target="_blank" aria-label="Instagram">
         <svg viewBox="0 0 24 24" fill="none">
@@ -314,7 +213,7 @@
           <circle cx="17.5" cy="6.5" r="1.5" fill="url(#igGrad)"/>
         </svg>
       </a>
-      
+
       <a href="#" class="social-link" id="finalTwitter" target="_blank" aria-label="Twitter/X">
         <svg viewBox="0 0 24 24" fill="white">
           <path d="M3 3l8.5 10.2L3.8 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z"/>
@@ -322,119 +221,99 @@
       </a>
     </div>
 
-    <a href="#" class="cta-button" id="finalCTA">
-      🔥 Sígueme para más noticias exclusivas
-    </a>
+    <a href="#" class="cta-button" id="finalCTA">🔥 Sígueme para más noticias exclusivas</a>
   </div>
 
   <script>
     // ==========================================
-    // 🔧 CONFIGURACIÓN FÁCIL PARA GITHUB
+    // 🔧 CONFIGURACIÓN (edita aquí)
     // ==========================================
-    // Solo modifica esta sección para cada nueva noticia:
-
     const NOTICIA_CONFIG = {
-      // 📝 CONTENIDO DE LA NOTICIA
+      // 📝 CONTENIDO
       titulo: "Bañistas retienen a migrantes en Granada; el debate estalla en redes",
-      
-      subtitulo: "El episodio en Castell de Ferro desata indignación. Artistas y usuarios denuncian la \"caza al vulnerable\" y el clima de tensión social.",
-      
+      subtitulo: "El episodio en Castell de Ferro desata indignación. Artistas y usuarios denuncian la “caza al vulnerable” y el clima de tensión social.",
       opinion: "Artículo 30 de la Constitución: los españoles tenemos el derecho y el deber de defender España. En Granada, unos bañistas actuaron para frenar una entrada ilegal. No es odio, es proteger tu país. Aplausos para quienes cumplen su deber cuando otros solo critican desde la orilla.",
-      
-      // 📅 FECHAS (Año, Mes-1, Día, Hora, Minuto)
-      fechaInicio: new Date(2025, 7, 11, 6, 0),   // 11 Ago 2025, 6:00
-      fechaFin: new Date(2025, 7, 11, 16, 0),     // 11 Ago 2025, 16:00
-      
+
+      // 📅 FECHAS (Año, Mes-1, Día, Hora, Min)
+      // OJO: enero=0, febrero=1, ... agosto=7
+      fechaInicio: new Date(2025, 7, 11, 6, 0),  // 11 Ago 2025, 06:00
+      fechaFin:    new Date(2025, 7, 11, 16, 0), // 11 Ago 2025, 16:00
+
       // 🔗 FUENTES
       fuentes: [
         { nombre: "El País", url: "https://elpais.com/espana/2025-08-05/un-grupo-de-banistas-retiene-por-la-fuerza-a-migrantes-llegados-a-una-playa-de-granada.html" },
         { nombre: "Cadena SER", url: "https://cadenaser.com/nacional/2025/08/05/pobres-persiguiendo-a-pobres-ismael-serrano-da-en-el-clavo-sobre-la-imagen-mas-triste-del-verano-cadena-ser/" }
       ],
-      
-      // 📱 REDES SOCIALES
+
+      // 📱 REDES
       instagram: "https://www.instagram.com/vitaminak.of",
-      twitter: "https://x.com/vitaminakof"
+      twitter:   "https://x.com/vitaminakof"
     };
 
     // ==========================================
-    // ⚙️ NO MODIFICAR NADA DE AQUÍ HACIA ABAJO
+    // ⚙️ LÓGICA (no modificar)
     // ==========================================
-
-    // Aplicar configuración a los elementos
+    // Rellenar contenido
     document.getElementById('newsTitle').textContent = NOTICIA_CONFIG.titulo;
     document.getElementById('newsSubtitle').textContent = NOTICIA_CONFIG.subtitulo;
     document.getElementById('newsOpinion').textContent = NOTICIA_CONFIG.opinion;
-    
-    // Generar fuentes
+
+    // Fuentes
     let fuentesHTML = '<strong>Fuentes:</strong> ';
-    NOTICIA_CONFIG.fuentes.forEach((fuente, index) => {
-      fuentesHTML += `<a href="${fuente.url}" target="_blank">${fuente.nombre}</a>`;
-      if (index < NOTICIA_CONFIG.fuentes.length - 1) fuentesHTML += ', ';
+    NOTICIA_CONFIG.fuentes.forEach((fuente, i) => {
+      fuentesHTML += `<a href="${fuente.url}" target="_blank" rel="noopener">${fuente.nombre}</a>${i < NOTICIA_CONFIG.fuentes.length - 1 ? ', ' : ''}`;
     });
     document.getElementById('newsSources').innerHTML = fuentesHTML;
-    
-    // Enlaces de redes sociales
-    document.getElementById('instagramBtn').href = NOTICIA_CONFIG.instagram;
-    document.getElementById('twitterBtn').href = NOTICIA_CONFIG.twitter;
-    document.getElementById('finalInstagram').href = NOTICIA_CONFIG.instagram;
-    document.getElementById('finalTwitter').href = NOTICIA_CONFIG.twitter;
-    document.getElementById('finalCTA').href = NOTICIA_CONFIG.instagram;
 
-    // Elementos del DOM
-    const newsView = document.getElementById('newsView');
+    // Redes
+    document.getElementById('instagramBtn').href = NOTICIA_CONFIG.instagram;
+    document.getElementById('twitterBtn').href   = NOTICIA_CONFIG.twitter;
+    document.getElementById('finalInstagram').href = NOTICIA_CONFIG.instagram;
+    document.getElementById('finalTwitter').href   = NOTICIA_CONFIG.twitter;
+    document.getElementById('finalCTA').href       = NOTICIA_CONFIG.instagram;
+
+    // Vistas y contador
+    const newsView  = document.getElementById('newsView');
     const finalView = document.getElementById('finalView');
     const countdown = document.getElementById('countdown');
 
-    // Función del temporizador
+    function formato(t){ return t < 10 ? '0'+t : t; }
+
     function actualizarTemporizador() {
-      const ahora = new Date().getTime();
+      const ahora = Date.now();
       const inicio = NOTICIA_CONFIG.fechaInicio.getTime();
-      const fin = NOTICIA_CONFIG.fechaFin.getTime();
-      
+      const fin    = NOTICIA_CONFIG.fechaFin.getTime();
+
       if (ahora < inicio) {
-        // Antes del inicio
-        const tiempoHastaInicio = inicio - ahora;
-        const horas = Math.floor(tiempoHastaInicio / (1000 * 60 * 60));
-        const minutos = Math.floor((tiempoHastaInicio % (1000 * 60 * 60)) / (1000 * 60));
-        const segundos = Math.floor((tiempoHastaInicio % (1000 * 60)) / 1000);
-        
-        countdown.textContent = `🔒 Disponible en ${horas}h ${minutos}m ${segundos}s`;
-        
+        const diff = inicio - ahora;
+        const h = Math.floor(diff / (1000*60*60));
+        const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+        const s = Math.floor((diff % (1000*60)) / 1000);
+        countdown.textContent = `🔒 Disponible en ${formato(h)}h ${formato(m)}m ${formato(s)}s`;
       } else if (ahora >= inicio && ahora < fin) {
-        // Durante el tiempo activo
-        const tiempoRestante = fin - ahora;
-        const horas = Math.floor(tiempoRestante / (1000 * 60 * 60));
-        const minutos = Math.floor((tiempoRestante % (1000 * 60 * 60)) / (1000 * 60));
-        const segundos = Math.floor((tiempoRestante % (1000 * 60)) / 1000);
-        
-        countdown.textContent = `⏳ Desaparece en ${horas}h ${minutos}m ${segundos}s`;
-        
+        const diff = fin - ahora;
+        const h = Math.floor(diff / (1000*60*60));
+        const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+        const s = Math.floor((diff % (1000*60)) / 1000);
+        countdown.textContent = `⏳ Desaparece en ${formato(h)}h ${formato(m)}m ${formato(s)}s`;
       } else {
-        // Tiempo expirado - mostrar vista final
         newsView.classList.add('hidden');
         finalView.classList.remove('hidden');
-        return;
       }
     }
-    
-    // Actualizar cada segundo
+
     setInterval(actualizarTemporizador, 1000);
     actualizarTemporizador();
-    
-    // Función de copiar
-    document.getElementById('copyBtn').addEventListener('click', function() {
-      const textoParaCopiar = `${NOTICIA_CONFIG.titulo}\n\n${NOTICIA_CONFIG.subtitulo}\n\n${NOTICIA_CONFIG.opinion}\n\n#VitaminaK`;
-      
-      navigator.clipboard.writeText(textoParaCopiar).then(function() {
+
+    // Copiar
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      const texto = `${NOTICIA_CONFIG.titulo}\n\n${NOTICIA_CONFIG.subtitulo}\n\n${NOTICIA_CONFIG.opinion}\n\n#VitaminaK`;
+      navigator.clipboard.writeText(texto).then(() => {
         const btn = document.getElementById('copyBtn');
-        const textoOriginal = btn.textContent;
+        const original = btn.textContent;
         btn.textContent = '✅ Copiado';
-        btn.style.background = 'rgba(76, 175, 80, 0.7)';
-        
-        setTimeout(() => {
-          btn.textContent = textoOriginal;
-          btn.style.background = '';
-        }, 2000);
+        btn.style.background = 'rgba(76,175,80,0.6)';
+        setTimeout(() => { btn.textContent = original; btn.style.background = ''; }, 1600);
       });
     });
   </script>
