@@ -412,7 +412,25 @@
     const def  = document.getElementById('view-default');
     const countdown = document.getElementById('countdown');
 
-    const expiresAt = Date.now() + 5 * 1000; // ahora + 5 segundos
+    // Fecha y hora de inicio (11 de agosto, 06:00)
+const startTime = new Date(2025, 8, 11, 6, 0, 0); // Mes 7 = agosto (0 = enero)
+// Fecha y hora de fin (11 de agosto, 16:00)
+const endTime = new Date(2025, 8, 11, 16, 0, 0);
+
+let expiresAt;
+
+// Si la hora actual está antes del inicio → empieza en el inicio
+if (Date.now() < startTime.getTime()) {
+  expiresAt = startTime.getTime();
+}
+// Si la hora actual está dentro del rango → cuenta hasta el final
+else if (Date.now() >= startTime.getTime() && Date.now() < endTime.getTime()) {
+  expiresAt = endTime.getTime();
+}
+// Si ya ha pasado el final → ya está caducado
+else {
+  expiresAt = Date.now();
+}
 
     function tick(){
       const ms = expiresAt - Date.now();
