@@ -1,400 +1,473 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Vitamina K — Publicación</title>
-<meta name="description" content="Publicación viva con carrusel, stories y encuesta.">
-<meta property="og:title" content="Vitamina K — Publicación">
-<meta property="og:description" content="Publicación viva con carrusel, stories y encuesta.">
-<meta property="og:type" content="website">
-<style>
-  :root { --fg:#101216; --bg:#f7f8fb; --card:#ffffffcc; --accent:#0b5cff; --muted:#6b7280; }
-  @media (prefers-color-scheme: dark){ :root{ --fg:#eceff4; --bg:#0b0d12; --card:#0f1320cc; --accent:#7aa2ff; --muted:#9aa3b2; } }
-  *{box-sizing:border-box}
-  html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
-  .wrap{min-height:100%;display:grid;place-items:center;padding:24px}
-  .card{width:clamp(320px,92vw,860px);border:1px solid #00000012;border-radius:18px;padding:22px 22px 18px;background:var(--card);backdrop-filter:saturate(1.2) blur(12px);box-shadow:0 12px 42px #00000014}
-  .brand{display:flex;gap:10px;align-items:center;margin-bottom:6px;font-weight:700;letter-spacing:.2px}
-  .headline{font-size:clamp(22px,5vw,38px);margin:8px 0 6px}
-  .kpi{font-size:clamp(26px,6.5vw,52px);font-weight:800;margin:2px 0 8px;color:var(--accent)}
-  .sub{opacity:.9;margin:0 0 12px;color:var(--muted)}
-  .muted{color:var(--muted)}
-  .bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);transform-origin:0 0;transform:scaleX(0);z-index:10}
-  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-  button, .btn{border:1px solid #00000022;background:transparent;padding:10px 14px;border-radius:12px;cursor:pointer;color:inherit;text-decoration:none}
-  button:hover, .btn:hover{border-color:#00000044}
-  .hidden{display:none}
+  <!-- ===== META ===== -->
+  <meta charset="UTF-8"> <!-- UTF-8 para que salgan bien acentos/Ã± -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Vitamina K â€” PublicaciÃ³n</title>
+  <meta name="description" content="PublicaciÃ³n viva con carrusel, stories y encuesta.">
+  <meta property="og:title" content="Vitamina K â€” PublicaciÃ³n">
+  <meta property="og:description" content="PublicaciÃ³n viva con carrusel, stories y encuesta.">
+  <meta property="og:type" content="website">
 
-  /* Carrusel base */
-  .carousel{position:relative;border-radius:14px;overflow:hidden;user-select:none}
-  .track{display:flex;transition:transform .35s ease-out;will-change:transform}
-  .slide{min-width:100%;height:220px;background:#000;display:grid;place-items:center;position:relative}
-  .slide img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.02)}
-  .caption{position:absolute;left:12px;bottom:12px;right:12px;background:linear-gradient( to top, #0009, #0000 );color:#fff;padding:10px 12px;border-radius:10px;font-weight:600}
-  .nav{position:absolute;top:50%;transform:translateY(-50%);display:flex;gap:8px;width:100%;justify-content:space-between;padding:0 6px;pointer-events:none}
-  .nav button{pointer-events:auto;background:rgba(0,0,0,.35);color:#fff;border:0;border-radius:10px;padding:8px 10px}
-  .dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
-  .dot{width:8px;height:8px;border-radius:50%;background:#00000033}
-  .dot.active{background:var(--accent)}
+  <style>
+    /* ===== THEME (claro/oscuro) ===== */
+    :root{
+      --fg:#101216; --bg:#f7f8fb; --card:#ffffffcc; --accent:#0b5cff; --muted:#6b7280;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{ --fg:#eceff4; --bg:#0b0d12; --card:#0f1320cc; --accent:#7aa2ff; --muted:#9aa3b2; }
+    }
 
-  /* Stories swipe (texto sobre imagen) */
-  .stories{margin-top:12px;border:1px dashed #00000022;border-radius:14px;padding:8px}
-  .story-frame{position:relative;height:320px;border-radius:12px;overflow:hidden}
-  .story-track{display:flex;height:100%;transition:transform .3s ease-out}
-  .story{min-width:100%;position:relative;background:#000}
-  .story img{width:100%;height:100%;object-fit:cover;opacity:.88}
-  .story .label{position:absolute;left:0;top:0;padding:8px 10px;background:rgba(0,0,0,.45);color:#fff;border-bottom-right-radius:10px;font-weight:700}
-  .story .text{position:absolute;left:10px;right:10px;bottom:12px;color:#fff;font-weight:700;font-size:clamp(16px,3.5vw,24px);text-shadow:0 2px 12px #000}
-  .story-dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
-  .story-dot{flex:1;height:4px;background:#00000033;border-radius:3px}
-  .story-dot.active{background:var(--accent)}
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
 
-  /* Encuesta */
-  .poll{margin-top:14px;padding:12px;border:1px solid #00000018;border-radius:12px}
-  .poll h3{margin:0 0 8px}
-  .opt{display:flex;align-items:center;gap:8px;margin:8px 0}
-  .barline{flex:1;height:8px;background:#00000015;border-radius:6px;overflow:hidden}
-  .fill{height:100%;width:0%;background:var(--accent);transition:width .4s ease}
-  .only-once{font-size:13px}
-  
-/* --- HERO (tarjeta tras caducar) --- */
-.card.hero{
-  width:clamp(360px,96vw,980px);
-  padding:28px;
-  border-radius:22px;
-  background:
-    radial-gradient(1200px 600px at 10% -10%, #0b5cff18, transparent 60%),
-    radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
-    var(--card);
-}
-.hero-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:18px;align-items:center}
-@media (max-width:800px){ .hero-grid{grid-template-columns:1fr;gap:14px} }
+    /* Layout centrado */
+    .wrap{
+      /* ðŸ§© No edites: mantiene la tarjeta centrada vertical y horizontal */
+      min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+    }
 
-.avatar{
-  width:140px;height:140px;border-radius:20px;
-  display:grid;place-items:center;font-weight:900;font-size:40px;
-  background:linear-gradient(135deg,#0b5cff, #8aa9ff);
-  color:#fff; box-shadow:0 10px 30px #0b5cff44;
-  transform:perspective(600px) rotateY(-6deg) rotateX(3deg);
-}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #00000022;background:#ffffff40;backdrop-filter:blur(6px)}
+    /* Tarjeta base (vista viva) */
+    .card{
+      width:clamp(320px,92vw,860px);
+      border:1px solid #00000012; border-radius:18px;
+      padding:22px 22px 18px; background:var(--card);
+      backdrop-filter:saturate(1.2) blur(12px); box-shadow:0 12px 42px #00000014;
+    }
 
-.hero-title{font-size:clamp(20px,4.6vw,34px);margin:6px 0}
-.hero-copy{color:var(--muted);margin:6px 0 14px}
-.cta-row{display:flex;gap:10px;flex-wrap:wrap}
-.btn.primary{background:var(--accent);color:#fff;border-color:transparent}
-.btn.primary:hover{filter:brightness(0.95)}
-.hero-mini{display:flex;gap:8px;margin-top:10px}
-.pill{border:1px dashed #00000033;background:transparent;padding:8px 12px;border-radius:999px;cursor:pointer}
-.pill:hover{border-color:#00000066}
+    .brand{display:flex;gap:10px;align-items:center;margin-bottom:6px;font-weight:700;letter-spacing:.2px}
+    .headline{font-size:clamp(22px,5vw,38px);margin:8px 0 6px}
+    .kpi{font-size:clamp(26px,6.5vw,52px);font-weight:800;margin:2px 0 8px;color:var(--accent)}
+    .sub{opacity:.9;margin:0 0 12px;color:var(--muted)}
+    .muted{color:var(--muted)}
+    .hidden{display:none}
 
-@media (prefers-reduced-motion:no-preference){
-  .card.hero{animation:heroIn .45s ease-out both}
-  @keyframes heroIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
-}
-  
-</style>
+    /* Barra superior de progreso (decorativa) */
+    .bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);transform-origin:0 0;transform:scaleX(0);z-index:10}
+
+    /* Controles (botones) */
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button,.btn{border:1px solid #00000022;background:transparent;padding:10px 14px;border-radius:12px;cursor:pointer;color:inherit;text-decoration:none}
+    button:hover,.btn:hover{border-color:#00000044}
+
+    /* ===== Carrusel ===== */
+    .carousel{position:relative;border-radius:14px;overflow:hidden;user-select:none}
+    .track{display:flex;transition:transform .35s ease-out;will-change:transform}
+    .slide{min-width:100%;height:220px;background:#000;display:grid;place-items:center;position:relative}
+    .slide img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.02)}
+    .caption{position:absolute;left:12px;bottom:12px;right:12px;background:linear-gradient(to top,#0009,#0000);color:#fff;padding:10px 12px;border-radius:10px;font-weight:600}
+    .nav{position:absolute;top:50%;transform:translateY(-50%);display:flex;gap:8px;width:100%;justify-content:space-between;padding:0 6px;pointer-events:none}
+    .nav button{pointer-events:auto;background:rgba(0,0,0,.35);color:#fff;border:0;border-radius:10px;padding:8px 10px}
+    .dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+    .dot{width:8px;height:8px;border-radius:50%;background:#00000033}
+    .dot.active{background:var(--accent)}
+
+    /* ===== Stories ===== */
+    .stories{margin-top:12px;border:1px dashed #00000022;border-radius:14px;padding:8px}
+    .story-frame{position:relative;height:320px;border-radius:12px;overflow:hidden}
+    .story-track{display:flex;height:100%;transition:transform .3s ease-out}
+    .story{min-width:100%;position:relative;background:#000}
+    .story img{width:100%;height:100%;object-fit:cover;opacity:.88}
+    .story .label{position:absolute;left:0;top:0;padding:8px 10px;background:rgba(0,0,0,.45);color:#fff;border-bottom-right-radius:10px;font-weight:700}
+    .story .text{position:absolute;left:10px;right:10px;bottom:12px;color:#fff;font-weight:700;font-size:clamp(16px,3.5vw,24px);text-shadow:0 2px 12px #000}
+    .story-dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+    .story-dot{flex:1;height:4px;background:#00000033;border-radius:3px}
+    .story-dot.active{background:var(--accent)}
+
+    /* ===== Encuesta ===== */
+    .poll{margin-top:14px;padding:12px;border:1px solid #00000018;border-radius:12px}
+    .poll h3{margin:0 0 8px}
+    .opt{display:flex;align-items:center;gap:8px;margin:8px 0}
+    .barline{flex:1;height:8px;background:#00000015;border-radius:6px;overflow:hidden}
+    .fill{height:100%;width:0%;background:var(--accent);transition:width .4s ease}
+    .only-once{font-size:13px}
+    .opt button[disabled]{opacity:.6;cursor:not-allowed}
+    .you{font-size:12px;color:var(--muted);margin-left:6px}
+
+    /* ===== HERO (tarjeta final) ===== */
+    .card.hero{
+      /* ðŸ§© Tarjeta que aparece al finalizar la cuenta atrÃ¡s */
+      width:clamp(360px,96vw,980px);
+      padding:28px; border-radius:22px;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #0b5cff18, transparent 60%),
+        radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
+        var(--card);
+    }
+    .hero-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:18px;align-items:start}
+    @media (max-width:800px){ .hero-grid{grid-template-columns:1fr;gap:14px} }
+
+    /* Avatares / badges (puedes ocultarlos si no te gustan) */
+    .avatar{
+      width:140px;height:140px;border-radius:20px;display:grid;place-items:center;
+      font-weight:900;font-size:40px;background:linear-gradient(135deg,#0b5cff,#8aa2ff);
+      color:#fff; box-shadow:0 10px 30px #0b5cff44; transform:perspective(600px) rotateY(-6deg) rotateX(3deg);
+    }
+    .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #00000022;background:#ffffff40;backdrop-filter:blur(6px)}
+
+    .hero-title{font-size:clamp(20px,4.6vw,34px);margin:6px 0}
+    .hero-copy{color:var(--muted);margin:6px 0 14px}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap}
+    .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+    .btn.primary:hover{filter:brightness(0.95)}
+    .hero-mini{display:flex;gap:8px;margin-top:10px}
+    .pill{border:1px dashed #00000033;background:transparent;padding:8px 12px;border-radius:999px;cursor:pointer}
+    .pill:hover{border-color:#00000066}
+
+    /* Fondo cuando se muestra la HERO (estÃ©tico) */
+    body.show-hero{
+      background:
+        radial-gradient(1200px 700px at 50% -10%, #0b5cff22, transparent 60%),
+        radial-gradient(900px 600px at 50% 10%, #8aa9ff22, transparent 60%),
+        var(--bg);
+    }
+
+    @media (prefers-reduced-motion:no-preference){
+      .card.hero{animation:heroIn .45s ease-out both}
+      @keyframes heroIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+    }
+  </style>
 </head>
 <body>
-<div class="bar" id="bar"></div>
-<div class="wrap">
-  <!-- Vista VIVA -->
-  <article class="card" id="view-live">
-    <div class="brand">VITAMINA K · Publicación</div>
-    <h1 class="headline" id="title">Cesta a 90€ y sueldos a 0</h1>
-    <div class="kpi" id="kpi">+276.000 visualizaciones</div>
-    <p class="sub" id="subtitle">Píldora clara y sin humo. Desaparece en horas.</p>
+  <div class="bar" id="bar"></div>
 
-    <!-- Carrusel de IMÁGENES (swipe o flechas) -->
-    <section class="carousel" id="carousel">
-      <div class="track" id="track">
-        <!-- Cambia las URLs por imágenes reales de tu noticia -->
-        <div class="slide"><img src="https://images.unsplash.com/photo-1586201375778-3d5f48f0b35f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Factura del súper, 2025</div></div>
-        <div class="slide"><img src="https://images.unsplash.com/photo-1500576992153-027bb7fbdc32?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Cola ante cajas automáticas</div></div>
-        <div class="slide"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Salarios congelados</div></div>
-        <div class="slide"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Comparativa 2018 vs 2025</div></div>
-      </div>
-      <div class="nav">
-        <button id="prev" aria-label="Anterior">?</button>
-        <button id="next" aria-label="Siguiente">?</button>
-      </div>
-      <div class="dots" id="dots"></div>
-    </section>
+  <div class="wrap">
+    <!-- ===== Vista VIVA (mientras dura) ===== -->
+    <article class="card" id="view-live">
+      <!-- ðŸ§© EDITA: marca y textos principales de la noticia -->
+      <div class="brand" id="brandEl">VITAMINA K Â· PublicaciÃ³n</div> <!-- tÃ­tulo de secciÃ³n -->
+      <h1 class="headline" id="title"> <!-- ðŸ§© EDITA: TÃ­tulo de la noticia -->
+        <!-- Ejemplo: "Gasolina a 2â‚¬, sueldos a 0" -->
+      </h1>
+      <div class="kpi" id="kpi"><!-- ðŸ§© EDITA: KPI opcional, deja vacÃ­o si no quieres mostrarlo --></div>
+      <p class="sub" id="subtitle"><!-- ðŸ§© EDITA: SubtÃ­tulo corto de la noticia --></p>
 
-    <!-- Stories swipe (4 pantallas) -->
-    <section class="stories" id="stories">
-      <div class="story-frame" id="storyFrame">
-        <div class="story-track" id="storyTrack">
-          <div class="story">
-            <img src="https://images.unsplash.com/photo-1520975693414-8f1a6c5a7d8f?q=80&w=1400&auto=format&fit=crop" alt="">
-            <div class="label">1/4</div>
-            <div class="text">Si la cesta sube, el discurso baja…</div>
+      <!-- ðŸ§© EDITA: Carrusel de imÃ¡genes (sustituye las URLs) -->
+      <section class="carousel" id="carousel">
+        <div class="track" id="track">
+          <!-- Reemplaza SOLO las URLs y los captions; estructura igual -->
+          <div class="slide"><img src="https://images.unsplash.com/photo-1586201375778-3d5f48f0b35f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Factura del sÃºper, 2025</div></div>
+          <div class="slide"><img src="https://images.unsplash.com/photo-1500576992153-027bb7fbdc32?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Cola ante cajas automÃ¡ticas</div></div>
+          <div class="slide"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Salarios congelados</div></div>
+          <div class="slide"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Comparativa 2018 vs 2025</div></div>
+        </div>
+        <div class="nav">
+          <button id="prev" aria-label="Anterior">â†</button>
+          <button id="next" aria-label="Siguiente">â†’</button>
+        </div>
+        <div class="dots" id="dots"></div>
+      </section>
+
+      <!-- ðŸ§© EDITA: Stories (imÃ¡genes + textos cortos). Puedes dejarlo tal cual o cambiar URLs/textos -->
+      <section class="stories" id="stories">
+        <div class="story-frame" id="storyFrame">
+          <div class="story-track" id="storyTrack">
+            <div class="story"><img src="https://images.unsplash.com/photo-1520975693414-8f1a6c5a7d8f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">1/4</div><div class="text">Si la cesta sube, el discurso bajaâ€¦</div></div>
+            <div class="story"><img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">2/4</div><div class="text">Dato: +22% en bÃ¡sicos 2021â†’2025</div></div>
+            <div class="story"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">3/4</div><div class="text">Sueldo real: plano como un ECG</div></div>
+            <div class="story"><img src="https://images.unsplash.com/photo-1542219550-37153d387c47?q=80&w=1400&auto=format&fit=crop" alt=""><div class="label">4/4</div><div class="text">La polÃ­tica promete. La nevera responde.</div></div>
           </div>
-          <div class="story">
-            <img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=1400&auto=format&fit=crop" alt="">
-            <div class="label">2/4</div>
-            <div class="text">Dato: +22% en básicos 2021?2025</div>
+        </div>
+        <div class="story-dots" id="storyDots">
+          <div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div>
+        </div>
+      </section>
+
+      <!-- ðŸ§© EDITA: Encuesta (pregunta/opciones dentro de CONFIG) -->
+      <section class="poll" id="poll">
+        <h3 id="pollQ"><!-- se rellena desde CONFIG.pollQuestion --></h3>
+        <div class="only-once muted">Voto Ãºnico por dispositivo</div>
+        <div id="options"></div>
+        <div id="totals" class="muted" style="margin-top:8px"></div>
+      </section>
+
+      <div class="controls">
+        <button id="copy">Copiar para X</button>
+        <button id="toggle">Dato â†” Contexto</button>
+        <span id="countdown" class="muted"></span> <!-- contador visible mientras dura -->
+      </div>
+    </article>
+
+    <!-- ===== Vista BASE (HERO final, cuando termina) ===== -->
+    <article class="card hero hidden" id="view-default">
+      <!-- ðŸ§© EDITA: Esta es la tarjeta que quieres mejorar tras caducar -->
+      <div class="brand">VITAMINA K</div> <!-- puedes cambiar el texto -->
+      <h1 class="headline">@vitaminak.of</h1> <!-- tu handle -->
+      <p class="sub">SÃ­gueme en IG y X. Publicaciones cortas, claras y con impacto.</p>
+
+      <div class="hero-grid">
+        <div class="hero-left">
+          <!-- ðŸ§© Puedes quitar el bloque avatar/badges si no lo quieres -->
+          <div class="avatar" aria-hidden="true">VK</div>
+          <div class="badges">
+            <span class="chip">#datosreales</span>
+            <span class="chip">#sinHumo</span>
+            <span class="chip">#MadeInSpain</span>
           </div>
-          <div class="story">
-            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1400&auto=format&fit=crop" alt="">
-            <div class="label">3/4</div>
-            <div class="text">Sueldo real: plano como un ECG mal</div>
+        </div>
+
+        <div class="hero-right">
+          <!-- ðŸ§© EDITA: TÃ­tulo/Copy del CTA de la tarjeta final -->
+          <h2 class="hero-title">La prÃ³xima noticia temporal se estÃ¡ cocinandoâ€¦</h2>
+          <p class="hero-copy">Mientras tanto, puedes ver mÃ¡s y seguirme en Instagram y X.</p>
+
+          <!-- ðŸ§© EDITA: Enlaces de redes -->
+          <div class="cta-row">
+            <a class="btn primary" href="https://x.com/vitaminakof" target="_blank" rel="noopener">Seguir en X</a>
+            <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
+            <button class="btn" id="copy-hero">Copiar enlace</button>
           </div>
-          <div class="story">
-            <img src="https://images.unsplash.com/photo-1542219550-37153d387c47?q=80&w=1400&auto=format&fit=crop" alt="">
-            <div class="label">4/4</div>
-            <div class="text">La política te promete. La nevera te responde.</div>
+
+          <!-- ðŸ§© EDITA: Puedes aÃ±adir aquÃ­ iconos/logos clicables si prefieres logos grandes -->
+          <!-- Ejemplo:
+          <div class="cta-row">
+            <a href="https://www.instagram.com/vitaminak.of" target="_blank" class="btn">Instagram</a>
+            <a href="https://x.com/vitaminakof" target="_blank" class="btn">X</a>
+          </div> -->
+
+          <div class="hero-mini">
+            <button class="pill" id="notify-me">ðŸ”” Recibir avisos</button>
+            <button class="pill" id="random-post">ðŸŽ² Ver publicaciÃ³n aleatoria</button>
           </div>
         </div>
       </div>
-      <div class="story-dots" id="storyDots">
-        <div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div>
-      </div>
-    </section>
-
-    <!-- Encuesta -->
-    <section class="poll" id="poll">
-      <h3>Si las elecciones fueran hoy, a quién votarías</h3>
-      <div class="only-once muted">Voto único por dispositivo</div>
-      <div id="options"></div>
-      <div id="totals" class="muted" style="margin-top:8px"></div>
-    </section>
-
-    <div class="controls">
-      <button id="copy">Copiar para X</button>
-      <button id="toggle">Dato ? Contexto</button>
-      <span id="countdown" class="muted"></span>
-    </div>
-  </article>
-
-  <!-- Vista BASE (cuando caduque) -->
-  <article class="card hero hidden" id="view-default">
-    <div class="brand">VITAMINA K</div>
-    <h1 class="headline">@vitaminak.of</h1>
-    <p class="sub">No vine a caer bien, vine a no caerme nunca. Sígueme en mis redes IG X.</p>
-   
-    <div class="hero-grid">
-  <div class="hero-left">
-    <div class="avatar" aria-hidden="true">VK</div>
-    <div class="badges">
-      <span class="chip">#anticorrupción</span>
-      <span class="chip">#datosreales</span>
-      <span class="chip">#MadeInSpain</span>
-    </div>
+    </article>
   </div>
 
-  <div class="hero-right">
-    <h2 class="hero-title">Lo importante explicado en pocos segundos</h2>
-    <p class="hero-copy">Publicaciones cortas, claras y con impacto. Sin ruido, sin humo, sin tiempo que perder.</p>
+  <script>
+    /* ====== CONFIG EDITABLE (cambia SOLO aquÃ­) ======
+       AquÃ­ actualizas tÃ­tulo, KPI, subtÃ­tulo, el texto de dato/contexto,
+       el tiempo de vida (cuenta atrÃ¡s) y la encuesta.
+    */
+    const CONFIG = {
+      // ðŸ§© EDITA: Textos principales de la noticia
+      title: "",                 // Ej: "Gasolina a 2â‚¬ y sueldos a 0"
+      kpi: "",                   // Ej: "+276.000 visualizaciones" (dÃ©jalo "" para ocultarlo)
+      subtitle: "",              // Ej: "PÃ­ldora clara y sin humo. Desaparece en horas."
+      shareText: "El dato que no te cuentan. #VitaminaK", // lo que copia el botÃ³n "Copiar para X"
 
-    <div class="cta-row">
-      <a class="btn primary" href="https://x.com/vitaminakof" target="_blank" rel="noopener">Seguir en X</a>
-      <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
-      <button class="btn" id="copy-hero">Copiar enlace</button>
-    </div>
+      // ðŸ§© EDITA: CuÃ¡nto dura la publicaciÃ³n (cuenta atrÃ¡s)
+      // OpciÃ³n 1: horas (mÃ¡s fÃ¡cil):
+      expiresHours: 6,           // nÃºmero de horas que debe durar
+      // OpciÃ³n 2: segundos (para pruebas rÃ¡pidas). Si pones un nÃºmero, tiene prioridad:
+      expiresSeconds: null,      // Ej: 10 â†’ 10 segundos. DÃ©jalo en null para ignorar.
 
-    <div class="hero-mini">
-      <button class="pill" id="notify-me">?? Recibir avisos</button>
-      <button class="pill" id="random-post">?? Ver publicación aleatoria</button>
-    </div>
-  </div>
-</div>
-  </article>
-</div>
+      // ðŸ§© EDITA: Dato y Contexto (textos cortos para alternar con el botÃ³n)
+      datoHTML: "<strong>Dato</strong>: â€¦",
+      contextoHTML: "<strong>Contexto</strong>: â€¦",
 
-<script>
-/* ========== CONFIG EDITABLE ========== */
-const CONFIG = {
-  expiresAt: Date.now() + 06*10*00*0,    // ahora + 6h
-  shareText: "El dato que no te cuentan. #VitaminaK",
-  datoHTML: "<strong>Dato</strong>: 62% paga más por lo mismo.",
-  contextoHTML: "<strong>Contexto</strong>: 2018 vs 2025: cesta +22% con salarios planos.",
-  title: "Cesta a 90€ y sueldos a 0",
-  kpi: "+276.000 visualizaciones",
-  subtitle: "Píldora clara y sin humo. Desaparece en horas.",
-  pollKey: "vk_poll_v2",        // cambia si quieres “resetear” votos locales
-  pollQuestion: "Si las elecciones fueran hoy, a quién votarías",
-  pollOptions: [
-    "PSOE","PP","Vox","Se Acabó la Fiesta","Sumar/Podemos","Otros"
-  ]
-};
-/* ========== /CONFIG ========== */
+      // ðŸ§© EDITA: Encuesta
+      pollKey: "vk_poll_v3",     // cambia el nombre para â€œresetearâ€ votos locales
+      pollQuestion: "",          // Pregunta (dÃ©jalo "" para ocultar encuesta)
+      pollOptions: [             // Opciones (vacÃ­a â†’ oculta encuesta)
+        // "PSOE","PP","Vox","Se AcabÃ³ la Fiesta","Sumar/Podemos","Otros"
+      ],
+    };
+    /* ===== FIN CONFIG EDITABLE ===== */
 
-/* Montaje básico */
-title.textContent = CONFIG.title;
-kpi.textContent = CONFIG.kpi;
-subtitle.textContent = CONFIG.subtitle;
-let showingDato = true;
+    /* ===== Montaje bÃ¡sico de textos ===== */
+    const titleEl = document.getElementById('title');
+    const kpiEl = document.getElementById('kpi');
+    const subtitleEl = document.getElementById('subtitle');
 
-/* Cuenta atrás + cambio de vista */
-const live = document.getElementById('view-live');
-const def = document.getElementById('view-default');
-function tick() {
-  const ms = CONFIG.expiresAt - Date.now();
-  if (ms <= 0) { live.classList.add('hidden'); def.classList.remove('hidden'); return; }
-  if (ms <= 0) {
-  live.classList.add('hidden');
-  def.classList.remove('hidden');
-  document.body.classList.add('show-hero'); // <— añade esta línea
-  return;
-}
+    titleEl.textContent = CONFIG.title || "";
+    kpiEl.textContent = CONFIG.kpi || "";
+    subtitleEl.textContent = CONFIG.subtitle || "";
 
-  const h = Math.floor(ms/3600000), m = Math.floor((ms%3600000)/60000), s = Math.floor((ms%60000)/1000);
-  countdown.textContent = `Desaparece en ${h}h ${m}m ${s}s`;
-}
-setInterval(tick, 1000); tick();
+    let showingDato = true;
 
-/* Barra de progreso */
-const bar = document.getElementById('bar');
-document.addEventListener('scroll', () => {
-  const max = document.body.scrollHeight - innerHeight;
-  const p = max>0 ? scrollY/max : 0;
-  bar.style.transform = `scaleX(${p})`;
-}, {passive:true});
+    /* ===== Cuenta atrÃ¡s + cambio de vista ===== */
+    const expiresAt = Date.now() + 5 * 1000; // ahora + 5 segundos
 
-/* Dato/Contexto */
-const toggleBtn = document.getElementById('toggle');
-toggleBtn.addEventListener('click', swap);
-function swap(){
-  showingDato = !showingDato;
-  toggleBtn.textContent = showingDato ? "Dato ? Contexto" : "Contexto ? Dato";
-}
+    function tick(){
+      const ms = expiresAt - Date.now();
+      if (ms <= 0) {
+        live.classList.add('hidden');
+        def.classList.remove('hidden');
+        document.body.classList.add('show-hero');
+        countdown.textContent = "Caducado";
+        return;
+      }
+      const h = Math.floor(ms/3600000),
+            m = Math.floor((ms%3600000)/60000),
+            s = Math.floor((ms%60000)/1000);
+      countdown.textContent = `Desaparece en ${h}h ${m}m ${s}s`;
+    }
+    setInterval(tick, 1000); tick();
 
-/* Copiar para X */
-copy.addEventListener('click', async()=>{
-  try{
-    await navigator.clipboard.writeText(`${CONFIG.shareText} ${location.href}`);
-    copy.textContent = "Copiado ?";
-    setTimeout(()=>copy.textContent="Copiar para X",1400);
-  }catch(e){ alert("No se pudo copiar"); }
-});
+    /* ===== Barra de progreso (decorativa) ===== */
+    const bar = document.getElementById('bar');
+    document.addEventListener('scroll', () => {
+      const max = document.body.scrollHeight - innerHeight;
+      const p = max>0 ? scrollY/max : 0;
+      bar.style.transform = `scaleX(${p})`;
+    }, {passive:true});
 
-/* Carrusel imágenes (swipe + flechas) */
-(function(){
-  const track = document.getElementById('track');
-  const slides = Array.from(track.children);
-  const dots = document.getElementById('dots');
-  const prev = document.getElementById('prev');
-  const next = document.getElementById('next');
-  let i = 0, startX=0, dx=0, isDown=false;
-
-  slides.forEach((_,idx)=>{
-    const d=document.createElement('div'); d.className='dot'+(idx===0?' active':''); dots.appendChild(d);
-  });
-  function setIndex(n){
-    i = Math.max(0, Math.min(slides.length-1, n));
-    track.style.transform = `translateX(${-i*100}%)`;
-    dots.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('active',k===i));
-  }
-  prev.addEventListener('click', ()=>setIndex(i-1));
-  next.addEventListener('click', ()=>setIndex(i+1));
-
-  // touch
-  track.addEventListener('touchstart', e=>{isDown=true; startX=e.touches[0].clientX; dx=0;},{passive:true});
-  track.addEventListener('touchmove', e=>{ if(!isDown) return; dx=e.touches[0].clientX - startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; }, {passive:true});
-  track.addEventListener('touchend', ()=>{ isDown=false; if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); });
-
-  // mouse (desktop)
-  let down=false, start=0;
-  track.addEventListener('mousedown', e=>{down=true; start=e.clientX;});
-  window.addEventListener('mouseup', ()=>{if(!down) return; down=false; if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i);});
-  window.addEventListener('mousemove', e=>{ if(!down) return; dx=e.clientX-start; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`;});
-})();
-
-/* Stories swipe */
-(function(){
-  const track = document.getElementById('storyTrack');
-  const dots = Array.from(document.getElementById('storyDots').children);
-  const total = dots.length;
-  let i=0, startX=0, dx=0, isDown=false, timer;
-
-  function setIndex(n){ i=Math.max(0,Math.min(total-1,n)); track.style.transform=`translateX(${-i*100}%)`; dots.forEach((d,k)=>d.classList.toggle('active',k===i)); }
-  function autoplay(){ clearTimeout(timer); timer=setTimeout(()=>{ setIndex((i+1)%total); autoplay(); }, 3500); }
-  autoplay();
-
-  track.addEventListener('touchstart', e=>{isDown=true; startX=e.touches[0].clientX; dx=0; clearTimeout(timer);},{passive:true});
-  track.addEventListener('touchmove', e=>{ if(!isDown) return; dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; },{passive:true});
-  track.addEventListener('touchend', ()=>{ isDown=false; if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); autoplay(); });
-
-  // clic en dots
-  dots.forEach((d,idx)=>d.addEventListener('click', ()=>{ setIndex(idx); autoplay(); }));
-})();
-
-/* Encuesta (una vez por dispositivo, localStorage) */
-(function(){
-  const optionsWrap = document.getElementById('options');
-  const totalsEl = document.getElementById('totals');
-  const KEY = CONFIG.pollKey;
-  const saved = JSON.parse(localStorage.getItem(KEY) || '{"votes":{},"voted":false}');
-  const votes = saved.votes;
-  CONFIG.pollOptions.forEach(opt=>{ if(!(opt in votes)) votes[opt]=0; });
-
-  function totalVotes(){ return Object.values(votes).reduce((a,b)=>a+b,0); }
-
-  function render(){
-    optionsWrap.innerHTML = "";
-    const t = totalVotes();
-    CONFIG.pollOptions.forEach(opt=>{
-      const row = document.createElement('div'); row.className='opt';
-      const btn = document.createElement('button'); btn.textContent = saved.voted ? "Votado" : "Votar";
-      btn.disabled = !!saved.voted;
-      btn.addEventListener('click', ()=> vote(opt));
-      const name = document.createElement('div'); name.style.minWidth='150px'; name.textContent = opt;
-      const bar = document.createElement('div'); bar.className='barline';
-      const fill = document.createElement('div'); fill.className='fill';
-      const pct = t ? Math.round(votes[opt]*100/t) : 0;
-      fill.style.width = pct+'%';
-      bar.appendChild(fill);
-      const perc = document.createElement('div'); perc.style.minWidth='38px'; perc.className='muted'; perc.textContent = (pct||0) + "%";
-      row.appendChild(btn); row.appendChild(name); row.appendChild(bar); row.appendChild(perc);
-      optionsWrap.appendChild(row);
+    /* ===== Dato/Contexto (solo cambia el texto del botÃ³n) ===== */
+    const toggleBtn = document.getElementById('toggle');
+    toggleBtn.addEventListener('click', ()=>{
+      showingDato = !showingDato;
+      toggleBtn.textContent = showingDato ? "Dato â†” Contexto" : "Contexto â†” Dato";
+      // (Si quieres mostrar los textos dentro de la pÃ¡gina, dime y te agrego un Ã¡rea que cambie con esto)
     });
-    totalsEl.textContent = `Total votos (local): ${totalVotes()}`;
-  }
 
-  function vote(option){
-    if(saved.voted) return;
-    votes[option] = (votes[option]||0) + 1;
-    saved.voted = true;
-    saved.votes = votes;
-    localStorage.setItem(KEY, JSON.stringify(saved));
-    render();
-  }
+    /* ===== Copiar para X ===== */
+    const copyBtn = document.getElementById('copy');
+    copyBtn.addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(`${CONFIG.shareText} ${location.href}`);
+        copyBtn.textContent = "Copiado âœ“";
+        setTimeout(()=>copyBtn.textContent="Copiar para X",1400);
+      }catch(e){ alert("No se pudo copiar"); }
+    });
 
-  render();
-})();
+    /* ===== Carrusel imÃ¡genes ===== */
+    (function(){
+      const track = document.getElementById('track');
+      const slides = Array.from(track.children);
+      const dots = document.getElementById('dots');
+      const prev = document.getElementById('prev');
+      const next = document.getElementById('next');
+      let i = 0, startX=0, dx=0;
 
-/* Accesos menores */
-document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='d') swap(); });
-// --- Interacciones de la HERO ---
-document.getElementById('copy-hero')?.addEventListener('click', async ()=>{
-  try{
-    await navigator.clipboard.writeText(location.href);
-    const btn = document.getElementById('copy-hero');
-    btn.textContent = "Enlace copiado ?";
-    setTimeout(()=>btn.textContent="Copiar enlace",1400);
-  }catch(e){ alert("No se pudo copiar"); }
-});
+      slides.forEach((_,idx)=>{
+        const d=document.createElement('div');
+        d.className='dot'+(idx===0?' active':''); dots.appendChild(d);
+      });
 
-document.getElementById('notify-me')?.addEventListener('click', ()=>{
-  alert("Pronto: avisos cuando publiquemos algo nuevo. Por ahora, sígueme en X/IG ??");
-});
+      function setIndex(n){
+        i = Math.max(0, Math.min(slides.length-1, n));
+        track.style.transform = `translateX(${-i*100}%)`;
+        dots.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('active',k===i));
+      }
+      prev.addEventListener('click', ()=>setIndex(i-1));
+      next.addEventListener('click', ()=>setIndex(i+1));
 
-document.getElementById('random-post')?.addEventListener('click', ()=>{
-  // Si en el futuro creas más páginas (publicacion-2.html, etc), añádelas aquí:
-  const posts = ["index.html" /*,"publicacion-2.html","publicacion-3.html"*/];
-  const pick = posts[Math.floor(Math.random()*posts.length)];
-  location.href = pick;
-});
+      // Touch (mÃ³vil)
+      track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; dx=0; }, {passive:true});
+      track.addEventListener('touchmove',  e=>{ dx=e.touches[0].clientX - startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; }, {passive:true});
+      track.addEventListener('touchend',   ()=>{ if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); });
 
-</script>
+      // Mouse (desktop)
+      let down=false, start=0;
+      track.addEventListener('mousedown', e=>{down=true; start=e.clientX;});
+      window.addEventListener('mouseup', ()=>{if(!down) return; down=false; if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i);});
+      window.addEventListener('mousemove', e=>{ if(!down) return; dx=e.clientX-start; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`;});
+    })();
+
+    /* ===== Stories swipe ===== */
+    (function(){
+      const track = document.getElementById('storyTrack');
+      const dots = Array.from(document.getElementById('storyDots').children);
+      const total = dots.length;
+      let i=0, startX=0, dx=0, timer;
+
+      function setIndex(n){ i=Math.max(0,Math.min(total-1,n)); track.style.transform=`translateX(${-i*100}%)`; dots.forEach((d,k)=>d.classList.toggle('active',k===i)); }
+      function autoplay(){ clearTimeout(timer); timer=setTimeout(()=>{ setIndex((i+1)%total); autoplay(); }, 3500); }
+      autoplay();
+
+      track.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; dx=0; clearTimeout(timer); },{passive:true});
+      track.addEventListener('touchmove',  e=>{ if(!startX) return; dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; },{passive:true});
+      track.addEventListener('touchend',   ()=>{ if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); autoplay(); startX=0; });
+
+      dots.forEach((d,idx)=>d.addEventListener('click', ()=>{ setIndex(idx); autoplay(); }));
+    })();
+
+    /* ===== Encuesta (una vez por dispositivo) ===== */
+    (function(){
+      const pollBox   = document.getElementById('poll');
+      const optionsEl = document.getElementById('options');
+      const totalsEl  = document.getElementById('totals');
+      const qEl       = document.getElementById('pollQ');
+
+      // Si no hay pregunta u opciones, ocultamos la encuesta
+      if(!CONFIG.pollQuestion || !CONFIG.pollOptions || !CONFIG.pollOptions.length){
+        pollBox.classList.add('hidden'); return;
+      }
+      qEl.textContent = CONFIG.pollQuestion;
+
+      const KEY = CONFIG.pollKey || "vk_poll";
+      let saved;
+      try{ saved = JSON.parse(localStorage.getItem(KEY) || "{}"); }catch(_){ saved = {}; }
+      if(!saved || typeof saved!=='object') saved={};
+      if(!saved.votes) saved.votes = {};
+      if(typeof saved.voted!=='boolean') saved.voted=false;
+      if(!saved.choice) saved.choice = "";
+
+      CONFIG.pollOptions.forEach(opt=>{ if(!(opt in saved.votes)) saved.votes[opt]=0; });
+      function totalVotes(){ return Object.values(saved.votes).reduce((a,b)=>a+b,0); }
+
+      function render(){
+        optionsEl.innerHTML = "";
+        const t = totalVotes();
+
+        CONFIG.pollOptions.forEach(opt=>{
+          const row = document.createElement('div'); row.className='opt';
+
+          const btn = document.createElement('button');
+          btn.textContent = saved.voted ? "Votado" : "Votar";
+          btn.disabled = !!saved.voted;
+          btn.addEventListener('click', ()=> vote(opt));
+
+          const name = document.createElement('div'); name.style.minWidth='150px'; name.textContent = opt;
+
+          const bar = document.createElement('div'); bar.className='barline';
+          const fill = document.createElement('div'); fill.className='fill';
+          const pct = t ? Math.round((saved.votes[opt]||0)*100/t) : 0;
+          fill.style.width = pct+'%';
+          bar.appendChild(fill);
+
+          const perc = document.createElement('div'); perc.style.minWidth='38px'; perc.className='muted'; perc.textContent = (pct||0) + "%";
+
+          row.appendChild(btn); row.appendChild(name); row.appendChild(bar); row.appendChild(perc);
+
+          if(saved.choice === opt){
+            const you = document.createElement('span'); you.className='you'; you.textContent="Â· tu voto"; row.appendChild(you);
+          }
+
+          optionsEl.appendChild(row);
+        });
+
+        totalsEl.textContent = `Total votos (local): ${totalVotes()}`;
+      }
+
+      function vote(option){
+        if(saved.voted) return;
+        if(!CONFIG.pollOptions.includes(option)) return;
+
+        saved.votes[option] = (saved.votes[option]||0) + 1;
+        saved.voted = true;
+        saved.choice = option;
+        try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(_){}
+        render();
+      }
+
+      render();
+    })();
+
+    /* ===== Atajos / Interacciones HERO ===== */
+    document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='d') { showingDato = !showingDato; } });
+
+    const copyHero = document.getElementById('copy-hero');
+    copyHero?.addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(location.href);
+        copyHero.textContent = "Enlace copiado âœ“";
+        setTimeout(()=>copyHero.textContent="Copiar enlace",1400);
+      }catch(e){ alert("No se pudo copiar"); }
+    });
+
+    document.getElementById('notify-me')?.addEventListener('click', ()=>{
+      alert("Pronto: avisos cuando publiquemos algo nuevo. Por ahora, sÃ­gueme en X/IG ðŸ˜‰");
+    });
+
+    document.getElementById('random-post')?.addEventListener('click', ()=>{
+      const posts = ["index.html" /*,"publicacion-2.html","publicacion-3.html"*/];
+      const pick = posts[Math.floor(Math.random()*posts.length)];
+      location.href = pick;
+    });
+  </script>
 </body>
 </html>
-
-
-
-
-
