@@ -16,6 +16,7 @@
       --card:#111827ee;      /* tarjetas más claras que el fondo */
       --accent:#7aa2ff;      /* color acento */
       --muted:#c3cae0;       /* texto secundario legible */
+      --ok:#22c55e;          /* verde para CTA */
     }
     *{box-sizing:border-box}
     html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
@@ -91,18 +92,28 @@
       border:1px solid rgba(255,255,255,0.14);
       box-shadow:0 20px 60px rgba(0,0,0,0.55);
     }
-    .hero-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:22px;align-items:start}
-    .hero-left{display:flex;flex-direction:column;gap:10px}
-    .hero-right{display:flex;flex-direction:column;gap:12px;justify-content:flex-start;align-self:flex-start}
-    .hero-title{font-size:clamp(22px,5vw,40px);margin:0 0 12px;font-weight:900;letter-spacing:.2px;color:#fff}
-    .card.hero .headline{color:#fff}
-    .card.hero .sub{color:#d6dbef}
-    .card.hero .brand{color:#c9d4ff}
-    .social-logos{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:6px}
-    .logo-bubble{width:84px;height:84px;border-radius:20px;display:grid;place-items:center;background:#fff;box-shadow:0 14px 36px #0b5cff22;border:1px solid #0001}
-    .logo-bubble svg{width:44px;height:44px}
-    .btn.primary{background:var(--accent);color:#fff;border-color:transparent;font-weight:700;padding:12px 16px;border-radius:14px}
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+    .hero-title{font-size:clamp(22px,5vw,40px);margin:0 0 8px;font-weight:900;letter-spacing:.2px;color:#fff}
+    .hero-copy{margin:0 0 14px;color:#d6dbef}
+    .social-row{display:flex;gap:16px;align-items:center}
+    .logo-bubble{
+      width:96px;height:96px;border-radius:22px;display:grid;place-items:center;
+      background:#fff; box-shadow:0 14px 36px #0b5cff22;border:1px solid #0001; transition:transform .15s ease;
+    }
+    .logo-bubble:hover{transform:translateY(-2px)}
+    .logo-bubble svg{width:50px;height:50px}
+
+    /* Bloque compartir */
+    .share{
+      margin-top:10px;display:flex;flex-wrap:wrap;gap:10px;align-items:center
+    }
+    .btn.primary{background:var(--ok);color:#07121f;border-color:transparent;font-weight:800;padding:12px 16px;border-radius:14px}
     .btn.outline{border:2px solid var(--accent);padding:12px 16px;border-radius:14px;font-weight:700}
+    .share .mini{font-size:12px;color:#c9d4ff;opacity:.9}
+
+    /* Badges */
+    .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
 
     /* FONDO CUANDO SE VE LA HERO */
     body.show-hero{
@@ -112,12 +123,10 @@
         var(--bg);
     }
 
-    /* MÓVIL: aún más legible */
-    @media (max-width:480px){
-      .card.hero{
-        background:linear-gradient(180deg, rgba(48,64,105,0.96) 0%, rgba(26,35,59,0.96) 100%);
-        border-color:rgba(255,255,255,0.18);
-      }
+    /* MÓVIL */
+    @media (max-width:640px){
+      .hero-grid{grid-template-columns:1fr}
+      .social-row{justify-content:flex-start}
     }
   </style>
 </head>
@@ -125,12 +134,12 @@
   <div class="bar" id="bar"></div>
 
   <div class="wrap">
-    <!-- ========== VISTA “VIVA” (activa) ========== -->
+    <!-- ========== VISTA “VIVA” (activa mientras dura) ========== -->
     <article class="card" id="view-live">
-      <div class="brand" id="brandEl"></div>     <!-- nombre de sección/marca -->
-      <h1 class="headline" id="title"></h1>      <!-- título noticia -->
-      <div class="kpi" id="kpi"></div>           <!-- KPI (puedes dejar vacío) -->
-      <p class="sub" id="subtitle"></p>          <!-- subtítulo -->
+      <div class="brand" id="brandEl"></div>
+      <h1 class="headline" id="title"></h1>
+      <div class="kpi" id="kpi"></div>
+      <p class="sub" id="subtitle"></p>
 
       <!-- Carrusel -->
       <section class="carousel" id="carousel">
@@ -153,7 +162,6 @@
         <div id="totals" class="muted" style="margin-top:8px"></div>
       </section>
 
-      <!-- Controles -->
       <div class="controls">
         <button id="copy">Copiar para X</button>
         <button id="toggle">Dato ↔ Contexto</button>
@@ -161,36 +169,54 @@
       </div>
     </article>
 
-    <!-- ========== VISTA “HERO FINAL” (cuando esté fuera de horario) ========== -->
+    <!-- ========== VISTA “HERO FINAL” (tras finalizar) ========== -->
     <article class="card hero hidden" id="view-default">
       <div class="hero-grid">
-        <div class="hero-left">
-          <div class="brand" id="brandFinal"></div>
-          <h1 class="headline" id="handleFinal"></h1>
-          <p class="sub" id="bioFinal"></p>
-          <div class="social-logos">
+        <!-- Columna izquierda: mensaje + logos -->
+        <div>
+          <h2 class="hero-title">La próxima noticia temporal se está cocinando…</h2>
+          <p class="hero-copy">Mientras tanto, puedes ver más y **seguirme** en Instagram y X.</p>
+
+          <div class="social-row">
+            <!-- Instagram -->
             <a class="logo-bubble" id="igLogo" target="_blank" rel="noopener" aria-label="Instagram">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/></linearGradient></defs>
+                <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/>
+                </linearGradient></defs>
                 <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
                 <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
                 <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
               </svg>
             </a>
+
+            <!-- X -->
             <a class="logo-bubble" id="xLogo" target="_blank" rel="noopener" aria-label="X">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
               </svg>
             </a>
           </div>
+
+          <!-- Señuelos sociales -->
+          <div class="badges">
+            <span class="chip">🕒 publicaciones fugaces</span>
+            <span class="chip">⚡ sin ruido</span>
+            <span class="chip">📈 datos por encima de relatos</span>
+          </div>
         </div>
 
-        <div class="hero-right">
-          <h2 class="hero-title" id="ctaTitle"></h2>
-          <p class="sub" id="ctaSub"></p>
-          <div class="cta-row">
-            <a class="btn primary" id="ctaX" target="_blank" rel="noopener">Seguir en X</a>
-            <a class="btn outline"  id="ctaIG" target="_blank" rel="noopener">Seguir en Instagram</a>
+        <!-- Columna derecha: compartir -->
+        <div>
+          <h3 class="hero-title" style="font-size:clamp(18px,4.2vw,30px);margin-top:0">Comparte esta página</h3>
+          <p class="sub">Si te gusta lo que ves, compártelo en un toque.</p>
+
+          <div class="share">
+            <button class="btn primary" id="share-native">Compartir ahora</button>
+            <a class="btn outline" id="share-x"   target="_blank" rel="noopener">Compartir en X</a>
+            <a class="btn outline" id="share-wa"  target="_blank" rel="noopener">WhatsApp</a>
+            <button class="btn" id="copy-hero">Copiar enlace</button>
+            <span class="mini">Funciona mejor desde el móvil 📱</span>
           </div>
         </div>
       </div>
@@ -200,27 +226,24 @@
   <script>
     /* =====================================================
        🧩 CONTENIDO: EDITA SOLO AQUÍ
-       (cada vez que subas una noticia, solo cambia esto)
     ===================================================== */
     const CONTENT = {
-      // Cabecera de la noticia
+      // Cabecera de la noticia (vista viva). Déjalo vacío si ahora quieres probar solo la HERO:
       brand: "VITAMINA K · Publicación",
-      title: "",           // ← título (vacío ahora)
-      kpi: "",             // ← deja vacío si no lo usas
-      subtitle: "",        // ← subtítulo
+      title: "",           // ← título
+      kpi: "",             // ← vacíalo si no lo usas
+      subtitle: "",
 
-      // Dato/Contexto (si no los usas, deja vacío)
+      // Dato/Contexto (opcional)
       datoHTML: "",
       contextoHTML: "",
 
-      /* HORARIO: activo todo el día para pruebas */
+      /* HORARIO: para probar la HERO, puedes forzar con ?force=hero=1
+         Si no fuerzas, la “vista viva” se muestra todo el día por defecto */
       mode: "daily",
       dailyWindow: { start: "00:00", end: "23:59" },
-      // Para fecha fija usa:
-      // mode: "window",
-      // windowISO: { start: "2025-08-10T12:00:00+02:00", end: "2025-08-11T12:00:00+02:00" },
 
-      // Carrusel: añade tus imágenes
+      // Carrusel (opcional)
       carousel: [
         // { src:"assets/images/foto1.webp", caption:"Pie 1" },
       ],
@@ -230,170 +253,22 @@
         // { img:"assets/images/story1.webp", text:"Texto 1" },
       ],
 
-      // Encuesta (déjalo vacío si no quieres encuesta)
+      // Encuesta (opcional)
       pollQuestion: "",
       pollOptions: [],
       pollKey: "vk_poll_v3",
 
-      // Tarjeta final (redes)
-      finalBrand: "VITAMINA K",
-      finalHandle: "@vitaminak.of",
-      finalBio: "No vine a caer bien, vine a no caerme nunca.",
-      ctaTitle: "SÍGUEME AHORA",
-      ctaSub: "X · Instagram",
-      xUrl: "https://x.com/vitaminakof",
+      // Enlaces redes (para logos y botones)
+      xUrl:  "https://x.com/vitaminakof",
       igUrl: "https://www.instagram.com/vitaminak.of",
 
-      // Botón copiar
-      shareText: "El dato que no te cuentan. #VitaminaK"
+      // Texto para compartir
+      shareText: "Nueva publicación temporal de Vitamina K — mírala aquí:",
     };
     /* =========================
        /🧩 FIN CONTENIDO
     ========================= */
 
-    /* ====== MONTAJE DE TEXTOS ====== */
+    /* ====== MONTAJE DE TEXTOS BÁSICOS ====== */
     brandEl.textContent = CONTENT.brand || "";
-    title.textContent   = CONTENT.title || "";
-    kpi.textContent     = CONTENT.kpi || "";
-    subtitle.textContent= CONTENT.subtitle || "";
-
-    // Botón Dato/Contexto (solo cambia el texto del botón)
-    let showingDato = true;
-    const toggleBtn = document.getElementById('toggle');
-    toggleBtn.addEventListener('click',()=>{
-      showingDato=!showingDato;
-      toggleBtn.textContent = showingDato ? "Dato ↔ Contexto" : "Contexto ↔ Dato";
-    });
-
-    /* ====== HORARIO (sin cuenta atrás) ====== */
-    const live = document.getElementById('view-live');
-    const def  = document.getElementById('view-default');
-    const countdownEl = document.getElementById('countdown');
-    function showView(liveOn){
-      live.classList.toggle('hidden', !liveOn);
-      def.classList.toggle('hidden',  liveOn);
-      document.body.classList.toggle('show-hero', !liveOn);
-      countdownEl.textContent = ""; // sin contador
-    }
-    function inFixedWindow(startISO, endISO){
-      const now=Date.now(), s=Date.parse(startISO), e=Date.parse(endISO);
-      if(isNaN(s)||isNaN(e)) return false; return now>=s && now<e;
-    }
-    function inDailyWindow(startHM, endHM){
-      const [sh,sm]=(startHM||"00:00").split(":").map(Number);
-      const [eh,em]=(endHM||"23:59").split(":").map(Number);
-      const now=new Date(), start=new Date(now), end=new Date(now);
-      start.setHours(sh||0, sm||0, 0, 0); end.setHours(eh||0, em||0, 0, 0);
-      if(end<=start) end.setDate(end.getDate()+1); // cruza medianoche
-      if(now<start && (end-start)>12*3600*1000){ start.setDate(start.getDate()-1); end.setDate(end.getDate()-1); }
-      return now>=start && now<end;
-    }
-    function reevaluate(){
-      let liveOn=false;
-      if(CONTENT.mode==="window" && CONTENT.windowISO){
-        liveOn = inFixedWindow(CONTENT.windowISO.start, CONTENT.windowISO.end);
-      }else{
-        liveOn = inDailyWindow(CONTENT.dailyWindow?.start, CONTENT.dailyWindow?.end);
-      }
-      showView(liveOn);
-    }
-    reevaluate(); setInterval(reevaluate, 30000);
-
-    /* ====== BARRA PROGRESO ====== */
-    const bar=document.getElementById('bar');
-    document.addEventListener('scroll',()=>{const max=document.body.scrollHeight-innerHeight; const p=max>0?scrollY/max:0; bar.style.transform=`scaleX(${p})`;},{passive:true});
-
-    /* ====== COPIAR PARA X ====== */
-    document.getElementById('copy').addEventListener('click',async()=>{
-      try{
-        await navigator.clipboard.writeText(`${CONTENT.shareText||""} ${location.href}`);
-        const b=document.getElementById('copy'); b.textContent="Copiado ✓"; setTimeout(()=>b.textContent="Copiar para X",1400);
-      }catch(e){ alert("No se pudo copiar"); }
-    });
-
-    /* ====== CARRUSEL ====== */
-    (function(){
-      const track=document.getElementById('track'), dots=document.getElementById('dots');
-      (CONTENT.carousel||[]).forEach((it,i)=>{
-        const slide=document.createElement('div'); slide.className='slide';
-        slide.innerHTML=`<img src="${it.src}" alt=""><div class="caption">${it.caption||""}</div>`;
-        track.appendChild(slide);
-        const d=document.createElement('div'); d.className='dot'+(i===0?' active':''); dots.appendChild(d);
-      });
-      if(!CONTENT.carousel?.length){document.querySelector('.carousel').classList.add('hidden');}
-      const prev=document.getElementById('prev'), next=document.getElementById('next'); let i=0,startX=0,dx=0;
-      function setIndex(n){i=Math.max(0,Math.min((CONTENT.carousel||[]).length-1,n)); track.style.transform=`translateX(${-i*100}%)`; dots.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('active',k===i));}
-      prev.addEventListener('click',()=>setIndex(i-1)); next.addEventListener('click',()=>setIndex(i+1));
-      track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX; dx=0;},{passive:true});
-      track.addEventListener('touchmove',e=>{dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${-i*100+(dx/innerWidth)*100}%)`;},{passive:true});
-      track.addEventListener('touchend',()=>{ if(Math.abs(dx)>40){ setIndex(i+(dx<0?1:-1)); } else setIndex(i); });
-    })();
-
-    /* ====== STORIES ====== */
-    (function(){
-      const track=document.getElementById('storyTrack'); const dots=document.getElementById('storyDots');
-      (CONTENT.stories||[]).forEach((s,idx)=>{
-        const el=document.createElement('div'); el.className='story';
-        el.innerHTML=`<img src="${s.img}" alt=""><div class="label">${idx+1}/${(CONTENT.stories||[]).length}</div><div class="text">${s.text||""}</div>`;
-        track.appendChild(el);
-        const d=document.createElement('div'); d.className='story-dot'+(idx===0?' active':''); dots.appendChild(d);
-      });
-      if(!CONTENT.stories?.length){document.querySelector('.stories').classList.add('hidden'); return;}
-      const total=(CONTENT.stories||[]).length; let i=0, startX=0, dx=0, timer;
-      function setIndex(n){ i=Math.max(0,Math.min(total-1,n)); track.style.transform=`translateX(${-i*100}%)`; dots.querySelectorAll('.story-dot').forEach((d,k)=>d.classList.toggle('active',k===i)); }
-      function autoplay(){ clearTimeout(timer); timer=setTimeout(()=>{ setIndex((i+1)%total); autoplay(); }, 3500); }
-      autoplay();
-      track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX; dx=0; clearTimeout(timer);},{passive:true});
-      track.addEventListener('touchmove',e=>{dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${-i*100+(dx/innerWidth)*100}%)`;},{passive:true});
-      track.addEventListener('touchend',()=>{ if(Math.abs(dx)>40){ setIndex(i+(dx<0?1:-1)); } else setIndex(i); autoplay(); });
-      dots.querySelectorAll('.story-dot').forEach((d,idx)=>d.addEventListener('click',()=>{ setIndex(idx); autoplay(); }));
-    })();
-
-    /* ====== ENCUESTA (localStorage; un voto por dispositivo) ====== */
-    (function(){
-      const pollBox=document.querySelector('.poll');
-      const optionsWrap=document.getElementById('options');
-      const totalsEl=document.getElementById('totals');
-      const pollQ=document.getElementById('pollQ');
-      if(!CONTENT.pollQuestion || !CONTENT.pollOptions?.length){ pollBox.classList.add('hidden'); return; }
-      pollQ.textContent = CONTENT.pollQuestion;
-      const KEY = CONTENT.pollKey || 'vk_poll';
-      let saved; try{ saved=JSON.parse(localStorage.getItem(KEY) || "{}"); }catch(_){ saved={}; }
-      if(!saved || typeof saved!=='object') saved={}; if(!saved.votes) saved.votes={}; if(typeof saved.voted!=='boolean') saved.voted=false; if(!saved.choice) saved.choice="";
-      CONTENT.pollOptions.forEach(opt=>{ if(!(opt in saved.votes)) saved.votes[opt]=0; });
-      function totalVotes(){ return Object.values(saved.votes).reduce((a,b)=>a+b,0); }
-      function render(){
-        optionsWrap.innerHTML=""; const t=totalVotes();
-        CONTENT.pollOptions.forEach(opt=>{
-          const row=document.createElement('div'); row.className='opt';
-          const btn=document.createElement('button'); btn.textContent=saved.voted ? "Votado" : "Votar"; btn.disabled=!!saved.voted; btn.addEventListener('click',()=>vote(opt));
-          const name=document.createElement('div'); name.style.minWidth='150px'; name.textContent=opt;
-          const bar=document.createElement('div'); bar.className='barline'; const fill=document.createElement('div'); fill.className='fill';
-          const pct=t?Math.round((saved.votes[opt]||0)*100/t):0; fill.style.width=pct+'%'; bar.appendChild(fill);
-          const perc=document.createElement('div'); perc.style.minWidth='42px'; perc.className='muted'; perc.textContent=(pct||0)+"%";
-          row.appendChild(btn); row.appendChild(name); row.appendChild(bar); row.appendChild(perc);
-          if(saved.choice===opt){ const you=document.createElement('span'); you.className='muted'; you.style.marginLeft='6px'; you.textContent='· tu voto'; row.appendChild(you); }
-          optionsWrap.appendChild(row);
-        });
-        totalsEl.textContent = `Total votos (local): ${totalVotes()}`;
-      }
-      function vote(option){ if(saved.voted) return; if(!CONTENT.pollOptions.includes(option)) return;
-        saved.votes[option]=(saved.votes[option]||0)+1; saved.voted=true; saved.choice=option;
-        try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(_){} render();
-      }
-      render();
-    })();
-
-    /* ====== HERO FINAL: ENLACES ====== */
-    document.getElementById('brandFinal').textContent = CONTENT.finalBrand || "";
-    document.getElementById('handleFinal').textContent = CONTENT.finalHandle || "";
-    document.getElementById('bioFinal').textContent = CONTENT.finalBio || "";
-    document.getElementById('ctaTitle').textContent = CONTENT.ctaTitle || "";
-    document.getElementById('ctaSub').textContent   = CONTENT.ctaSub || "";
-    document.getElementById('ctaX').href  = CONTENT.xUrl || "#";
-    document.getElementById('ctaIG').href = CONTENT.igUrl || "#";
-    document.getElementById('igLogo').href = CONTENT.igUrl || "#";
-    document.getElementById('xLogo').href  = CONTENT.xUrl || "#";
-  </script>
-</body>
-</html>
+    title.text
