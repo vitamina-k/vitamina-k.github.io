@@ -114,10 +114,9 @@
 }
 
 /* Evita hueco extra sobre el título */
-.hero-right .hero-title{ margin-top: 0; }
-
-@media (max-width:800px){
-  .hero-grid{ grid-template-columns: 1fr; gap: 14px; }
+/* Ajuste rápido: sube el bloque derecho para alinear con el handle */
+.hero-right{ margin-top:-56px; }
+@media (max-width:800px){ .hero-right{ margin-top:8px; } }
 }
     /* Logos paralelos */
        .social-row{display:flex;gap:16px;align-items:center}
