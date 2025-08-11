@@ -261,49 +261,43 @@
     </article>
 
     <!-- ===== Vista BASE (HERO final, cuando termina) ===== -->
-    <article class="card hero hidden" id="view-default">
-  <div class="hero-grid grid-areas">
-    <!-- Fila 1: títulos alineados -->
-    <div class="left-title">
-      <div class="brand">VITAMINA K</div>
-      <h1 class="headline">@vitaminak.of</h1>
-      <p class="sub">Sígueme en IG y X. Publicaciones cortas, claras y con impacto.</p>
-    </div>
+<article class="card hero hidden" id="view-default" style="text-align:center">
+  <!-- Handle centrado -->
+  <h1 class="headline" style="margin-bottom:6px">@vitaminak.of</h1>
 
-    <div class="right-title">
-      <h2 class="hero-title">La próxima noticia temporal se está cocinando…</h2>
-    </div>
+  <!-- Texto explicativo -->
+  <p class="sub" style="max-width:600px;margin:0 auto 24px">
+    Si no puedes ver la noticia es porque en esta web tienen una temporalidad.  
+    Pero no te preocupes, puedes seguir viendo más en mis redes sociales.
+  </p>
 
-    <!-- Fila 2: logos y copy/botones -->
-    <div class="left-logos">
-      <div class="social-row">
-        <a class="logo-bubble" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener" aria-label="Instagram">
-          <!-- tu SVG de IG aquí -->
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/>
-            </linearGradient></defs>
-            <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
-            <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
-            <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
-          </svg>
-        </a>
+  <!-- Logos sociales -->
+  <div class="social-row" style="justify-content:center; margin-bottom:28px">
+    <a class="logo-bubble" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/>
+        </linearGradient></defs>
+        <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
+        <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
+        <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
+      </svg>
+    </a>
 
-        <a class="logo-bubble" href="https://x.com/vitaminakof" target="_blank" rel="noopener" aria-label="X">
-          <!-- tu SVG de X aquí -->
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="right-copy">
-      <p class="hero-copy">Mientras tanto, puedes ver más y seguirme en Instagram y X.</p>
-      <!-- si quieres botones de compartir, van aquí -->
-    </div>
+    <a class="logo-bubble" href="https://x.com/vitaminakof" target="_blank" rel="noopener" aria-label="X">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
+      </svg>
+    </a>
   </div>
+
+  <!-- CTA potente -->
+  <a href="https://x.com/vitaminakof" target="_blank" rel="noopener" 
+     class="btn primary" style="font-size:18px;padding:14px 26px;border-radius:14px">
+    🚀 No te pierdas lo que viene — Sígueme ahora
+  </a>
 </article>
+
 <script>
     /* ====== CONFIG EDITABLE (cambia SOLO aquí) ======
        Aquí actualizas título, KPI, subtítulo, el texto de dato/contexto,
