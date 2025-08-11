@@ -1,274 +1,400 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <!-- CABECERA / META -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Vitamina K — Publicación</title>
-  <meta name="description" content="Publicación viva con carrusel, stories y encuesta.">
-  <meta property="og:type" content="website">
+<meta charset="UTF-8">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Vitamina K — Publicación</title>
+<meta name="description" content="Publicación viva con carrusel, stories y encuesta.">
+<meta property="og:title" content="Vitamina K — Publicación">
+<meta property="og:description" content="Publicación viva con carrusel, stories y encuesta.">
+<meta property="og:type" content="website">
+<style>
+  :root { --fg:#101216; --bg:#f7f8fb; --card:#ffffffcc; --accent:#0b5cff; --muted:#6b7280; }
+  @media (prefers-color-scheme: dark){ :root{ --fg:#eceff4; --bg:#0b0d12; --card:#0f1320cc; --accent:#7aa2ff; --muted:#9aa3b2; } }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+  .wrap{min-height:100%;display:grid;place-items:center;padding:24px}
+  .card{width:clamp(320px,92vw,860px);border:1px solid #00000012;border-radius:18px;padding:22px 22px 18px;background:var(--card);backdrop-filter:saturate(1.2) blur(12px);box-shadow:0 12px 42px #00000014}
+  .brand{display:flex;gap:10px;align-items:center;margin-bottom:6px;font-weight:700;letter-spacing:.2px}
+  .headline{font-size:clamp(22px,5vw,38px);margin:8px 0 6px}
+  .kpi{font-size:clamp(26px,6.5vw,52px);font-weight:800;margin:2px 0 8px;color:var(--accent)}
+  .sub{opacity:.9;margin:0 0 12px;color:var(--muted)}
+  .muted{color:var(--muted)}
+  .bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);transform-origin:0 0;transform:scaleX(0);z-index:10}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  button, .btn{border:1px solid #00000022;background:transparent;padding:10px 14px;border-radius:12px;cursor:pointer;color:inherit;text-decoration:none}
+  button:hover, .btn:hover{border-color:#00000044}
+  .hidden{display:none}
 
-  <style>
-    /* ====== VARIABLES Y BASE (ALTO CONTRASTE) ====== */
-    :root{
-      --fg:#eaf0ff;          /* texto principal (muy claro) */
-      --bg:#0a0f1a;          /* fondo */
-      --card:#111827ee;      /* tarjetas más claras que el fondo */
-      --accent:#7aa2ff;      /* color acento */
-      --muted:#c3cae0;       /* texto secundario legible */
-      --ok:#22c55e;          /* verde para CTA */
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
-    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  /* Carrusel base */
+  .carousel{position:relative;border-radius:14px;overflow:hidden;user-select:none}
+  .track{display:flex;transition:transform .35s ease-out;will-change:transform}
+  .slide{min-width:100%;height:220px;background:#000;display:grid;place-items:center;position:relative}
+  .slide img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.02)}
+  .caption{position:absolute;left:12px;bottom:12px;right:12px;background:linear-gradient( to top, #0009, #0000 );color:#fff;padding:10px 12px;border-radius:10px;font-weight:600}
+  .nav{position:absolute;top:50%;transform:translateY(-50%);display:flex;gap:8px;width:100%;justify-content:space-between;padding:0 6px;pointer-events:none}
+  .nav button{pointer-events:auto;background:rgba(0,0,0,.35);color:#fff;border:0;border-radius:10px;padding:8px 10px}
+  .dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+  .dot{width:8px;height:8px;border-radius:50%;background:#00000033}
+  .dot.active{background:var(--accent)}
 
-    /* ====== TARJETA GENERAL ====== */
-    .card{
-      width:clamp(320px,92vw,860px);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:18px;
-      padding:22px;
-      background:var(--card);
-      backdrop-filter:saturate(1.2) blur(12px);
-      box-shadow:0 12px 42px rgba(0,0,0,.35);
-      margin:0 auto;
-    }
+  /* Stories swipe (texto sobre imagen) */
+  .stories{margin-top:12px;border:1px dashed #00000022;border-radius:14px;padding:8px}
+  .story-frame{position:relative;height:320px;border-radius:12px;overflow:hidden}
+  .story-track{display:flex;height:100%;transition:transform .3s ease-out}
+  .story{min-width:100%;position:relative;background:#000}
+  .story img{width:100%;height:100%;object-fit:cover;opacity:.88}
+  .story .label{position:absolute;left:0;top:0;padding:8px 10px;background:rgba(0,0,0,.45);color:#fff;border-bottom-right-radius:10px;font-weight:700}
+  .story .text{position:absolute;left:10px;right:10px;bottom:12px;color:#fff;font-weight:700;font-size:clamp(16px,3.5vw,24px);text-shadow:0 2px 12px #000}
+  .story-dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+  .story-dot{flex:1;height:4px;background:#00000033;border-radius:3px}
+  .story-dot.active{background:var(--accent)}
 
-    /* TIPOGRAFÍA */
-    .brand{display:flex;gap:10px;align-items:center;margin-bottom:6px;font-weight:700;letter-spacing:.2px;color:#c9d4ff}
-    .headline{font-size:clamp(22px,5vw,38px);margin:8px 0 6px;color:#fff}
-    .kpi{font-size:clamp(26px,6.5vw,52px);font-weight:800;margin:2px 0 8px;color:var(--accent)}
-    .sub{margin:0 0 12px;color:var(--muted)}
-    .muted{color:var(--muted)}
-    .hidden{display:none}
+  /* Encuesta */
+  .poll{margin-top:14px;padding:12px;border:1px solid #00000018;border-radius:12px}
+  .poll h3{margin:0 0 8px}
+  .opt{display:flex;align-items:center;gap:8px;margin:8px 0}
+  .barline{flex:1;height:8px;background:#00000015;border-radius:6px;overflow:hidden}
+  .fill{height:100%;width:0%;background:var(--accent);transition:width .4s ease}
+  .only-once{font-size:13px}
+  
+/* --- HERO (tarjeta tras caducar) --- */
+.card.hero{
+  width:clamp(360px,96vw,980px);
+  padding:28px;
+  border-radius:22px;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #0b5cff18, transparent 60%),
+    radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
+    var(--card);
+}
+.hero-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:18px;align-items:center}
+@media (max-width:800px){ .hero-grid{grid-template-columns:1fr;gap:14px} }
 
-    /* BARRA DE PROGRESO SUPERIOR */
-    .bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);transform-origin:0 0;transform:scaleX(0);z-index:10}
+.avatar{
+  width:140px;height:140px;border-radius:20px;
+  display:grid;place-items:center;font-weight:900;font-size:40px;
+  background:linear-gradient(135deg,#0b5cff, #8aa9ff);
+  color:#fff; box-shadow:0 10px 30px #0b5cff44;
+  transform:perspective(600px) rotateY(-6deg) rotateX(3deg);
+}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid #00000022;background:#ffffff40;backdrop-filter:blur(6px)}
 
-    /* CONTROLES */
-    .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button,.btn{border:1px solid rgba(255,255,255,.18);background:transparent;padding:10px 14px;border-radius:12px;cursor:pointer;color:inherit;text-decoration:none}
-    button:hover,.btn:hover{border-color:rgba(255,255,255,.35)}
+.hero-title{font-size:clamp(20px,4.6vw,34px);margin:6px 0}
+.hero-copy{color:var(--muted);margin:6px 0 14px}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap}
+.btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+.btn.primary:hover{filter:brightness(0.95)}
+.hero-mini{display:flex;gap:8px;margin-top:10px}
+.pill{border:1px dashed #00000033;background:transparent;padding:8px 12px;border-radius:999px;cursor:pointer}
+.pill:hover{border-color:#00000066}
 
-    /* ====== CARRUSEL ====== */
-    .carousel{position:relative;border-radius:14px;overflow:hidden;user-select:none;margin-bottom:10px}
-    .track{display:flex;transition:transform .35s ease-out}
-    .slide{min-width:100%;height:220px;position:relative}
-    .slide img{width:100%;height:100%;object-fit:cover;display:block}
-    .caption{position:absolute;left:12px;bottom:12px;right:12px;background:linear-gradient(to top,#0009,#0000);color:#fff;padding:10px 12px;border-radius:10px;font-weight:600}
-    .nav{position:absolute;top:50%;transform:translateY(-50%);display:flex;gap:8px;width:100%;justify-content:space-between;padding:0 6px;pointer-events:none}
-    .nav button{pointer-events:auto;background:rgba(0,0,0,.4);color:#fff;border:0;border-radius:10px;padding:8px 10px}
-    .dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
-    .dot{width:8px;height:8px;border-radius:50%;background:#ffffff33}
-    .dot.active{background:var(--accent)}
-
-    /* ====== STORIES ====== */
-    .stories{margin-top:12px;border:1px dashed rgba(255,255,255,.18);border-radius:14px;padding:8px}
-    .story-frame{position:relative;height:320px;border-radius:12px;overflow:hidden}
-    .story-track{display:flex;height:100%;transition:transform .3s ease-out}
-    .story{min-width:100%;position:relative;background:#000}
-    .story img{width:100%;height:100%;object-fit:cover;opacity:.9}
-    .story .label{position:absolute;left:0;top:0;padding:8px 10px;background:rgba(0,0,0,.45);color:#fff;border-bottom-right-radius:10px;font-weight:700}
-    .story .text{position:absolute;left:10px;right:10px;bottom:12px;color:#fff;font-weight:700;font-size:clamp(16px,3.5vw,24px);text-shadow:0 2px 12px #000}
-    .story-dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
-    .story-dot{flex:1;height:4px;background:#ffffff33;border-radius:3px}
-    .story-dot.active{background:var(--accent)}
-
-    /* ====== ENCUESTA ====== */
-    .poll{margin-top:14px;padding:12px;border:1px solid rgba(255,255,255,.18);border-radius:12px}
-    .opt{display:flex;align-items:center;gap:8px;margin:8px 0}
-    .barline{flex:1;height:8px;background:#ffffff22;border-radius:6px;overflow:hidden}
-    .fill{height:100%;width:0%;background:var(--accent);transition:width .4s ease}
-    .opt button[disabled]{opacity:.6;cursor:not-allowed}
-    .only-once{font-size:13px}
-
-    /* ====== HERO (TARJETA FINAL) — ALTA VISIBILIDAD ====== */
-    .card.hero{
-      width:clamp(380px,96vw,1000px);
-      padding:32px;
-      border-radius:22px;
-      background:linear-gradient(180deg, rgba(32,45,77,0.96) 0%, rgba(18,26,46,0.96) 100%);
-      color:#eaf0ff;
-      border:1px solid rgba(255,255,255,0.14);
-      box-shadow:0 20px 60px rgba(0,0,0,0.55);
-    }
-    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
-    .hero-title{font-size:clamp(22px,5vw,40px);margin:0 0 8px;font-weight:900;letter-spacing:.2px;color:#fff}
-    .hero-copy{margin:0 0 14px;color:#d6dbef}
-    .social-row{display:flex;gap:16px;align-items:center}
-    .logo-bubble{
-      width:96px;height:96px;border-radius:22px;display:grid;place-items:center;
-      background:#fff; box-shadow:0 14px 36px #0b5cff22;border:1px solid #0001; transition:transform .15s ease;
-    }
-    .logo-bubble:hover{transform:translateY(-2px)}
-    .logo-bubble svg{width:50px;height:50px}
-
-    /* Bloque compartir */
-    .share{
-      margin-top:10px;display:flex;flex-wrap:wrap;gap:10px;align-items:center
-    }
-    .btn.primary{background:var(--ok);color:#07121f;border-color:transparent;font-weight:800;padding:12px 16px;border-radius:14px}
-    .btn.outline{border:2px solid var(--accent);padding:12px 16px;border-radius:14px;font-weight:700}
-    .share .mini{font-size:12px;color:#c9d4ff;opacity:.9}
-
-    /* Badges */
-    .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
-
-    /* FONDO CUANDO SE VE LA HERO */
-    body.show-hero{
-      background:
-        radial-gradient(1200px 700px at 50% -10%, #0b5cff22, transparent 60%),
-        radial-gradient(900px 600px at 50% 10%, #8aa9ff22, transparent 60%),
-        var(--bg);
-    }
-
-    /* MÓVIL */
-    @media (max-width:640px){
-      .hero-grid{grid-template-columns:1fr}
-      .social-row{justify-content:flex-start}
-    }
-  </style>
+@media (prefers-reduced-motion:no-preference){
+  .card.hero{animation:heroIn .45s ease-out both}
+  @keyframes heroIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+}
+  
+</style>
 </head>
 <body>
-  <div class="bar" id="bar"></div>
+<div class="bar" id="bar"></div>
+<div class="wrap">
+  <!-- Vista VIVA -->
+  <article class="card" id="view-live">
+    <div class="brand">VITAMINA K · Publicación</div>
+    <h1 class="headline" id="title">Cesta a 90€ y sueldos a 0</h1>
+    <div class="kpi" id="kpi">+276.000 visualizaciones</div>
+    <p class="sub" id="subtitle">Píldora clara y sin humo. Desaparece en horas.</p>
 
-  <div class="wrap">
-    <!-- ========== VISTA “VIVA” (activa mientras dura) ========== -->
-    <article class="card" id="view-live">
-      <div class="brand" id="brandEl"></div>
-      <h1 class="headline" id="title"></h1>
-      <div class="kpi" id="kpi"></div>
-      <p class="sub" id="subtitle"></p>
-
-      <!-- Carrusel -->
-      <section class="carousel" id="carousel">
-        <div class="track" id="track"></div>
-        <div class="nav"><button id="prev" aria-label="Anterior">←</button><button id="next" aria-label="Siguiente">→</button></div>
-        <div class="dots" id="dots"></div>
-      </section>
-
-      <!-- Stories -->
-      <section class="stories" id="stories">
-        <div class="story-frame"><div class="story-track" id="storyTrack"></div></div>
-        <div class="story-dots" id="storyDots"></div>
-      </section>
-
-      <!-- Encuesta -->
-      <section class="poll">
-        <h3 id="pollQ"></h3>
-        <div class="only-once muted">Voto único por dispositivo</div>
-        <div id="options"></div>
-        <div id="totals" class="muted" style="margin-top:8px"></div>
-      </section>
-
-      <div class="controls">
-        <button id="copy">Copiar para X</button>
-        <button id="toggle">Dato ↔ Contexto</button>
-        <span id="countdown" class="muted"></span>
+    <!-- Carrusel de IMÁGENES (swipe o flechas) -->
+    <section class="carousel" id="carousel">
+      <div class="track" id="track">
+        <!-- Cambia las URLs por imágenes reales de tu noticia -->
+        <div class="slide"><img src="https://images.unsplash.com/photo-1586201375778-3d5f48f0b35f?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Factura del súper, 2025</div></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1500576992153-027bb7fbdc32?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Cola ante cajas automáticas</div></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Salarios congelados</div></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1400&auto=format&fit=crop" alt=""><div class="caption">Comparativa 2018 vs 2025</div></div>
       </div>
-    </article>
+      <div class="nav">
+        <button id="prev" aria-label="Anterior">?</button>
+        <button id="next" aria-label="Siguiente">?</button>
+      </div>
+      <div class="dots" id="dots"></div>
+    </section>
 
-    <!-- ========== VISTA “HERO FINAL” (tras finalizar) ========== -->
-    <article class="card hero hidden" id="view-default">
-      <div class="hero-grid">
-        <!-- Columna izquierda: mensaje + logos -->
-        <div>
-          <h2 class="hero-title">La próxima noticia temporal se está cocinando…</h2>
-          <p class="hero-copy">Mientras tanto, puedes ver más y **seguirme** en Instagram y X.</p>
-
-          <div class="social-row">
-            <!-- Instagram -->
-            <a class="logo-bubble" id="igLogo" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/>
-                </linearGradient></defs>
-                <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.5"/>
-                <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="1.5"/>
-                <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
-              </svg>
-            </a>
-
-            <!-- X -->
-            <a class="logo-bubble" id="xLogo" target="_blank" rel="noopener" aria-label="X">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
-              </svg>
-            </a>
+    <!-- Stories swipe (4 pantallas) -->
+    <section class="stories" id="stories">
+      <div class="story-frame" id="storyFrame">
+        <div class="story-track" id="storyTrack">
+          <div class="story">
+            <img src="https://images.unsplash.com/photo-1520975693414-8f1a6c5a7d8f?q=80&w=1400&auto=format&fit=crop" alt="">
+            <div class="label">1/4</div>
+            <div class="text">Si la cesta sube, el discurso baja…</div>
           </div>
-
-          <!-- Señuelos sociales -->
-          <div class="badges">
-            <span class="chip">🕒 publicaciones fugaces</span>
-            <span class="chip">⚡ sin ruido</span>
-            <span class="chip">📈 datos por encima de relatos</span>
+          <div class="story">
+            <img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=1400&auto=format&fit=crop" alt="">
+            <div class="label">2/4</div>
+            <div class="text">Dato: +22% en básicos 2021?2025</div>
           </div>
-        </div>
-
-        <!-- Columna derecha: compartir -->
-        <div>
-          <h3 class="hero-title" style="font-size:clamp(18px,4.2vw,30px);margin-top:0">Comparte esta página</h3>
-          <p class="sub">Si te gusta lo que ves, compártelo en un toque.</p>
-
-          <div class="share">
-            <button class="btn primary" id="share-native">Compartir ahora</button>
-            <a class="btn outline" id="share-x"   target="_blank" rel="noopener">Compartir en X</a>
-            <a class="btn outline" id="share-wa"  target="_blank" rel="noopener">WhatsApp</a>
-            <button class="btn" id="copy-hero">Copiar enlace</button>
-            <span class="mini">Funciona mejor desde el móvil 📱</span>
+          <div class="story">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1400&auto=format&fit=crop" alt="">
+            <div class="label">3/4</div>
+            <div class="text">Sueldo real: plano como un ECG mal</div>
+          </div>
+          <div class="story">
+            <img src="https://images.unsplash.com/photo-1542219550-37153d387c47?q=80&w=1400&auto=format&fit=crop" alt="">
+            <div class="label">4/4</div>
+            <div class="text">La política te promete. La nevera te responde.</div>
           </div>
         </div>
       </div>
-    </article>
+      <div class="story-dots" id="storyDots">
+        <div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div>
+      </div>
+    </section>
+
+    <!-- Encuesta -->
+    <section class="poll" id="poll">
+      <h3>Si las elecciones fueran hoy, a quién votarías</h3>
+      <div class="only-once muted">Voto único por dispositivo</div>
+      <div id="options"></div>
+      <div id="totals" class="muted" style="margin-top:8px"></div>
+    </section>
+
+    <div class="controls">
+      <button id="copy">Copiar para X</button>
+      <button id="toggle">Dato ? Contexto</button>
+      <span id="countdown" class="muted"></span>
+    </div>
+  </article>
+
+  <!-- Vista BASE (cuando caduque) -->
+  <article class="card hero hidden" id="view-default">
+    <div class="brand">VITAMINA K</div>
+    <h1 class="headline">@vitaminak.of</h1>
+    <p class="sub">No vine a caer bien, vine a no caerme nunca. Sígueme en mis redes IG X.</p>
+   
+    <div class="hero-grid">
+  <div class="hero-left">
+    <div class="avatar" aria-hidden="true">VK</div>
+    <div class="badges">
+      <span class="chip">#anticorrupción</span>
+      <span class="chip">#datosreales</span>
+      <span class="chip">#MadeInSpain</span>
+    </div>
   </div>
 
-  <script>
-    /* =====================================================
-       🧩 CONTENIDO: EDITA SOLO AQUÍ
-    ===================================================== */
-    const CONTENT = {
-      // Cabecera de la noticia (vista viva). Déjalo vacío si ahora quieres probar solo la HERO:
-      brand: "VITAMINA K · Publicación",
-      title: "",           // ← título
-      kpi: "",             // ← vacíalo si no lo usas
-      subtitle: "",
+  <div class="hero-right">
+    <h2 class="hero-title">Lo importante explicado en pocos segundos</h2>
+    <p class="hero-copy">Publicaciones cortas, claras y con impacto. Sin ruido, sin humo, sin tiempo que perder.</p>
 
-      // Dato/Contexto (opcional)
-      datoHTML: "",
-      contextoHTML: "",
+    <div class="cta-row">
+      <a class="btn primary" href="https://x.com/vitaminakof" target="_blank" rel="noopener">Seguir en X</a>
+      <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en Instagram</a>
+      <button class="btn" id="copy-hero">Copiar enlace</button>
+    </div>
 
-      /* HORARIO: para probar la HERO, puedes forzar con ?force=hero=1
-         Si no fuerzas, la “vista viva” se muestra todo el día por defecto */
-      mode: "daily",
-      dailyWindow: { start: "00:00", end: "23:59" },
+    <div class="hero-mini">
+      <button class="pill" id="notify-me">?? Recibir avisos</button>
+      <button class="pill" id="random-post">?? Ver publicación aleatoria</button>
+    </div>
+  </div>
+</div>
+  </article>
+</div>
 
-      // Carrusel (opcional)
-      carousel: [
-        // { src:"assets/images/foto1.webp", caption:"Pie 1" },
-      ],
+<script>
+/* ========== CONFIG EDITABLE ========== */
+const CONFIG = {
+  expiresAt: Date.now() + 06*10*00*0,    // ahora + 6h
+  shareText: "El dato que no te cuentan. #VitaminaK",
+  datoHTML: "<strong>Dato</strong>: 62% paga más por lo mismo.",
+  contextoHTML: "<strong>Contexto</strong>: 2018 vs 2025: cesta +22% con salarios planos.",
+  title: "Cesta a 90€ y sueldos a 0",
+  kpi: "+276.000 visualizaciones",
+  subtitle: "Píldora clara y sin humo. Desaparece en horas.",
+  pollKey: "vk_poll_v2",        // cambia si quieres “resetear” votos locales
+  pollQuestion: "Si las elecciones fueran hoy, a quién votarías",
+  pollOptions: [
+    "PSOE","PP","Vox","Se Acabó la Fiesta","Sumar/Podemos","Otros"
+  ]
+};
+/* ========== /CONFIG ========== */
 
-      // Stories (opcional)
-      stories: [
-        // { img:"assets/images/story1.webp", text:"Texto 1" },
-      ],
+/* Montaje básico */
+title.textContent = CONFIG.title;
+kpi.textContent = CONFIG.kpi;
+subtitle.textContent = CONFIG.subtitle;
+let showingDato = true;
 
-      // Encuesta (opcional)
-      pollQuestion: "",
-      pollOptions: [],
-      pollKey: "vk_poll_v3",
+/* Cuenta atrás + cambio de vista */
+const live = document.getElementById('view-live');
+const def = document.getElementById('view-default');
+function tick() {
+  const ms = CONFIG.expiresAt - Date.now();
+  if (ms <= 0) { live.classList.add('hidden'); def.classList.remove('hidden'); return; }
+  if (ms <= 0) {
+  live.classList.add('hidden');
+  def.classList.remove('hidden');
+  document.body.classList.add('show-hero'); // <— añade esta línea
+  return;
+}
 
-      // Enlaces redes (para logos y botones)
-      xUrl:  "https://x.com/vitaminakof",
-      igUrl: "https://www.instagram.com/vitaminak.of",
+  const h = Math.floor(ms/3600000), m = Math.floor((ms%3600000)/60000), s = Math.floor((ms%60000)/1000);
+  countdown.textContent = `Desaparece en ${h}h ${m}m ${s}s`;
+}
+setInterval(tick, 1000); tick();
 
-      // Texto para compartir
-      shareText: "Nueva publicación temporal de Vitamina K — mírala aquí:",
-    };
-    /* =========================
-       /🧩 FIN CONTENIDO
-    ========================= */
+/* Barra de progreso */
+const bar = document.getElementById('bar');
+document.addEventListener('scroll', () => {
+  const max = document.body.scrollHeight - innerHeight;
+  const p = max>0 ? scrollY/max : 0;
+  bar.style.transform = `scaleX(${p})`;
+}, {passive:true});
 
-    /* ====== MONTAJE DE TEXTOS BÁSICOS ====== */
-    brandEl.textContent = CONTENT.brand || "";
-    title.text
+/* Dato/Contexto */
+const toggleBtn = document.getElementById('toggle');
+toggleBtn.addEventListener('click', swap);
+function swap(){
+  showingDato = !showingDato;
+  toggleBtn.textContent = showingDato ? "Dato ? Contexto" : "Contexto ? Dato";
+}
+
+/* Copiar para X */
+copy.addEventListener('click', async()=>{
+  try{
+    await navigator.clipboard.writeText(`${CONFIG.shareText} ${location.href}`);
+    copy.textContent = "Copiado ?";
+    setTimeout(()=>copy.textContent="Copiar para X",1400);
+  }catch(e){ alert("No se pudo copiar"); }
+});
+
+/* Carrusel imágenes (swipe + flechas) */
+(function(){
+  const track = document.getElementById('track');
+  const slides = Array.from(track.children);
+  const dots = document.getElementById('dots');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  let i = 0, startX=0, dx=0, isDown=false;
+
+  slides.forEach((_,idx)=>{
+    const d=document.createElement('div'); d.className='dot'+(idx===0?' active':''); dots.appendChild(d);
+  });
+  function setIndex(n){
+    i = Math.max(0, Math.min(slides.length-1, n));
+    track.style.transform = `translateX(${-i*100}%)`;
+    dots.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('active',k===i));
+  }
+  prev.addEventListener('click', ()=>setIndex(i-1));
+  next.addEventListener('click', ()=>setIndex(i+1));
+
+  // touch
+  track.addEventListener('touchstart', e=>{isDown=true; startX=e.touches[0].clientX; dx=0;},{passive:true});
+  track.addEventListener('touchmove', e=>{ if(!isDown) return; dx=e.touches[0].clientX - startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; }, {passive:true});
+  track.addEventListener('touchend', ()=>{ isDown=false; if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); });
+
+  // mouse (desktop)
+  let down=false, start=0;
+  track.addEventListener('mousedown', e=>{down=true; start=e.clientX;});
+  window.addEventListener('mouseup', ()=>{if(!down) return; down=false; if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i);});
+  window.addEventListener('mousemove', e=>{ if(!down) return; dx=e.clientX-start; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`;});
+})();
+
+/* Stories swipe */
+(function(){
+  const track = document.getElementById('storyTrack');
+  const dots = Array.from(document.getElementById('storyDots').children);
+  const total = dots.length;
+  let i=0, startX=0, dx=0, isDown=false, timer;
+
+  function setIndex(n){ i=Math.max(0,Math.min(total-1,n)); track.style.transform=`translateX(${-i*100}%)`; dots.forEach((d,k)=>d.classList.toggle('active',k===i)); }
+  function autoplay(){ clearTimeout(timer); timer=setTimeout(()=>{ setIndex((i+1)%total); autoplay(); }, 3500); }
+  autoplay();
+
+  track.addEventListener('touchstart', e=>{isDown=true; startX=e.touches[0].clientX; dx=0; clearTimeout(timer);},{passive:true});
+  track.addEventListener('touchmove', e=>{ if(!isDown) return; dx=e.touches[0].clientX-startX; track.style.transform=`translateX(${-i*100 + (dx/innerWidth)*100}%)`; },{passive:true});
+  track.addEventListener('touchend', ()=>{ isDown=false; if(Math.abs(dx)>40){ setIndex(i + (dx<0?1:-1)); } else setIndex(i); autoplay(); });
+
+  // clic en dots
+  dots.forEach((d,idx)=>d.addEventListener('click', ()=>{ setIndex(idx); autoplay(); }));
+})();
+
+/* Encuesta (una vez por dispositivo, localStorage) */
+(function(){
+  const optionsWrap = document.getElementById('options');
+  const totalsEl = document.getElementById('totals');
+  const KEY = CONFIG.pollKey;
+  const saved = JSON.parse(localStorage.getItem(KEY) || '{"votes":{},"voted":false}');
+  const votes = saved.votes;
+  CONFIG.pollOptions.forEach(opt=>{ if(!(opt in votes)) votes[opt]=0; });
+
+  function totalVotes(){ return Object.values(votes).reduce((a,b)=>a+b,0); }
+
+  function render(){
+    optionsWrap.innerHTML = "";
+    const t = totalVotes();
+    CONFIG.pollOptions.forEach(opt=>{
+      const row = document.createElement('div'); row.className='opt';
+      const btn = document.createElement('button'); btn.textContent = saved.voted ? "Votado" : "Votar";
+      btn.disabled = !!saved.voted;
+      btn.addEventListener('click', ()=> vote(opt));
+      const name = document.createElement('div'); name.style.minWidth='150px'; name.textContent = opt;
+      const bar = document.createElement('div'); bar.className='barline';
+      const fill = document.createElement('div'); fill.className='fill';
+      const pct = t ? Math.round(votes[opt]*100/t) : 0;
+      fill.style.width = pct+'%';
+      bar.appendChild(fill);
+      const perc = document.createElement('div'); perc.style.minWidth='38px'; perc.className='muted'; perc.textContent = (pct||0) + "%";
+      row.appendChild(btn); row.appendChild(name); row.appendChild(bar); row.appendChild(perc);
+      optionsWrap.appendChild(row);
+    });
+    totalsEl.textContent = `Total votos (local): ${totalVotes()}`;
+  }
+
+  function vote(option){
+    if(saved.voted) return;
+    votes[option] = (votes[option]||0) + 1;
+    saved.voted = true;
+    saved.votes = votes;
+    localStorage.setItem(KEY, JSON.stringify(saved));
+    render();
+  }
+
+  render();
+})();
+
+/* Accesos menores */
+document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='d') swap(); });
+// --- Interacciones de la HERO ---
+document.getElementById('copy-hero')?.addEventListener('click', async ()=>{
+  try{
+    await navigator.clipboard.writeText(location.href);
+    const btn = document.getElementById('copy-hero');
+    btn.textContent = "Enlace copiado ?";
+    setTimeout(()=>btn.textContent="Copiar enlace",1400);
+  }catch(e){ alert("No se pudo copiar"); }
+});
+
+document.getElementById('notify-me')?.addEventListener('click', ()=>{
+  alert("Pronto: avisos cuando publiquemos algo nuevo. Por ahora, sígueme en X/IG ??");
+});
+
+document.getElementById('random-post')?.addEventListener('click', ()=>{
+  // Si en el futuro creas más páginas (publicacion-2.html, etc), añádelas aquí:
+  const posts = ["index.html" /*,"publicacion-2.html","publicacion-3.html"*/];
+  const pick = posts[Math.floor(Math.random()*posts.length)];
+  location.href = pick;
+});
+
+</script>
+</body>
+</html>
+
+
+
+
+
