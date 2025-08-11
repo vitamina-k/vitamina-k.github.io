@@ -102,7 +102,39 @@
   gap: 18px;
   align-items: start; /* ambos bloques arrancan arriba */
 }
+/* Grid por áreas para alinear títulos en la misma fila */
+.grid-areas{
+  display:grid;
+  grid-template-columns: 1.1fr 1.4fr;
+  grid-template-areas:
+    "leftTitle  rightTitle"
+    "leftLogos  rightCopy";
+  column-gap: 28px;
+  row-gap: 18px;
+  align-items: start;
+}
 
+/* asignación de áreas */
+.left-title  { grid-area:leftTitle; }
+.right-title { grid-area:rightTitle; align-self:start; }
+.left-logos  { grid-area:leftLogos; }
+.right-copy  { grid-area:rightCopy; }
+
+/* evitar saltos indeseados */
+.right-title .hero-title{ margin-top:0; }
+.left-title .headline { margin-bottom:10px; }
+
+/* responsive */
+@media (max-width:800px){
+  .grid-areas{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "leftTitle"
+      "rightTitle"
+      "leftLogos"
+      "rightCopy";
+  }
+}
 /* Estructura interna de cada columna */
 .hero-left,
 .hero-right{
