@@ -95,18 +95,30 @@
         radial-gradient(900px 500px at 110% 0%, #8aa9ff18, transparent 60%),
         var(--card);
     }
-    .hero-grid{display:flex; 
-               flex-direction: column;
-               justify-content: flex-start; /* fuerza que empiece arriba */
-               padding-top: 0; /*quita posibles desplazamiento */
-               margin-top: 0; /* elimina huevos */
-               }
-    .hero-right .hero-title { 
-      margin-top: 0; /* asegura que el título no se baje */
-      }
-    
-               
-    @media (max-width:800px){ .hero-grid{grid-template-columns:1fr;gap:14px} }
+    /* Grid de la HERO: dos columnas, alineadas arriba */
+.hero-grid{
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 18px;
+  align-items: start; /* ambos bloques arrancan arriba */
+}
+
+/* Estructura interna de cada columna */
+.hero-left,
+.hero-right{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* asegura que el contenido empiece arriba */
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Evita hueco extra sobre el título */
+.hero-right .hero-title{ margin-top: 0; }
+
+@media (max-width:800px){
+  .hero-grid{ grid-template-columns: 1fr; gap: 14px; }
+}
     /* Logos paralelos */
        .social-row{display:flex;gap:16px;align-items:center}
        .logo-bubble{
