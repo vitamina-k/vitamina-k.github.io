@@ -4,7 +4,7 @@
   <!-- ===== META ===== -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Vitamina K — Publicación</title>
+  <title>LA NOTICIA</title>
   <meta name="description" content="Publicación viva con carrusel, stories y encuesta.">
   <meta property="og:title" content="Vitamina K — Publicación">
   <meta property="og:description" content="Publicación viva con carrusel, stories y encuesta.">
@@ -230,16 +230,23 @@
 
     <!-- ===== Vista BASE (HERO final, cuando termina) ===== -->
     <article class="card hero hidden" id="view-default">
-      <!-- 🧩 EDITA: Esta es la tarjeta que quieres mejorar tras caducar -->
+  <div class="hero-grid grid-areas">
+    <!-- Fila 1: títulos alineados -->
+    <div class="left-title">
       <div class="brand">VITAMINA K</div>
       <h1 class="headline">@vitaminak.of</h1>
       <p class="sub">Sígueme en IG y X. Publicaciones cortas, claras y con impacto.</p>
+    </div>
 
-      <div class="hero-grid">
-    <!-- Izquierda: logos (sustituye los href por tus enlaces si quieres) -->
-        <div>
-        <div class="social-row">
-        <a class="logo-bubble" id="igLogo" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener" aria-label="Instagram">
+    <div class="right-title">
+      <h2 class="hero-title">La próxima noticia temporal se está cocinando…</h2>
+    </div>
+
+    <!-- Fila 2: logos y copy/botones -->
+    <div class="left-logos">
+      <div class="social-row">
+        <a class="logo-bubble" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener" aria-label="Instagram">
+          <!-- tu SVG de IG aquí -->
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stop-color="#f58529"/><stop offset="50%" stop-color="#dd2a7b"/><stop offset="100%" stop-color="#8134af"/>
@@ -250,7 +257,8 @@
           </svg>
         </a>
 
-        <a class="logo-bubble" id="xLogo" href="https://x.com/vitaminakof" target="_blank" rel="noopener" aria-label="X">
+        <a class="logo-bubble" href="https://x.com/vitaminakof" target="_blank" rel="noopener" aria-label="X">
+          <!-- tu SVG de X aquí -->
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z" fill="#000"/>
           </svg>
@@ -258,12 +266,9 @@
       </div>
     </div>
 
-    <!-- Derecha: texto + compartir -->
-    <div>
-      <h2 class="hero-title">La próxima noticia temporal se está cocinando…</h2>
+    <div class="right-copy">
       <p class="hero-copy">Mientras tanto, puedes ver más y seguirme en Instagram y X.</p>
-
-      </div>
+      <!-- si quieres botones de compartir, van aquí -->
     </div>
   </div>
 </article>
