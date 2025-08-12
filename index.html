@@ -224,97 +224,93 @@
     <a href="#" class="cta-button" id="finalCTA">🔥 Sígueme para más noticias exclusivas</a>
   </div>
 
-  <script>
-    // ==========================================
-    // 🔧 CONFIGURACIÓN (edita aquí)
-    // ==========================================
-    const NOTICIA_CONFIG = {
-      // 📝 CONTENIDO
-      titulo: "El salario que nunca llega a tu bolsillo",
-      subtitulo: "En España, trabajar más no significa ganar más. Por cada 1.321 € que cuesta a tu empresa subirte el sueldo, tú solo recibes 247 €. El resto se lo queda el Estado entre impuestos y cotizaciones. Año tras año, el porcentaje que pierdes crece… y tu bolsillo no lo nota.",
-      opinion: "Esta es la realidad que muchos prefieren callar: cuanto más produces y más valor generas, menos te queda. Entre IRPF y cotizaciones, el Estado puede quedarse con casi la mitad de lo que produces, dejando tu esfuerzo reducido a un salario neto que apenas crece. Mientras tú trabajas horas extra para poder llenar la nevera, la otra mitad de tu sueldo se evapora en un sistema que gasta sin control y en prioridades que no alivian tu vida diaria. Paradójicamente, incluso con un salario mediano, casi un tercio del coste laboral que generas se esfuma antes de llegar a tu cuenta. El mensaje es claro: aquí no se premia al que produce, se exprime hasta el límite.",
+ <script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ===== CONFIG =====
+  const NOTICIA_CONFIG = {
+    titulo: "El salario que nunca llega a tu bolsillo",
+    subtitulo: "En España, trabajar más no significa ganar más. Por cada 1.321 € que cuesta a tu empresa subirte el sueldo, tú solo recibes 247 €. El resto se lo queda el Estado entre impuestos y cotizaciones. Año tras año, el porcentaje que pierdes crece… y tu bolsillo no lo nota.",
+    opinion: "Esta es la realidad que muchos prefieren callar: cuanto más produces y más valor generas, menos te queda. Entre IRPF y cotizaciones, el Estado puede quedarse con casi la mitad de lo que produces, dejando tu esfuerzo reducido a un salario neto que apenas crece. Mientras tú trabajas horas extra para poder llenar la nevera, la otra mitad de tu sueldo se evapora en un sistema que gasta sin control y en prioridades que no alivian tu vida diaria. Paradójicamente, incluso con un salario mediano, casi un tercio del coste laboral que generas se esfuma antes de llegar a tu cuenta. El mensaje es claro: aquí no se premia al que produce, se exprime hasta el límite.",
 
-      // 📅 FECHAS (Año, Mes-1, Día, Hora, Min)
-      // OJO: enero=0, febrero=1, ... agosto=7
-      fechaInicio: new Date(2025, 7, 12, 6, 0),  // 12 Ago 2025, 06:00
-        fechaFin:    new Date(2025, 7, 12, 18, 0), // 12 Ago 2025, 18:00
+    // OJO: enero=0 ... agosto=7
+    fechaInicio: new Date(2025, 7, 12, 6, 0),   // 12 ago 2025 06:00
+    fechaFin:    new Date(2025, 7, 12, 18, 0),  // 12 ago 2025 18:00
 
-      // 🔗 FUENTES
-      fuente: [
-        { nombre: "Libre Mercado", url: "https://www.libremercado.com/2025-08-11/domingo-asi-se-queda-hacienda-con-mas-del-40-por-ciento-de-tu-salario-7283788/?_gl=1*sat8jw*_ga*YW1wLWZZSm1tQUUxbjNyRFU5NWZqWUViYlE.*_ga_69R48LF3TL*czE3NTQ5NzM4MzYkbzE4JGcxJHQxNzU0OTczODQwJGo1NiRsMCRoMA.." },
-      ],
+    // Usa "fuentes" (plural)
+    fuentes: [
+      { nombre: "Libre Mercado", url: "https://www.libremercado.com/2025-08-11/domingo-asi-se-queda-hacienda-con-mas-del-40-por-ciento-de-tu-salario-7283788/" }
+    ],
 
-      // 📱 REDES
-      instagram: "https://www.instagram.com/vitaminak.of",
-      twitter:   "https://x.com/vitaminakof"
-    };
+    instagram: "https://www.instagram.com/vitaminak.of",
+    twitter:   "https://x.com/vitaminakof"
+  };
 
-    // ==========================================
-    // ⚙️ LÓGICA (no modificar)
-    // ==========================================
-    // Rellenar contenido
-    document.getElementById('newsTitle').textContent = NOTICIA_CONFIG.titulo;
-    document.getElementById('newsSubtitle').textContent = NOTICIA_CONFIG.subtitulo;
-    document.getElementById('newsOpinion').textContent = NOTICIA_CONFIG.opinion;
+  // ===== RELLENO DE CONTENIDO =====
+  const $ = (id) => document.getElementById(id);
+  const newsView  = $('newsView');
+  const finalView = $('finalView');
+  const countdown = $('countdown');
 
-    // Fuentes
-    let fuentesHTML = '<strong>Fuentes:</strong> ';
-    NOTICIA_CONFIG.fuentes.forEach((fuente, i) => {
-      fuentesHTML += `<a href="${fuente.url}" target="_blank" rel="noopener">${fuente.nombre}</a>${i < NOTICIA_CONFIG.fuentes.length - 1 ? ', ' : ''}`;
-    });
-    document.getElementById('newsSources').innerHTML = fuentesHTML;
+  $('newsTitle').textContent    = NOTICIA_CONFIG.titulo;
+  $('newsSubtitle').textContent = NOTICIA_CONFIG.subtitulo;
+  $('newsOpinion').textContent  = NOTICIA_CONFIG.opinion;
 
-    // Redes
-    document.getElementById('instagramBtn').href = NOTICIA_CONFIG.instagram;
-    document.getElementById('twitterBtn').href   = NOTICIA_CONFIG.twitter;
-    document.getElementById('finalInstagram').href = NOTICIA_CONFIG.instagram;
-    document.getElementById('finalTwitter').href   = NOTICIA_CONFIG.twitter;
-    document.getElementById('finalCTA').href       = NOTICIA_CONFIG.instagram;
+  // Fuentes (seguro aunque falte el array)
+  const fuentes = Array.isArray(NOTICIA_CONFIG.fuentes) ? NOTICIA_CONFIG.fuentes : [];
+  let fuentesHTML = '<strong>Fuentes:</strong> ';
+  fuentesHTML += fuentes.map(f => `<a href="${f.url}" target="_blank" rel="noopener">${f.nombre}</a>`).join(', ');
+  $('newsSources').innerHTML = fuentesHTML;
 
-    // Vistas y contador
-    const newsView  = document.getElementById('newsView');
-    const finalView = document.getElementById('finalView');
-    const countdown = document.getElementById('countdown');
+  // Redes
+  const ig = $('instagramBtn'), tw = $('twitterBtn');
+  if (ig) ig.href = NOTICIA_CONFIG.instagram;
+  if (tw) tw.href = NOTICIA_CONFIG.twitter;
+  const fig = $('finalInstagram'), ftw = $('finalTwitter'), fcta = $('finalCTA');
+  if (fig) fig.href = NOTICIA_CONFIG.instagram;
+  if (ftw) ftw.href = NOTICIA_CONFIG.twitter;
+  if (fcta) fcta.href = NOTICIA_CONFIG.instagram;
 
-    function formato(t){ return t < 10 ? '0'+t : t; }
+  // Contador
+  const z2 = (n)=> (n<10?'0'+n:n);
+  function actualizarTemporizador(){
+    const ahora  = Date.now();
+    const inicio = NOTICIA_CONFIG.fechaInicio.getTime();
+    const fin    = NOTICIA_CONFIG.fechaFin.getTime();
 
-    function actualizarTemporizador() {
-      const ahora = Date.now();
-      const inicio = NOTICIA_CONFIG.fechaInicio.getTime();
-      const fin    = NOTICIA_CONFIG.fechaFin.getTime();
-
-      if (ahora < inicio) {
-        const diff = inicio - ahora;
-        const h = Math.floor(diff / (1000*60*60));
-        const m = Math.floor((diff % (1000*60*60)) / (1000*60));
-        const s = Math.floor((diff % (1000*60)) / 1000);
-        countdown.textContent = `🔒 Disponible en ${formato(h)}h ${formato(m)}m ${formato(s)}s`;
-      } else if (ahora >= inicio && ahora < fin) {
-        const diff = fin - ahora;
-        const h = Math.floor(diff / (1000*60*60));
-        const m = Math.floor((diff % (1000*60*60)) / (1000*60));
-        const s = Math.floor((diff % (1000*60)) / 1000);
-        countdown.textContent = `⏳ Desaparece en ${formato(h)}h ${formato(m)}m ${formato(s)}s`;
-      } else {
-        newsView.classList.add('hidden');
-        finalView.classList.remove('hidden');
-      }
+    if (ahora < inicio) {
+      const diff = inicio - ahora;
+      const h = Math.floor(diff / 3_600_000);
+      const m = Math.floor((diff % 3_600_000) / 60_000);
+      const s = Math.floor((diff % 60_000) / 1000);
+      countdown.textContent = `🔒 Disponible en ${z2(h)}h ${z2(m)}m ${z2(s)}s`;
+    } else if (ahora < fin) {
+      const diff = fin - ahora;
+      const h = Math.floor(diff / 3_600_000);
+      const m = Math.floor((diff % 3_600_000) / 60_000);
+      const s = Math.floor((diff % 60_000) / 1000);
+      countdown.textContent = `⏳ Desaparece en ${z2(h)}h ${z2(m)}m ${z2(s)}s`;
+    } else {
+      newsView.classList.add('hidden');
+      finalView.classList.remove('hidden');
     }
+  }
+  actualizarTemporizador();
+  setInterval(actualizarTemporizador, 1000);
 
-    setInterval(actualizarTemporizador, 1000);
-    actualizarTemporizador();
-
-    // Copiar
-    document.getElementById('copyBtn').addEventListener('click', () => {
-      const texto = `${NOTICIA_CONFIG.titulo}\n\n${NOTICIA_CONFIG.subtitulo}\n\n${NOTICIA_CONFIG.opinion}\n\n#VitaminaK`;
-      navigator.clipboard.writeText(texto).then(() => {
-        const btn = document.getElementById('copyBtn');
-        const original = btn.textContent;
-        btn.textContent = '✅ Copiado';
-        btn.style.background = 'rgba(76,175,80,0.6)';
-        setTimeout(() => { btn.textContent = original; btn.style.background = ''; }, 1600);
+  // Copiar (solo si existe el botón)
+  const copyBtn = document.getElementById('copyBtn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const txt = `${NOTICIA_CONFIG.titulo}\n\n${NOTICIA_CONFIG.subtitulo}\n\n${NOTICIA_CONFIG.opinion}\n\n#VitaminaK`;
+      navigator.clipboard.writeText(txt).then(()=>{
+        const original = copyBtn.textContent;
+        copyBtn.textContent = '✅ Copiado';
+        copyBtn.style.background = 'rgba(76,175,80,0.6)';
+        setTimeout(()=>{ copyBtn.textContent = original; copyBtn.style.background=''; }, 1600);
       });
     });
-  </script>
+  }
+});
+</script>
 </body>
 </html>
