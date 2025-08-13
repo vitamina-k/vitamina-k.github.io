@@ -36,9 +36,7 @@
     .brand{font-weight:900; letter-spacing:.4px; text-transform:uppercase; opacity:.95; text-align:center}
     .title{font-size:clamp(22px,3.8vw,30px); text-align:center; margin:8px 0 6px}
     .sub{color:var(--muted); text-align:center; margin:0 0 20px}
-    .poll{
-      margin-top:6px; display:flex; flex-direction:column; gap:10px;
-    }
+    .poll{ margin-top:6px; display:flex; flex-direction:column; gap:10px; }
     .row{
       display:grid; grid-template-columns: 1.1fr 3.2fr 70px; gap:12px;
       align-items:center; padding:10px 12px; border-radius:12px;
@@ -57,8 +55,6 @@
     .legend{ display:flex; justify-content:space-between; align-items:center; margin-top:8px; color:var(--muted); font-size:13px }
     .legend .note{ opacity:.9 }
     .legend .you{ font-weight:700; color:var(--accent) }
-
-    /* Botones sociales + CTA */
     .actions{ margin-top:20px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap }
     .btn{ padding:10px 14px; border-radius:12px; border:1px solid var(--btn-stroke);
           background:var(--btn); color:#fff; text-decoration:none; font-weight:700;
@@ -66,10 +62,10 @@
     .btn:hover{ transform:translateY(-2px); background:#ffffff33; border-color:#ffffff77 }
     .btn.primary{ background:var(--accent); color:#0b0f1a; border-color:transparent }
     .btn.primary:hover{ filter:brightness(.95) }
-
-    /* Admin total oculto (toggle con Shift+C) */
+    /* admin total oculto; sin “tip” visible */
     #adminTotal{ display:none; margin-top:8px; text-align:right; font-size:12px; color:#cfe9ff }
-    .hint{ display: none; }
+    /* aviso tostada */
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111827cc;color:#fff;padding:10px 14px;border:1px solid #ffffff33;border-radius:10px;backdrop-filter:blur(10px);display:none}
   </style>
 </head>
 <body>
@@ -79,16 +75,19 @@
       <h1 class="title">Encuesta rápida · ¿A quién votarías hoy?</h1>
       <p class="sub">Vota una sola vez. La lista se ordena sola por apoyo. Mira cómo suben las barras en tiempo real.</p>
 
+      <!-- ENCUESTA -->
       <section class="poll" id="poll"></section>
 
+      <!-- Leyenda inferior -->
       <div class="legend">
         <span class="note">Porcentaje sobre el total de votos de esta encuesta.</span>
         <span class="you" id="youBadge" style="display:none">Tu voto registrado ✓</span>
       </div>
 
+      <!-- Total oculto para ti (Shift+T lo muestra/oculta) -->
       <div id="adminTotal">Total de votos: <span id="totalCount">0</span></div>
-      <!-- Eliminado el texto de tip -->
 
+      <!-- Botones sociales + CTA -->
       <div class="actions">
         <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 Instagram</a>
         <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 Seguir</a>
@@ -97,167 +96,163 @@
     </article>
   </div>
 
+  <div class="toast" id="toast"></div>
+
   <script>
-(function(){
-  // =========== CONFIG ===========
-  // 👇 Pega aquí tu URL del Web App (la que me pasaste)
-  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxfxtW-bLzKb2uPp9IImq4Ng2LhyzE8MyfQdaBSQAUr5SZmK78bf6jgD0lbwx70FKkv/exec';
+  (function(){
+    // ======= TU ENDPOINT (Apps Script) =======
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxfxtW-bLzKb2uPp9IImq4Ng2LhyzE8MyfQdaBSQAUr5SZmK78bf6jgD0lbwx70FKkv/exec';
 
-  // Opciones de la encuesta (incluye nulos, abstención y SAF)
-  const OPCIONES = [
-    'PSOE',
-    'Sumar',
-    'PP',
-    'Vox',
-    'Se Acabó la Fiesta',
-    'Abstención',
-    'Voto nulo',
-    'Otros'
-  ];
+    // ======= CONFIG =======
+    const KEY_LOCAL = 'vk_poll_partidos_v3'; // cambiar = reset local
+    const OPCIONES = [
+      'PSOE',
+      'Sumar',
+      'PP',
+      'Vox',
+      'Se Acabó la Fiesta',
+      'Abstención',
+      'Voto nulo',
+      'Otros'
+    ];
 
-  // Clave local para “1 voto por dispositivo” (puedes cambiarla para resetear)
-  const LOCAL_KEY = 'vk_poll_partidos_server_v1';
-
-  // ========= HELPERS UI =========
-  const pollEl = document.getElementById('poll');
-  const totalEl = document.getElementById('totalCount');
-  const adminTotal = document.getElementById('adminTotal');
-  const youBadge = document.getElementById('youBadge');
-
-  // Estado local mínimo: si ya votó y a quién
-  function getLocal(){
-    try{
-      return JSON.parse(localStorage.getItem(LOCAL_KEY) || '{"voted":false,"choice":""}');
-    }catch(_){ return {voted:false, choice:''}; }
-  }
-  function setLocal(voted, choice){
-    try{ localStorage.setItem(LOCAL_KEY, JSON.stringify({voted, choice})); }catch(_){}
-  }
-
-  // ========= API CALLS =========
-  async function fetchResults(){
-    const url = ENDPOINT + '?action=results';
-    const res = await fetch(url, {method:'GET', mode:'cors', cache:'no-store'});
-    if(!res.ok) throw new Error('Error de red al leer resultados');
-    const data = await res.json();
-    // Esperado: { ok:true, votes: { nombre:numero,... }, total:number }
-    if(!data || data.ok === false) throw new Error(data?.error || 'Respuesta inválida');
-    // Asegura que existen todas las opciones:
-    OPCIONES.forEach(n => { if(!(n in data.votes)) data.votes[n] = 0; });
-    // Total consistente
-    data.total = typeof data.total === 'number'
-      ? data.total
-      : Object.values(data.votes).reduce((a,b)=>a+(+b||0),0);
-    return data;
-  }
-
-  async function sendVote(option){
-    const body = new URLSearchParams({ action:'vote', option });
-    const res = await fetch(ENDPOINT, {
-      method:'POST',
-      mode:'cors',
-      headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8' },
-      body
-    });
-    if(!res.ok) throw new Error('No se pudo enviar el voto');
-    const data = await res.json();
-    if(!data || data.ok === false) throw new Error(data?.error || 'Respuesta inválida');
-    return data; // mismo formato que results
-  }
-
-  // ========= RENDER =========
-  function percentOf(v, t){
-    if(!t) return 0;
-    return Math.round((v * 10000) / t) / 100; // dos decimales
-  }
-
-  function sortedOptions(votes){
-    return [...OPCIONES].sort((a,b)=>{
-      const da = (votes[b]||0) - (votes[a]||0);
-      if(da !== 0) return da;
-      return a.localeCompare(b);
-    });
-  }
-
-  function renderUI({votes, total}){
-    const local = getLocal();
-    pollEl.innerHTML = '';
-    totalEl.textContent = total;
-
-    const order = sortedOptions(votes);
-    order.forEach(name=>{
-      const row = document.createElement('div');
-      row.className = 'row';
-      if(local.voted && local.choice === name) row.classList.add('voted');
-
-      const nameEl = document.createElement('div');
-      nameEl.className = 'name';
-      nameEl.textContent = name;
-
-      const barline = document.createElement('div');
-      barline.className = 'barline';
-
-      const fill = document.createElement('div');
-      fill.className = 'fill';
-
-      const pct = percentOf(votes[name]||0, total);
-      requestAnimationFrame(()=>{ fill.style.width = pct + '%'; });
-      barline.appendChild(fill);
-
-      const pctEl = document.createElement('div');
-      pctEl.className = 'pct';
-      pctEl.textContent = pct.toFixed(1) + '%';
-
-      row.appendChild(nameEl);
-      row.appendChild(barline);
-      row.appendChild(pctEl);
-
-      row.addEventListener('click', async ()=>{
-        const localNow = getLocal();
-        if(localNow.voted) return; // ya votó en este dispositivo
-        try{
-          row.style.pointerEvents = 'none';
-          const data = await sendVote(name);
-          setLocal(true, name);
-          youBadge.style.display = 'inline';
-          // re-render con resultados frescos del servidor
-          renderUI(data);
-        }catch(err){
-          alert('No se pudo registrar tu voto. Inténtalo de nuevo.');
-          row.style.pointerEvents = '';
-        }
-      }, {passive:true});
-
-      pollEl.appendChild(row);
-    });
-
-    youBadge.style.display = getLocal().voted ? 'inline' : 'none';
-  }
-
-  // ========= INIT =========
-  async function init(){
-    try{
-      const data = await fetchResults();
-      renderUI(data);
-    }catch(err){
-      console.error(err);
-      // Fallback mínimo para que no se vea vacío
-      const empty = { votes:{}, total:0 };
-      OPCIONES.forEach(n=>empty.votes[n]=0);
-      renderUI(empty);
+    // ======= ESTADO LOCAL =======
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(KEY_LOCAL);
+        if(!raw) return { voted:false, choice:'' };
+        const obj = JSON.parse(raw);
+        if(!obj || typeof obj!=='object') throw 0;
+        if(typeof obj.voted!=='boolean') obj.voted=false;
+        if(typeof obj.choice!=='string') obj.choice='';
+        return obj;
+      }catch(_){ return { voted:false, choice:'' }; }
     }
-  }
-
-  // Toggle admin total (solo tú lo ves si sabes el atajo)
-  window.addEventListener('keydown', (e)=>{
-    if(e.key.toLowerCase()==='t' && e.shiftKey){
-      adminTotal.style.display = (adminTotal.style.display==='none' || !adminTotal.style.display) ? 'block' : 'none';
+    function saveState(s){
+      try{ localStorage.setItem(KEY_LOCAL, JSON.stringify(s)); }catch(_){}
     }
-  });
+    let local = loadState();
 
-  init();
-})();
-</script>
+    // ======= UI =======
+    const pollEl = document.getElementById('poll');
+    const totalEl = document.getElementById('totalCount');
+    const youBadge = document.getElementById('youBadge');
+    const toast = document.getElementById('toast');
 
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=> toast.style.display='none', 2200);
+    }
+
+    // ======= API =======
+    async function apiResults(){
+      const res = await fetch(ENDPOINT + '?action=results', { method:'GET' });
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      return res.json(); // {ok:true, votes:{nombre:count,...}, total:n}
+    }
+
+    async function apiVote(option){
+      const body = new URLSearchParams({ action:'vote', option });
+      const res = await fetch(ENDPOINT, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
+        body
+      });
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      return res.json(); // {ok:true, votes:{...}, total:n}
+    }
+
+    // ======= RENDER =======
+    function ordenarPorPorcentaje(votes){
+      const total = Object.values(votes).reduce((a,b)=>a+(+b||0),0) || 1;
+      return [...OPCIONES].sort((a,b)=>{
+        const pa = (votes[a]||0)/total;
+        const pb = (votes[b]||0)/total;
+        if(pb!==pa) return pb - pa; // desc
+        return a.localeCompare(b);
+      });
+    }
+
+    function render(votes){
+      pollEl.innerHTML = '';
+      const total = Object.values(votes).reduce((a,b)=>a+(+b||0),0);
+      totalEl.textContent = total;
+
+      ordenarPorPorcentaje(votes).forEach(name=>{
+        const v = +votes[name] || 0;
+        const pct = total ? (v*100/total) : 0;
+
+        const row = document.createElement('div');
+        row.className = 'row' + (local.voted && local.choice===name ? ' voted' : '');
+
+        const nameEl = document.createElement('div');
+        nameEl.className = 'name';
+        nameEl.textContent = name;
+
+        const barline = document.createElement('div');
+        barline.className = 'barline';
+        const fill = document.createElement('div');
+        fill.className = 'fill';
+        requestAnimationFrame(()=>{ fill.style.width = pct.toFixed(1) + '%'; });
+        barline.appendChild(fill);
+
+        const pctEl = document.createElement('div');
+        pctEl.className = 'pct';
+        pctEl.textContent = pct.toFixed(1) + '%';
+
+        row.appendChild(nameEl);
+        row.appendChild(barline);
+        row.appendChild(pctEl);
+
+        row.addEventListener('click', async ()=>{
+          if(local.voted) return;
+          try{
+            const data = await apiVote(name);
+            if(!data.ok) throw new Error(data.error || 'Error');
+            local.voted = true;
+            local.choice = name;
+            saveState(local);
+            youBadge.style.display = 'inline';
+            render(data.votes);
+            showToast('¡Voto registrado!');
+          }catch(e){
+            console.error(e);
+            showToast('No se pudo registrar tu voto. Inténtalo de nuevo.');
+          }
+        }, { passive:true });
+
+        pollEl.appendChild(row);
+      });
+
+      youBadge.style.display = local.voted ? 'inline' : 'none';
+    }
+
+    // ======= CARGA INICIAL =======
+    (async function init(){
+      try{
+        const data = await apiResults();
+        if(!data.ok) throw new Error(data.error || 'Error');
+        render(data.votes || {});
+      }catch(e){
+        console.error(e);
+        // fallback: arranque en cero
+        const empty = {};
+        OPCIONES.forEach(o=> empty[o]=0);
+        render(empty);
+        showToast('No se pudo cargar el recuento inicial.');
+      }
+    })();
+
+    // ======= Admin: mostrar/ocultar total con Shift+T (sin texto visible) =======
+    const adminTotal = document.getElementById('adminTotal');
+    window.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase()==='t' && e.shiftKey){
+        adminTotal.style.display = (adminTotal.style.display==='none' || !adminTotal.style.display) ? 'block' : 'none';
+      }
+    });
+  })();
+  </script>
 </body>
 </html>
