@@ -3,314 +3,227 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>VITAMINA K</title>
-  <meta name="description" content="Noticias temporales que no te cuentan.">
-  <meta property="og:title" content="Vitamina K — La noticia temporal">
-  <meta property="og:description" content="Contenido exclusivo con tiempo limitado.">
+  <title>VITAMINA K — Encuesta</title>
+  <meta name="description" content="Votación en vivo sobre intención de voto.">
+  <meta property="og:title" content="Vitamina K — Encuesta de voto">
+  <meta property="og:description" content="Participa y mira cómo cambia el ranking en tiempo real.">
   <meta property="og:type" content="website">
-
   <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #1a1f2b 0%, #101522 100%);
-      color: #ffffff;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+    *{box-sizing:border-box}
+    :root{
+      --bg1:#1a1f2b; --bg2:#101522; --glass:rgba(255,255,255,.10);
+      --glass-2:rgba(255,255,255,.16); --stroke:rgba(255,255,255,.18);
+      --fg:#fff; --muted:rgba(255,255,255,.85);
+      --accent:#4ecdc4; --accent-2:#7dd3fc;
+      --bar:#4ecdc4; --bar-bg:rgba(255,255,255,.15);
+      --btn:#ffffff29; --btn-stroke:#ffffff44;
     }
-
-    /* ===== VISTA PRINCIPAL DE NOTICIA ===== */
-    .news-container {
-      max-width: 800px; width: 100%;
-      background: rgba(255, 255, 255, 0.10);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 40px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-      text-align: center;
+    html,body{
+      margin:0; min-height:100%;
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:var(--fg);
+      font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Inter,Arial;
     }
-
-    .brand-title{
-      font-size: 30px;
-      font-weight: 800;
-      margin-bottom: 8px;
-      color:#ffffff;              /* sin degradado */
-      letter-spacing:.3px;
-      text-transform: uppercase;
+    .wrap{
+      min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
     }
-
-    .temporal-alert {
-      display: inline-block;
-      background: rgba(255, 193, 7, 0.15);
-      border: 1.5px solid #ffcd39;
-      padding: 6px 16px;
-      border-radius: 999px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      font-size: 13px;
-      color:#ffea7a;
+    .card{
+      width:min(860px,96vw);
+      background:var(--glass); backdrop-filter:blur(18px) saturate(1.2);
+      border:1px solid var(--stroke); border-radius:20px; padding:28px;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
     }
-
-    .countdown-display {
-      font-size: 22px;
-      font-weight: 700;
-      color: #9be6ff;
-      margin-bottom: 24px;
-      padding: 12px 18px;
-      background: rgba(0, 0, 0, 0.25);
-      border-radius: 12px;
-      display: inline-block;
+    .brand{font-weight:900; letter-spacing:.4px; text-transform:uppercase; opacity:.95; text-align:center}
+    .title{font-size:clamp(22px,3.8vw,30px); text-align:center; margin:8px 0 6px}
+    .sub{color:var(--muted); text-align:center; margin:0 0 20px}
+    .poll{
+      margin-top:6px; display:flex; flex-direction:column; gap:10px;
     }
-
-    .news-card {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 24px;
-      margin-top: 16px;
-      text-align: left;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+    .row{
+      display:grid; grid-template-columns: 1.1fr 3.2fr 70px; gap:12px;
+      align-items:center; padding:10px 12px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06); cursor:pointer;
+      transition:transform .08s ease, background .2s ease, border-color .2s ease;
     }
+    .row:hover{ transform:translateY(-1px); background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.22); }
+    .row.voted{ outline:2px solid var(--accent); background:rgba(78,205,196,.12) }
+    .name{ font-weight:800; letter-spacing:.2px }
+    .barline{ position:relative; width:100%; height:12px; background:var(--bar-bg); border-radius:999px; overflow:hidden }
+    .fill{ position:absolute; left:0; top:0; height:100%; width:0%;
+           background:linear-gradient(90deg,var(--bar),var(--accent-2));
+           transition: width .45s cubic-bezier(.2,.8,.2,1); }
+    .pct{ text-align:right; font-variant-numeric:tabular-nums; font-weight:800 }
+    .legend{ display:flex; justify-content:space-between; align-items:center; margin-top:8px; color:var(--muted); font-size:13px }
+    .legend .note{ opacity:.9 }
+    .legend .you{ font-weight:700; color:var(--accent) }
 
-    /* Imagen principal de la noticia */
-    .news-image{ margin:0 0 18px 0; border-radius:12px; overflow:hidden }
-    .news-image img{ width:100%; height:auto; display:block; object-fit:cover; }
+    /* Botones sociales + CTA */
+    .actions{ margin-top:20px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap }
+    .btn{ padding:10px 14px; border-radius:12px; border:1px solid var(--btn-stroke);
+          background:var(--btn); color:#fff; text-decoration:none; font-weight:700;
+          transition:transform .12s ease, background .2s ease, border-color .2s ease; }
+    .btn:hover{ transform:translateY(-2px); background:#ffffff33; border-color:#ffffff77 }
+    .btn.primary{ background:var(--accent); color:#0b0f1a; border-color:transparent }
+    .btn.primary:hover{ filter:brightness(.95) }
 
-    .news-title { font-size: 28px; font-weight: 800; margin: 0 0 12px 0; line-height: 1.28; }
-    .news-subtitle { font-size: 18px; color: rgba(255, 255, 255, 0.92); margin: 0 0 16px 0; line-height: 1.5; }
-
-    .news-opinion {
-      background: rgba(255, 255, 255, 0.08);
-      border-left: 4px solid #4ecdc4;
-      padding: 16px;
-      margin: 18px 0;
-      border-radius: 0 10px 10px 0;
-      line-height: 1.6;
-    }
-
-    .news-meta { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 14px; }
-    .sources { margin-bottom: 12px; opacity: 0.9; }
-    .sources a { color: #7dd3fc; text-decoration: none; margin-right: 12px; }
-    .sources a:hover { text-decoration: underline; }
-
-    .share-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      padding: 9px 16px; background: rgba(255, 255, 255, 0.16);
-      border: 1px solid rgba(255,255,255,.25); border-radius: 10px;
-      color: white; text-decoration: none; font-weight: 600; transition: all .2s ease; cursor: pointer;
-    }
-    .btn:hover { background: rgba(255, 255, 255, 0.24); transform: translateY(-2px); }
-
-    /* ===== VISTA FINAL ===== */
-    .final-container {
-      max-width: 600px; width: 100%;
-      background: rgba(255, 255, 255, 0.10);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 48px 32px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-      text-align: center;
-    }
-
-    .final-brand { font-size: 40px; font-weight: 900; margin-bottom: 14px; color:#fff; letter-spacing:.5px; }
-    .final-message { font-size: 18px; line-height: 1.6; margin-bottom: 28px; opacity: 0.92; }
-
-    .social-icons {
-      display: flex; justify-content: center; gap: 28px; margin-bottom: 32px;
-    }
-
-    .social-link {
-      width: 82px; height: 82px; border-radius: 18px;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1.5px solid rgba(255, 255, 255, 0.28);
-      display: flex; align-items: center; justify-content: center;
-      text-decoration: none; transition: all 0.25s ease;
-    }
-    .social-link:hover { transform: translateY(-4px) scale(1.05); background: rgba(255,255,255,.26); }
-
-    .social-link svg { width: 40px; height: 40px; }
-
-    .cta-button {
-      display: inline-block; padding: 15px 28px;
-      background: #4ecdc4; border: none; border-radius: 12px;
-      color: #0b0f1a; font-size: 16px; font-weight: 800; text-decoration: none;
-      transition: all 0.25s ease; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    }
-    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,0,0,.3); }
-
-    .hidden { display: none !important; }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .news-container, .final-container { padding: 30px 20px; }
-      .news-title { font-size: 24px; }
-      .final-brand { font-size: 32px; }
-      .social-icons { gap: 20px; }
-      .social-link { width: 72px; height: 72px; }
-    }
+    /* Admin total oculto (toggle con Shift+C) */
+    #adminTotal{ display:none; margin-top:8px; text-align:right; font-size:12px; color:#cfe9ff }
+    .hint{ display: none; }
   </style>
 </head>
-
 <body>
-  <!-- ===== VISTA DE NOTICIA (TEMPORAL) ===== -->
-  <div class="news-container" id="newsView">
-    <div class="brand-title">VITAMINAK.OF</div>
+  <div class="wrap">
+    <article class="card">
+      <div class="brand">VITAMINAK.OF</div>
+      <h1 class="title">Encuesta rápida · ¿A quién votarías hoy?</h1>
+      <p class="sub">Vota una sola vez. La lista se ordena sola por apoyo. Mira cómo suben las barras en tiempo real.</p>
 
-    <div class="temporal-alert">NOTICIA TEMPORAL</div>
+      <section class="poll" id="poll"></section>
 
-    <div class="countdown-display" id="countdown">Calculando tiempo...</div>
-
-    <div class="news-card">
-      <!-- Imagen principal -->
-      <figure class="news-image">
-        <img src="assets/imag1.jpg"
-             alt="imag1">
-      </figure>
-
-      <h1 class="news-title" id="newsTitle"></h1>
-      <p class="news-subtitle" id="newsSubtitle"></p>
-
-      <div class="news-opinion" id="newsOpinion"></div>
-
-      <div class="news-meta">
-        <div class="sources" id="newsSources"></div>
-
-        <div class="share-buttons">
-          <a class="btn" id="instagramBtn" target="_blank">📸 Instagram</a>
-          <a class="btn" id="twitterBtn" target="_blank">🐦 Twitter</a>
-        </div>
+      <div class="legend">
+        <span class="note">Porcentaje sobre el total de votos de esta encuesta.</span>
+        <span class="you" id="youBadge" style="display:none">Tu voto registrado ✓</span>
       </div>
-    </div>
+
+      <div id="adminTotal">Total de votos: <span id="totalCount">0</span></div>
+      <!-- Eliminado el texto de tip -->
+
+      <div class="actions">
+        <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 Instagram</a>
+        <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 Seguir</a>
+        <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">🔥 Sígueme para ver los resultados</a>
+      </div>
+    </article>
   </div>
 
-  <!-- ===== VISTA FINAL (CUANDO EXPIRE) ===== -->
-  <div class="final-container hidden" id="finalView">
-        <div class="final-brand">KEVIN PEREZ</div>
-    <div class="final-brand">VITAMINA K</div>
-    <p class="final-message">
-      Te perdiste algo grande… y no será la última vez. No esperes a que te lo cuenten, sígueme y entérate el primero.
-    </p>
+  <script>
+  (function(){
+    // ======= CONFIGURACIÓN DE LA ENCUESTA =======
+    const KEY = 'vk_poll_partidos_v2'; // cambia para "resetear" locales
+    const OPCIONES = [
+      'PSOE',
+      'Sumar',
+      'PP',
+      'Vox',
+      'Se Acabó la Fiesta',
+      'Abstención',
+      'Voto nulo',
+      'Otros'
+    ];
 
-    <div class="social-icons">
-      <a href="#" class="social-link" id="finalInstagram" target="_blank" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none">
-          <defs>
-            <linearGradient id="igGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#f58529"/>
-              <stop offset="50%" stop-color="#dd2a7b"/>
-              <stop offset="100%" stop-color="#8134af"/>
-            </linearGradient>
-          </defs>
-          <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#igGrad)" stroke-width="2" fill="none"/>
-          <circle cx="12" cy="12" r="4" stroke="url(#igGrad)" stroke-width="2" fill="none"/>
-          <circle cx="17.5" cy="6.5" r="1.5" fill="url(#igGrad)"/>
-        </svg>
-      </a>
-
-      <a href="#" class="social-link" id="finalTwitter" target="_blank" aria-label="Twitter/X">
-        <svg viewBox="0 0 24 24" fill="white">
-          <path d="M3 3l8.5 10.2L3.8 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z"/>
-        </svg>
-      </a>
-    </div>
-
-    <a href="#" class="cta-button" id="finalCTA">🔥 Sígueme para más noticias exclusivas</a>
-  </div>
-
- <script>
-document.addEventListener('DOMContentLoaded', () => {
-  // ===== CONFIG =====
-  const NOTICIA_CONFIG = {
-    titulo: "El salario que nunca llega a tu bolsillo",
-    subtitulo: "En España, trabajar más no significa ganar más. Por cada 1.321 € que cuesta a tu empresa subirte el sueldo, tú solo recibes 247 €. El resto se lo queda el Estado entre impuestos y cotizaciones. Año tras año, el porcentaje que pierdes crece… y tu bolsillo no lo nota.",
-    opinion: "Esta es la realidad que muchos prefieren callar: cuanto más produces y más valor generas, menos te queda. Entre IRPF y cotizaciones, el Estado puede quedarse con casi la mitad de lo que produces, dejando tu esfuerzo reducido a un salario neto que apenas crece. Mientras tú trabajas horas extra para poder llenar la nevera, la otra mitad de tu sueldo se evapora en un sistema que gasta sin control y en prioridades que no alivian tu vida diaria. Paradójicamente, incluso con un salario mediano, casi un tercio del coste laboral que generas se esfuma antes de llegar a tu cuenta. El mensaje es claro: aquí no se premia al que produce, se exprime hasta el límite.",
-
-    // OJO: enero=0 ... agosto=7
-    fechaInicio: new Date(2025, 7, 12, 6, 0),   // 12 ago 2025 06:00
-    fechaFin:    new Date(2025, 7, 12, 18, 0),  // 12 ago 2025 18:00
-
-    // Usa "fuentes" (plural)
-    fuentes: [
-      { nombre: "Libre Mercado", url: "https://www.libremercado.com/2025-08-11/domingo-asi-se-queda-hacienda-con-mas-del-40-por-ciento-de-tu-salario-7283788/" }
-    ],
-
-    instagram: "https://www.instagram.com/vitaminak.of",
-    twitter:   "https://x.com/vitaminakof"
-  };
-
-  // ===== RELLENO DE CONTENIDO =====
-  const $ = (id) => document.getElementById(id);
-  const newsView  = $('newsView');
-  const finalView = $('finalView');
-  const countdown = $('countdown');
-
-  $('newsTitle').textContent    = NOTICIA_CONFIG.titulo;
-  $('newsSubtitle').textContent = NOTICIA_CONFIG.subtitulo;
-  $('newsOpinion').textContent  = NOTICIA_CONFIG.opinion;
-
-  // Fuentes (seguro aunque falte el array)
-  const fuentes = Array.isArray(NOTICIA_CONFIG.fuentes) ? NOTICIA_CONFIG.fuentes : [];
-  let fuentesHTML = '<strong>Fuentes:</strong> ';
-  fuentesHTML += fuentes.map(f => `<a href="${f.url}" target="_blank" rel="noopener">${f.nombre}</a>`).join(', ');
-  $('newsSources').innerHTML = fuentesHTML;
-
-  // Redes
-  const ig = $('instagramBtn'), tw = $('twitterBtn');
-  if (ig) ig.href = NOTICIA_CONFIG.instagram;
-  if (tw) tw.href = NOTICIA_CONFIG.twitter;
-  const fig = $('finalInstagram'), ftw = $('finalTwitter'), fcta = $('finalCTA');
-  if (fig) fig.href = NOTICIA_CONFIG.instagram;
-  if (ftw) ftw.href = NOTICIA_CONFIG.twitter;
-  if (fcta) fcta.href = NOTICIA_CONFIG.instagram;
-
-  // Contador
-  const z2 = (n)=> (n<10?'0'+n:n);
-  function actualizarTemporizador(){
-    const ahora  = Date.now();
-    const inicio = NOTICIA_CONFIG.fechaInicio.getTime();
-    const fin    = NOTICIA_CONFIG.fechaFin.getTime();
-
-    if (ahora < inicio) {
-      const diff = inicio - ahora;
-      const h = Math.floor(diff / 3_600_000);
-      const m = Math.floor((diff % 3_600_000) / 60_000);
-      const s = Math.floor((diff % 60_000) / 1000);
-      countdown.textContent = `🔒 Disponible en ${z2(h)}h ${z2(m)}m ${z2(s)}s`;
-    } else if (ahora < fin) {
-      const diff = fin - ahora;
-      const h = Math.floor(diff / 3_600_000);
-      const m = Math.floor((diff % 3_600_000) / 60_000);
-      const s = Math.floor((diff % 60_000) / 1000);
-      countdown.textContent = `⏳ Desaparece en ${z2(h)}h ${z2(m)}m ${z2(s)}s`;
-    } else {
-      newsView.classList.add('hidden');
-      finalView.classList.remove('hidden');
+    // ======= CARGA DE ESTADO (localStorage) =======
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if(!raw) return { votes:{}, total:0, voted:false, choice:'' };
+        const obj = JSON.parse(raw);
+        if(!obj || typeof obj!=='object') throw 0;
+        // sanea estructura
+        if(!obj.votes || typeof obj.votes!=='object') obj.votes = {};
+        if(typeof obj.total!=='number') obj.total = 0;
+        if(typeof obj.voted!=='boolean') obj.voted = false;
+        if(typeof obj.choice!=='string') obj.choice = '';
+        OPCIONES.forEach(n => { if(!(n in obj.votes)) obj.votes[n] = 0; });
+        return obj;
+      }catch(_){
+        return { votes:{}, total:0, voted:false, choice:'' };
+      }
     }
-  }
-  actualizarTemporizador();
-  setInterval(actualizarTemporizador, 1000);
+    function saveState(s){
+      try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(_){}
+    }
 
-  // Copiar (solo si existe el botón)
-  const copyBtn = document.getElementById('copyBtn');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      const txt = `${NOTICIA_CONFIG.titulo}\n\n${NOTICIA_CONFIG.subtitulo}\n\n${NOTICIA_CONFIG.opinion}\n\n#VitaminaK`;
-      navigator.clipboard.writeText(txt).then(()=>{
-        const original = copyBtn.textContent;
-        copyBtn.textContent = '✅ Copiado';
-        copyBtn.style.background = 'rgba(76,175,80,0.6)';
-        setTimeout(()=>{ copyBtn.textContent = original; copyBtn.style.background=''; }, 1600);
+    let state = loadState();
+    // inicializa faltantes
+    OPCIONES.forEach(n => { if(!(n in state.votes)) state.votes[n] = 0; });
+
+    const pollEl = document.getElementById('poll');
+    const totalEl = document.getElementById('totalCount');
+    const adminTotal = document.getElementById('adminTotal');
+    const youBadge = document.getElementById('youBadge');
+
+    function totalVotes(){
+      // también mantenemos state.total, pero recalculamos por seguridad
+      return Object.values(state.votes).reduce((a,b)=>a + (typeof b==='number'?b:0), 0);
+    }
+
+    function percent(name){
+      const t = Math.max(1, totalVotes()); // evita división por 0
+      const v = state.votes[name] || 0;
+      return Math.round((v * 10000) / t) / 100; // 2 decimales
+    }
+
+    function sortedOptions(){
+      // Ordena por votos desc y por nombre asc para estabilidad
+      return [...OPCIONES].sort((a,b)=>{
+        const da = state.votes[b] - state.votes[a];
+        if(da !== 0) return da;
+        return a.localeCompare(b);
       });
+    }
+
+    function render(){
+      pollEl.innerHTML = '';
+      const order = sortedOptions();
+      const t = totalVotes();
+      totalEl.textContent = t;
+
+      order.forEach(name=>{
+        const row = document.createElement('div');
+        row.className = 'row';
+        if(state.voted && state.choice === name) row.classList.add('voted');
+
+        const nameEl = document.createElement('div');
+        nameEl.className = 'name';
+        nameEl.textContent = name;
+
+        const barline = document.createElement('div');
+        barline.className = 'barline';
+        const fill = document.createElement('div');
+        fill.className = 'fill';
+        // ancho objetivo con animación
+        const p = t ? percent(name) : 0;
+        requestAnimationFrame(()=>{ fill.style.width = p + '%'; });
+        barline.appendChild(fill);
+
+        const pctEl = document.createElement('div');
+        pctEl.className = 'pct';
+        pctEl.textContent = (t ? p.toFixed(1) : '0.0') + '%';
+
+        row.appendChild(nameEl);
+        row.appendChild(barline);
+        row.appendChild(pctEl);
+
+        // votar
+        row.addEventListener('click', ()=>{
+          if(state.voted) return;
+          state.votes[name] = (state.votes[name] || 0) + 1;
+          state.total = totalVotes();
+          state.voted = true;
+          state.choice = name;
+          saveState(state);
+          youBadge.style.display = 'inline';
+          render(); // reordenar y actualizar UI
+        }, { passive:true });
+
+        pollEl.appendChild(row);
+      });
+
+      // muestra insignia si ya votó
+      youBadge.style.display = state.voted ? 'inline' : 'none';
+    }
+
+    // Toggle admin total (solo tú lo ves)
+    window.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase()==='c' && e.shiftKey){
+        const isVisible = adminTotal.style.display === 'block';
+        adminTotal.style.display = isVisible ? 'none' : 'block';
+      }
     });
-  }
-});
-</script>
+
+    render();
+  })();
+  </script>
 </body>
 </html>
