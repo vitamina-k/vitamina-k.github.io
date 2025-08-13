@@ -98,132 +98,166 @@
   </div>
 
   <script>
-  (function(){
-    // ======= CONFIGURACIÓN DE LA ENCUESTA =======
-    const KEY = 'vk_poll_partidos_v2'; // cambia para "resetear" locales
-    const OPCIONES = [
-      'PSOE',
-      'Sumar',
-      'PP',
-      'Vox',
-      'Se Acabó la Fiesta',
-      'Abstención',
-      'Voto nulo',
-      'Otros'
-    ];
+(function(){
+  // =========== CONFIG ===========
+  // 👇 Pega aquí tu URL del Web App (la que me pasaste)
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxfxtW-bLzKb2uPp9IImq4Ng2LhyzE8MyfQdaBSQAUr5SZmK78bf6jgD0lbwx70FKkv/exec';
 
-    // ======= CARGA DE ESTADO (localStorage) =======
-    function loadState(){
-      try{
-        const raw = localStorage.getItem(KEY);
-        if(!raw) return { votes:{}, total:0, voted:false, choice:'' };
-        const obj = JSON.parse(raw);
-        if(!obj || typeof obj!=='object') throw 0;
-        // sanea estructura
-        if(!obj.votes || typeof obj.votes!=='object') obj.votes = {};
-        if(typeof obj.total!=='number') obj.total = 0;
-        if(typeof obj.voted!=='boolean') obj.voted = false;
-        if(typeof obj.choice!=='string') obj.choice = '';
-        OPCIONES.forEach(n => { if(!(n in obj.votes)) obj.votes[n] = 0; });
-        return obj;
-      }catch(_){
-        return { votes:{}, total:0, voted:false, choice:'' };
-      }
-    }
-    function saveState(s){
-      try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(_){}
-    }
+  // Opciones de la encuesta (incluye nulos, abstención y SAF)
+  const OPCIONES = [
+    'PSOE',
+    'Sumar',
+    'PP',
+    'Vox',
+    'Se Acabó la Fiesta',
+    'Abstención',
+    'Voto nulo',
+    'Otros'
+  ];
 
-    let state = loadState();
-    // inicializa faltantes
-    OPCIONES.forEach(n => { if(!(n in state.votes)) state.votes[n] = 0; });
+  // Clave local para “1 voto por dispositivo” (puedes cambiarla para resetear)
+  const LOCAL_KEY = 'vk_poll_partidos_server_v1';
 
-    const pollEl = document.getElementById('poll');
-    const totalEl = document.getElementById('totalCount');
-    const adminTotal = document.getElementById('adminTotal');
-    const youBadge = document.getElementById('youBadge');
+  // ========= HELPERS UI =========
+  const pollEl = document.getElementById('poll');
+  const totalEl = document.getElementById('totalCount');
+  const adminTotal = document.getElementById('adminTotal');
+  const youBadge = document.getElementById('youBadge');
 
-    function totalVotes(){
-      // también mantenemos state.total, pero recalculamos por seguridad
-      return Object.values(state.votes).reduce((a,b)=>a + (typeof b==='number'?b:0), 0);
-    }
+  // Estado local mínimo: si ya votó y a quién
+  function getLocal(){
+    try{
+      return JSON.parse(localStorage.getItem(LOCAL_KEY) || '{"voted":false,"choice":""}');
+    }catch(_){ return {voted:false, choice:''}; }
+  }
+  function setLocal(voted, choice){
+    try{ localStorage.setItem(LOCAL_KEY, JSON.stringify({voted, choice})); }catch(_){}
+  }
 
-    function percent(name){
-      const t = Math.max(1, totalVotes()); // evita división por 0
-      const v = state.votes[name] || 0;
-      return Math.round((v * 10000) / t) / 100; // 2 decimales
-    }
+  // ========= API CALLS =========
+  async function fetchResults(){
+    const url = ENDPOINT + '?action=results';
+    const res = await fetch(url, {method:'GET', mode:'cors', cache:'no-store'});
+    if(!res.ok) throw new Error('Error de red al leer resultados');
+    const data = await res.json();
+    // Esperado: { ok:true, votes: { nombre:numero,... }, total:number }
+    if(!data || data.ok === false) throw new Error(data?.error || 'Respuesta inválida');
+    // Asegura que existen todas las opciones:
+    OPCIONES.forEach(n => { if(!(n in data.votes)) data.votes[n] = 0; });
+    // Total consistente
+    data.total = typeof data.total === 'number'
+      ? data.total
+      : Object.values(data.votes).reduce((a,b)=>a+(+b||0),0);
+    return data;
+  }
 
-    function sortedOptions(){
-      // Ordena por votos desc y por nombre asc para estabilidad
-      return [...OPCIONES].sort((a,b)=>{
-        const da = state.votes[b] - state.votes[a];
-        if(da !== 0) return da;
-        return a.localeCompare(b);
-      });
-    }
+  async function sendVote(option){
+    const body = new URLSearchParams({ action:'vote', option });
+    const res = await fetch(ENDPOINT, {
+      method:'POST',
+      mode:'cors',
+      headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8' },
+      body
+    });
+    if(!res.ok) throw new Error('No se pudo enviar el voto');
+    const data = await res.json();
+    if(!data || data.ok === false) throw new Error(data?.error || 'Respuesta inválida');
+    return data; // mismo formato que results
+  }
 
-    function render(){
-      pollEl.innerHTML = '';
-      const order = sortedOptions();
-      const t = totalVotes();
-      totalEl.textContent = t;
+  // ========= RENDER =========
+  function percentOf(v, t){
+    if(!t) return 0;
+    return Math.round((v * 10000) / t) / 100; // dos decimales
+  }
 
-      order.forEach(name=>{
-        const row = document.createElement('div');
-        row.className = 'row';
-        if(state.voted && state.choice === name) row.classList.add('voted');
+  function sortedOptions(votes){
+    return [...OPCIONES].sort((a,b)=>{
+      const da = (votes[b]||0) - (votes[a]||0);
+      if(da !== 0) return da;
+      return a.localeCompare(b);
+    });
+  }
 
-        const nameEl = document.createElement('div');
-        nameEl.className = 'name';
-        nameEl.textContent = name;
+  function renderUI({votes, total}){
+    const local = getLocal();
+    pollEl.innerHTML = '';
+    totalEl.textContent = total;
 
-        const barline = document.createElement('div');
-        barline.className = 'barline';
-        const fill = document.createElement('div');
-        fill.className = 'fill';
-        // ancho objetivo con animación
-        const p = t ? percent(name) : 0;
-        requestAnimationFrame(()=>{ fill.style.width = p + '%'; });
-        barline.appendChild(fill);
+    const order = sortedOptions(votes);
+    order.forEach(name=>{
+      const row = document.createElement('div');
+      row.className = 'row';
+      if(local.voted && local.choice === name) row.classList.add('voted');
 
-        const pctEl = document.createElement('div');
-        pctEl.className = 'pct';
-        pctEl.textContent = (t ? p.toFixed(1) : '0.0') + '%';
+      const nameEl = document.createElement('div');
+      nameEl.className = 'name';
+      nameEl.textContent = name;
 
-        row.appendChild(nameEl);
-        row.appendChild(barline);
-        row.appendChild(pctEl);
+      const barline = document.createElement('div');
+      barline.className = 'barline';
 
-        // votar
-        row.addEventListener('click', ()=>{
-          if(state.voted) return;
-          state.votes[name] = (state.votes[name] || 0) + 1;
-          state.total = totalVotes();
-          state.voted = true;
-          state.choice = name;
-          saveState(state);
+      const fill = document.createElement('div');
+      fill.className = 'fill';
+
+      const pct = percentOf(votes[name]||0, total);
+      requestAnimationFrame(()=>{ fill.style.width = pct + '%'; });
+      barline.appendChild(fill);
+
+      const pctEl = document.createElement('div');
+      pctEl.className = 'pct';
+      pctEl.textContent = pct.toFixed(1) + '%';
+
+      row.appendChild(nameEl);
+      row.appendChild(barline);
+      row.appendChild(pctEl);
+
+      row.addEventListener('click', async ()=>{
+        const localNow = getLocal();
+        if(localNow.voted) return; // ya votó en este dispositivo
+        try{
+          row.style.pointerEvents = 'none';
+          const data = await sendVote(name);
+          setLocal(true, name);
           youBadge.style.display = 'inline';
-          render(); // reordenar y actualizar UI
-        }, { passive:true });
+          // re-render con resultados frescos del servidor
+          renderUI(data);
+        }catch(err){
+          alert('No se pudo registrar tu voto. Inténtalo de nuevo.');
+          row.style.pointerEvents = '';
+        }
+      }, {passive:true});
 
-        pollEl.appendChild(row);
-      });
-
-      // muestra insignia si ya votó
-      youBadge.style.display = state.voted ? 'inline' : 'none';
-    }
-
-    // Toggle admin total (solo tú lo ves)
-    window.addEventListener('keydown', (e)=>{
-      if(e.key.toLowerCase()==='c' && e.shiftKey){
-        const isVisible = adminTotal.style.display === 'block';
-        adminTotal.style.display = isVisible ? 'none' : 'block';
-      }
+      pollEl.appendChild(row);
     });
 
-    render();
-  })();
-  </script>
+    youBadge.style.display = getLocal().voted ? 'inline' : 'none';
+  }
+
+  // ========= INIT =========
+  async function init(){
+    try{
+      const data = await fetchResults();
+      renderUI(data);
+    }catch(err){
+      console.error(err);
+      // Fallback mínimo para que no se vea vacío
+      const empty = { votes:{}, total:0 };
+      OPCIONES.forEach(n=>empty.votes[n]=0);
+      renderUI(empty);
+    }
+  }
+
+  // Toggle admin total (solo tú lo ves si sabes el atajo)
+  window.addEventListener('keydown', (e)=>{
+    if(e.key.toLowerCase()==='t' && e.shiftKey){
+      adminTotal.style.display = (adminTotal.style.display==='none' || !adminTotal.style.display) ? 'block' : 'none';
+    }
+  });
+
+  init();
+})();
+</script>
+
 </body>
 </html>
