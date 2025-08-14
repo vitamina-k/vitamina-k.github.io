@@ -3,34 +3,50 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VITAMINA K · Encuesta y últimas piezas</title>
-<meta name="description" content="Opinión, datos y encuestas.">
-<meta property="og:title" content="VITAMINA K · Encuesta y últimas piezas">
-<meta property="og:description" content="Participa en la encuesta y lee mis últimas piezas.">
+<title>VITAMINA K · Encuesta + Piezas</title>
+<meta name="description" content="Encuestas, piezas cortas y llamadas a la acción. Claro, directo y con impacto.">
+<meta property="og:title" content="VITAMINA K · Encuesta + Piezas">
+<meta property="og:description" content="Vota y lee las últimas piezas. Sígueme en IG y X.">
 <meta property="og:type" content="website">
 <style>
   :root{
-    --bg1:#1a1f2b; --bg2:#101522; --glass:rgba(255,255,255,.10);
-    --stroke:rgba(255,255,255,.14); --fg:#fff; --muted:#cfd7ffcc;
+    --bg1:#141a27; --bg2:#0f1422; --glass:rgba(255,255,255,.10);
+    --stroke:rgba(255,255,255,.16); --fg:#fff; --muted:#cfd7ffcc;
     --accent:#4ecdc4; --accent2:#7dd3fc; --chip:#ffffff1a;
     --bar:#4ecdc4; --barbg:#ffffff22;
   }
   *{box-sizing:border-box}
   html,body{margin:0;min-height:100%;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:var(--fg);
-            font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+            font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
   a{color:#aee7ff;text-decoration:none} a:hover{text-decoration:underline}
-  .wrap{max-width:980px;margin:0 auto;padding:28px}
+
+  /* Layout base */
+  .wrap{max-width:1100px;margin:0 auto;padding:22px}
   .card{background:var(--glass);backdrop-filter:blur(18px) saturate(1.2);border:1px solid var(--stroke);
         border-radius:22px;box-shadow:0 20px 60px #00000055}
-  header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px}
+
+  /* Header/nav */
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px}
   .brand{font-weight:900;letter-spacing:.4px}
+  nav{display:flex;gap:10px;flex-wrap:wrap}
+  nav a{display:inline-block;padding:8px 12px;border:1px solid var(--stroke);border-radius:12px;background:var(--chip)}
   .social-mini a{display:inline-block;padding:8px 12px;border:1px solid var(--stroke);border-radius:12px;background:var(--chip);margin-left:8px}
-  .hero{padding:30px 26px 24px}
-  .hero h1{margin:2px 0 6px;font-size:clamp(22px,4.5vw,34px)}
+
+  /* Hero/presentación */
+  .hero{padding:28px 24px}
+  .hero h1{margin:2px 0 6px;font-size:clamp(22px,4.5vw,36px)}
   .hero p{margin:0;color:var(--muted)}
+  .hero-cta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid #ffffff55;background:#ffffff29;color:#fff;text-decoration:none;font-weight:800}
+  .btn.primary{background:var(--accent);color:#0b0f1a;border-color:transparent}
+
+  /* Sección genérica */
+  .section{margin-top:18px;padding:22px}
+  .section h2{margin:0 0 10px;font-size:clamp(18px,3.6vw,26px)}
+  .muted{color:var(--muted)}
 
   /* ENCUESTA */
-  .poll{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+  .poll{margin-top:10px;display:flex;flex-direction:column;gap:10px}
   .row{display:grid;grid-template-columns:1.1fr 3.2fr 70px;gap:12px;align-items:center;
        padding:10px 12px;border:1px solid #ffffff1f;border-radius:12px;background:#ffffff12;cursor:pointer;
        transition:transform .08s ease, background .2s, border-color .2s}
@@ -41,170 +57,233 @@
   .fill{position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg,var(--bar),var(--accent2));
         transition:width .45s cubic-bezier(.2,.8,.2,1)}
   .pct{text-align:right;font-variant-numeric:tabular-nums;font-weight:800}
-  .legend{margin-top:8px;color:var(--muted);font-size:13px}
+  /* total oculto (toggle con Shift+T) */
+  #adminTotal{display:none;margin-top:8px;text-align:right;font-size:12px;color:#cfe9ff}
 
   /* Últimas piezas */
-  .grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:22px}
-  @media(min-width:760px){ .grid{grid-template-columns:1fr 1fr} }
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:860px){ .grid{grid-template-columns:1fr 1fr 1fr} }
   .post{padding:18px;border:1px solid var(--stroke);border-radius:16px;background:var(--glass)}
   .post h3{margin:0 0 6px;font-size:18px}
   .post p{margin:0 0 10px;color:var(--muted)}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
   .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--stroke);background:var(--chip);font-size:12px}
 
-  /* CTA final */
-  .cta{margin-top:22px;padding:18px;text-align:center}
-  .btn{display:inline-block;margin:6px 8px;padding:10px 14px;border-radius:12px;border:1px solid #ffffff55;background:#ffffff29;color:#fff;text-decoration:none;font-weight:800}
-  .btn.primary{background:var(--accent);color:#0b0f1a;border-color:transparent}
-  .muted{color:var(--muted)}
+  /* Sobre/manifesto */
+  .cols{display:grid;grid-template-columns:1fr;gap:14px}
+  @media(min-width:860px){ .cols{grid-template-columns:1.2fr 1fr} }
+  .box{padding:16px;border:1px solid var(--stroke);border-radius:14px;background:var(--glass)}
+
+  /* Footer */
+  footer{margin-top:18px;padding:18px;text-align:center;color:#aab8ffcc}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <!-- Encabezado -->
   <div class="card">
+    <!-- ================= Header ================= -->
     <header>
       <div class="brand">VITAMINAK.OF</div>
+      <nav>
+        <a href="#encuesta">Encuesta</a>
+        <a href="#piezas">Últimas piezas</a>
+        <a href="#sobre">Sobre</a>
+      </nav>
       <div class="social-mini">
         <a href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">IG</a>
         <a href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏</a>
       </div>
     </header>
-    <!-- Hero -->
+
+    <!-- ================= Presentación ================= -->
     <section class="hero">
-      <h1>Encuesta + últimas piezas</h1>
-      <p>Vota y después léete lo último. Todo claro, corto y con impacto.</p>
-
-      <!-- ===== ENCUESTA de intención de voto ===== -->
-      <div class="poll" id="poll"></div>
-      <div class="legend"><span id="legendNote">Porcentaje sobre el total de votos guardados.</span></div>
-
-      <!-- ===== Últimas piezas ===== -->
-      <div class="grid" id="ultimas">
-        <!-- 1) Granada -->
-        <article class="post">
-          <h3>Granada: polémica tras retención de migrantes en la playa</h3>
-          <p>Un grupo de bañistas retuvo a varios migrantes recién llegados en Castell de Ferro. El episodio encendió el debate social y político por el trato a personas que llegan por mar.</p>
-          <div class="chips">
-            <span class="chip"><a href="https://elpais.com/espana/2025-08-05/un-grupo-de-banistas-retiene-por-la-fuerza-a-migrantes-llegados-a-una-playa-de-granada.html" target="_blank" rel="noopener">Fuente: El País</a></span>
-            <span class="chip"><a href="https://cadenaser.com/nacional/2025/08/05/pobres-persiguiendo-a-pobres-ismael-serrano-da-en-el-clavo-sobre-la-imagen-mas-triste-del-verano-cadena-ser/" target="_blank" rel="noopener">Cadena SER (reacciones)</a></span>
-          </div>
-        </article>
-
-        <!-- 2) IRPF/OCDE -->
-        <article class="post">
-          <h3>IRPF e impuestos al trabajo: la cuña fiscal sube al 40,6%</h3>
-          <p>La OCDE confirma que, al no actualizar tramos del IRPF con la inflación, la carga sobre los salarios aumentó en 2024. En España, la cuña fiscal (coste total vs. salario neto) alcanzó el 40,6%.</p>
-          <div class="chips">
-            <span class="chip"><a href="https://elpais.com/economia/2025-04-30/la-ocde-constata-los-efectos-de-la-inflacion-en-el-irpf-los-trabajadores-soportan-una-mayor-carga-fiscal-sobre-su-sueldo.html" target="_blank" rel="noopener">Fuente: El País / OCDE</a></span>
-          </div>
-        </article>
-
-        <!-- 3) IPC julio -->
-        <article class="post">
-          <h3>IPC de julio: 2,7% interanual, la cesta sigue apretando</h3>
-          <p>El INE avanzó un 2,7% para julio: la inflación se modera pero la alimentación continúa empujando el coste de vida por encima de lo cómodo para muchos hogares.</p>
-          <div class="chips">
-            <span class="chip"><a href="https://theobjective.com/economia/2025-08-13/ine-inflacion-julio-espana-2025/" target="_blank" rel="noopener">Fuente: The Objective / INE</a></span>
-          </div>
-        </article>
-      </div>
-
-      <!-- CTA -->
-      <div class="cta">
-        <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 Instagram</a>
-        <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 Seguir</a>
-        <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">🔥 No te pierdas lo siguiente</a>
+      <h1>Claro, corto y con impacto.</h1>
+      <p>Encuestas para tomar el pulso y piezas que te ponen en contexto en 60 segundos. Sin humo.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#encuesta">🔻 Votar ahora</a>
+        <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 Sígueme en IG</a>
+        <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 Sígueme en X</a>
       </div>
     </section>
+
+    <!-- ================= Encuesta ================= -->
+    <section id="encuesta" class="section">
+      <h2>Encuesta rápida · ¿A quién votarías hoy?</h2>
+      <p class="muted" id="encuestaNota">Vota una sola vez desde este dispositivo. La lista se ordena sola por apoyo.</p>
+      <div class="poll" id="poll"></div>
+      <div id="adminTotal">Total de votos: <span id="totalCount">0</span></div>
+    </section>
+
+    <!-- ================= Últimas piezas ================= -->
+    <section id="piezas" class="section">
+      <h2>Últimas piezas</h2>
+      <div class="grid">
+        <!-- 1) Granada -->
+        <article class="post">
+          <h3>Granada: bañistas, rescate y debate encendido</h3>
+          <p>Un grupo de bañistas retuvo a migrantes recién llegados en Castell de Ferro. El episodio abrió un choque social y político sobre seguridad, humanidad y legalidad.</p>
+          <div class="chips">
+            <span class="chip"><a href="https://elpais.com/espana/2025-08-05/un-grupo-de-banistas-retiene-por-la-fuerza-a-migrantes-llegados-a-una-playa-de-granada.html" target="_blank" rel="noopener">El País</a></span>
+            <span class="chip"><a href="https://cadenaser.com/nacional/2025/08/05/pobres-persiguiendo-a-pobres-ismael-serrano-da-en-el-clavo-sobre-la-imagen-mas-triste-del-verano-cadena-ser/" target="_blank" rel="noopener">Cadena SER</a></span>
+          </div>
+        </article>
+
+        <!-- 2) IRPF / cuña fiscal -->
+        <article class="post">
+          <h3>IRPF: cuando el tramo no sube, lo pagas tú</h3>
+          <p>La OCDE advierte: sin deflactar tramos con la inflación, sube la carga real sobre tu nómina. La cuña fiscal en España ronda el 40% del coste laboral.</p>
+          <div class="chips">
+            <span class="chip"><a href="https://elpais.com/economia/2025-04-30/la-ocde-constata-los-efectos-de-la-inflacion-en-el-irpf-los-trabajadores-soportan-una-mayor-carga-fiscal-sobre-su-sueldo.html" target="_blank" rel="noopener">El País · OCDE</a></span>
+          </div>
+        </article>
+
+        <!-- 3) IPC -->
+        <article class="post">
+          <h3>IPC de julio: respiro corto, cesta tensa</h3>
+          <p>El INE avanzó un 2,7% interanual: la inflación cede, pero la compra semanal sigue apretando a los hogares con menos margen.</p>
+          <div class="chips">
+            <span class="chip"><a href="https://theobjective.com/economia/2025-08-13/ine-inflacion-julio-espana-2025/" target="_blank" rel="noopener">The Objective · INE</a></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= Sobre ================= -->
+    <section id="sobre" class="section">
+      <h2>Sobre VITAMINA K</h2>
+      <div class="cols">
+        <div class="box">
+          <h3 style="margin-top:0">Pilares</h3>
+          <ul>
+            <li><strong>Datos primero:</strong> antes de opinar, verifico y cito.</li>
+            <li><strong>Claro y corto:</strong> 60 segundos para entender lo esencial.</li>
+            <li><strong>Impacto:</strong> lo que afecta a tu bolsillo, tu seguridad y tu día a día.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3 style="margin-top:0">Manifiesto</h3>
+          <p class="muted">Informar no es gritar. Es ordenar, comparar y explicar. Aquí no hay humo: hay contexto, fuentes y criterio.</p>
+          <div style="margin-top:10px">
+            <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 Sígueme en IG</a>
+            <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 Sígueme en X</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Footer ================= -->
+    <footer>
+      © <span id="y"></span> VITAMINA K · Hecho para leerse rápido.
+    </footer>
   </div>
 </div>
 
 <script>
+/* ====== utilidades ====== */
+document.getElementById('y').textContent = new Date().getFullYear();
+
 /* ====== ENCUESTA con backend Apps Script ======
-   Mantengo tu endpoint /exec. Si falla, guarda en localStorage para que no se rompa la UI.
-   Estructura de payload:
-   { action:"vote", option:"PSOE" }
-   Para leer recuento:
-   { action:"tally" }  -> { ok:true, votes:{nombre:numero,...}, total:n }
+   Endpoint: tu /exec (POST JSON)
+   - { action:"tally" } -> { ok:true, votes:{nombre:numero,...}, total:n }
+   - { action:"vote", option:"..." } -> { ok:true, votes:{...}, total:n }
+   Si el backend falla, la UI usa caché local para no romperse (no suma global).
 */
 const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxfxtW-bLzKb2uPp9IImq4Ng2LhyzE8MyfQdaBSQAUr5SZmK78bf6jgD0lbwx70FKkv/exec';
 const OPTIONS = ['PSOE','Sumar','PP','Vox','Se Acabó la Fiesta','Abstención','Voto nulo','Otros'];
-const KEY = 'vk_vote_cache_v2'; // caché local de emergencia
+const KEY = 'vk_vote_cache_v3'; // caché local
 
 const $poll = document.getElementById('poll');
+const $total = document.getElementById('totalCount');
+const $admin = document.getElementById('adminTotal');
+
 let state = { votes:Object.fromEntries(OPTIONS.map(n=>[n,0])), total:0, voted:false, choice:'' };
 
-// -------- helpers
-const saveLocal=()=>localStorage.setItem(KEY,JSON.stringify(state));
-const loadLocal=()=>{ try{ const s=JSON.parse(localStorage.getItem(KEY)||'{}'); if(s && s.votes) state=s; }catch{} };
+/* ----- helpers ----- */
+const saveLocal=()=>{ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch{} };
+const loadLocal=()=>{ try{ const s=JSON.parse(localStorage.getItem(KEY)||'{}'); if(s && s.votes){ state=s; } }catch{} };
 loadLocal();
 
-function pct(name){ const t = Math.max(1, state.total); return Math.round((state.votes[name]||0)*10000/t)/100; }
-function order(){ return [...OPTIONS].sort((a,b)=> (state.votes[b]-state.votes[a]) || a.localeCompare(b)); }
+const pct = (name)=> {
+  const t = Math.max(1, state.total);
+  return Math.round(( (state.votes[name]||0) * 10000 ) / t)/100;
+};
+const order = ()=> [...OPTIONS].sort((a,b)=>(state.votes[b]-state.votes[a]) || a.localeCompare(b));
 
 function render(){
   $poll.innerHTML='';
   const t = state.total;
+  $total.textContent = t;
+
   order().forEach(name=>{
     const row = document.createElement('div'); row.className='row';
     if(state.voted && state.choice===name) row.classList.add('voted');
 
     const nm = document.createElement('div'); nm.className='name'; nm.textContent = name;
-    const bar= document.createElement('div'); bar.className='bar';
-    const fill=document.createElement('div'); fill.className='fill';
-    const p = t ? pct(name) : 0; requestAnimationFrame(()=>{ fill.style.width = p+'%'; });
+
+    const bar = document.createElement('div'); bar.className='bar';
+    const fill= document.createElement('div'); fill.className='fill';
+    const p = t ? pct(name) : 0;
+    requestAnimationFrame(()=>{ fill.style.width = p + '%'; });
     bar.appendChild(fill);
 
-    const pctEl=document.createElement('div'); pctEl.className='pct';
-    pctEl.textContent = (t?p.toFixed(1):'0.0')+'%';
+    const pc = document.createElement('div'); pc.className='pct'; pc.textContent = (t?p.toFixed(1):'0.0') + '%';
 
-    row.append(nm,bar,pctEl);
-    row.addEventListener('click',()=> vote(name),{passive:true});
+    row.append(nm, bar, pc);
+    row.addEventListener('click', ()=> castVote(name), {passive:true});
     $poll.appendChild(row);
   });
 }
 
-// -------- backend calls
-async function fetchTally(){
+/* ----- backend ----- */
+async function getTally(){
   try{
     const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'tally'})});
     const json = await res.json();
     if(json && json.ok && json.votes){
-      state.votes = Object.assign(Object.fromEntries(OPTIONS.map(n=>[n,0])), json.votes);
-      state.total = json.total||Object.values(state.votes).reduce((a,b)=>a+b,0);
-      render();
-      saveLocal();
-      return true;
+      // normaliza opciones
+      const normalized = Object.fromEntries(OPTIONS.map(n=>[n,0]));
+      for(const k in json.votes){ if(k in normalized) normalized[k] = json.votes[k]|0; }
+      state.votes = normalized;
+      state.total = json.total || Object.values(normalized).reduce((a,b)=>a+b,0);
+      saveLocal(); render(); return true;
     }
   }catch(e){}
-  // fallback local
-  render();
-  return false;
+  render(); return false; // fallback
 }
 
-async function vote(option){
+async function castVote(option){
   if(state.voted) return;
   try{
-    const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action:'vote', option})});
+    const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'vote', option})});
     const json = await res.json();
     if(json && json.ok){
       // servidor devuelve recuento actualizado
-      state.votes = Object.assign(Object.fromEntries(OPTIONS.map(n=>[n,0])), json.votes||state.votes);
-      state.total = json.total || (state.total+1);
+      const normalized = Object.fromEntries(OPTIONS.map(n=>[n,0]));
+      const source = json.votes || {};
+      for(const k in source){ if(k in normalized) normalized[k] = source[k]|0; }
+      state.votes = normalized;
+      state.total = json.total || (state.total + 1);
       state.voted = true; state.choice = option;
       saveLocal(); render(); return;
     }
   }catch(e){}
-  // fallback local (si server cae)
-  state.votes[option] = (state.votes[option]||0)+1;
+  // fallback local (no suma global)
+  state.votes[option] = (state.votes[option]||0) + 1;
   state.total += 1; state.voted = true; state.choice = option;
   saveLocal(); render();
 }
 
-fetchTally();
+/* ----- init ----- */
+getTally();
 render();
+
+/* ----- toggle contador oculto (Shift+T) ----- */
+window.addEventListener('keydown', (e)=>{
+  if(e.shiftKey && e.key.toLowerCase()==='t'){
+    const s = getComputedStyle($admin).display;
+    $admin.style.display = (s==='none') ? 'block' : 'none';
+  }
+});
 </script>
 </body>
 </html>
