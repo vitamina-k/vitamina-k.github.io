@@ -1,270 +1,210 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>VITAMINA K — Opinión, datos y encuesta</title>
-  <meta name="description" content="Vitamina K: piezas breves, datos claros y encuesta en vivo. Sígueme en Instagram y X.">
-  <meta property="og:title" content="VITAMINA K — Opinión, datos y encuesta">
-  <meta property="og:description" content="Publicaciones breves e incómodas, con encuesta en vivo.">
-  <meta name="theme-color" content="#0f1422">
-  <style>
-    :root{--bg1:#0f1422;--bg2:#0a0f1a;--ink:#e8edf7;--muted:#b7c3da;--stroke:#1f2a44;--accent:#4ecdc4;--accent2:#7dd3fc;--ghost:#ffffff1a}
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Arial}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{width:min(1100px,92vw);margin-inline:auto}
-    .glass{background:linear-gradient(180deg,#ffffff14,#ffffff0a);backdrop-filter:blur(10px) saturate(1.15);border:1px solid var(--stroke);border-radius:18px}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VITAMINA K · Encuesta y últimas piezas</title>
+<meta name="description" content="Opinión, datos y encuestas.">
+<meta property="og:title" content="VITAMINA K · Encuesta y últimas piezas">
+<meta property="og:description" content="Participa en la encuesta y lee mis últimas piezas.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg1:#1a1f2b; --bg2:#101522; --glass:rgba(255,255,255,.10);
+    --stroke:rgba(255,255,255,.14); --fg:#fff; --muted:#cfd7ffcc;
+    --accent:#4ecdc4; --accent2:#7dd3fc; --chip:#ffffff1a;
+    --bar:#4ecdc4; --barbg:#ffffff22;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:var(--fg);
+            font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+  a{color:#aee7ff;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:980px;margin:0 auto;padding:28px}
+  .card{background:var(--glass);backdrop-filter:blur(18px) saturate(1.2);border:1px solid var(--stroke);
+        border-radius:22px;box-shadow:0 20px 60px #00000055}
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px}
+  .brand{font-weight:900;letter-spacing:.4px}
+  .social-mini a{display:inline-block;padding:8px 12px;border:1px solid var(--stroke);border-radius:12px;background:var(--chip);margin-left:8px}
+  .hero{padding:30px 26px 24px}
+  .hero h1{margin:2px 0 6px;font-size:clamp(22px,4.5vw,34px)}
+  .hero p{margin:0;color:var(--muted)}
 
-    header{position:sticky;top:0;z-index:10;background:linear-gradient(180deg,#0f1422ee,#0f142200)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .brand{font-weight:900;letter-spacing:.4px}
-    .menu{display:flex;gap:6px}
-    .menu a{padding:8px 10px;border-radius:10px}
-    .menu a:hover{background:var(--ghost)}
-    .cta{background:var(--accent);color:#0a0f10;font-weight:800;border-radius:12px;padding:10px 14px}
-    .cta:hover{filter:brightness(.95)}
+  /* ENCUESTA */
+  .poll{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+  .row{display:grid;grid-template-columns:1.1fr 3.2fr 70px;gap:12px;align-items:center;
+       padding:10px 12px;border:1px solid #ffffff1f;border-radius:12px;background:#ffffff12;cursor:pointer;
+       transition:transform .08s ease, background .2s, border-color .2s}
+  .row:hover{transform:translateY(-1px);background:#ffffff22;border-color:#ffffff3a}
+  .row.voted{outline:2px solid var(--accent);background:#4ecdc41a}
+  .name{font-weight:800}
+  .bar{position:relative;height:12px;border-radius:999px;background:var(--barbg);overflow:hidden}
+  .fill{position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg,var(--bar),var(--accent2));
+        transition:width .45s cubic-bezier(.2,.8,.2,1)}
+  .pct{text-align:right;font-variant-numeric:tabular-nums;font-weight:800}
+  .legend{margin-top:8px;color:var(--muted);font-size:13px}
 
-    .hero{margin:28px 0}
-    .hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;padding:22px}
-    .badge{display:inline-flex;gap:8px;align-items:center;border:1px dashed var(--stroke);border-radius:999px;padding:6px 12px;color:var(--muted);font-weight:700}
-    h1{font-size:clamp(28px,5.6vw,48px);line-height:1.15;margin:14px 0 10px}
-    .lede{color:var(--muted);margin:0 0 18px}
-    .btn{border:1px solid var(--stroke);background:#ffffff12;padding:12px 16px;border-radius:12px;font-weight:800}
-    .btn:hover{background:#ffffff22}
-    .btn.primary{background:var(--accent);color:#0a0f10;border-color:transparent}
-    .btn.primary:hover{filter:brightness(.95)}
-    .cta-row{display:flex;gap:10px;flex-wrap:wrap}
+  /* Últimas piezas */
+  .grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:22px}
+  @media(min-width:760px){ .grid{grid-template-columns:1fr 1fr} }
+  .post{padding:18px;border:1px solid var(--stroke);border-radius:16px;background:var(--glass)}
+  .post h3{margin:0 0 6px;font-size:18px}
+  .post p{margin:0 0 10px;color:var(--muted)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--stroke);background:var(--chip);font-size:12px}
 
-    .social{margin:28px 0;padding:20px}
-    .social-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .social-card{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid var(--stroke);border-radius:14px;background:#ffffff10;transition:transform .12s ease,background .2s ease}
-    .social-card:hover{transform:translateY(-2px);background:#ffffff18}
-    .logo{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#fff}
-    .logo svg{width:26px;height:26px}
-    .muted{color:var(--muted)}
-
-    /* ENCUESTA */
-    .poll{margin:28px 0;padding:22px}
-    .pill{display:inline-block;border:1px dashed var(--stroke);border-radius:999px;padding:6px 12px;color:var(--muted);font-weight:700}
-    .rows{margin-top:10px;display:flex;flex-direction:column;gap:10px}
-    .row{display:grid;grid-template-columns:1.1fr 3.2fr 72px;gap:12px;align-items:center;padding:10px 12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);border-radius:12px;cursor:pointer;transition:transform .08s ease,background .2s ease,border-color .2s ease}
-    .row:hover{transform:translateY(-1px);background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22)}
-    .row.voted{outline:2px solid var(--accent);background:rgba(78,205,196,.12)}
-    .name{font-weight:800;letter-spacing:.2px}
-    .bar{position:relative;width:100%;height:12px;background:#ffffff22;border-radius:999px;overflow:hidden}
-    .fill{position:absolute;inset:0 auto 0 0;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .45s cubic-bezier(.2,.8,.2,1)}
-    .pct{text-align:right;font-variant-numeric:tabular-nums;font-weight:800}
-    .status{display:flex;justify-content:space-between;align-items:center;margin-top:8px;color:var(--muted);font-size:13px}
-    .status .you{font-weight:800;color:var(--accent);display:none}
-
-    /* Razones y posts (igual que antes) */
-    .reasons{margin:28px 0;padding:22px}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .reason{padding:16px;border:1px solid var(--stroke);border-radius:14px;background:#ffffff0c}
-    .reason h4{margin:0 0 6px}
-    .posts{margin:28px 0;padding:22px}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{padding:0;overflow:hidden}
-    .thumb{aspect-ratio:16/9;background:linear-gradient(135deg,var(--accent)20%,#0000),radial-gradient(300px 200px at 10% -10%, #7dd3fc33, transparent 60%),#141a2a;border-bottom:1px solid var(--stroke)}
-    .card-body{padding:14px}
-    .card-body h5{margin:0 0 6px}
-    .card-body p{margin:0;color:var(--muted)}
-
-    footer{margin:36px 0 26px;color:#93a2bf}
-    footer .links{display:flex;gap:12px;flex-wrap:wrap}
-    @media (max-width:900px){
-      .hero .wrap{grid-template-columns:1fr}
-      .social-grid,.grid-3,.cards{grid-template-columns:1fr}
-      .row{grid-template-columns:1fr;gap:8px}
-      .pct{text-align:left}
-    }
-  </style>
+  /* CTA final */
+  .cta{margin-top:22px;padding:18px;text-align:center}
+  .btn{display:inline-block;margin:6px 8px;padding:10px 14px;border-radius:12px;border:1px solid #ffffff55;background:#ffffff29;color:#fff;text-decoration:none;font-weight:800}
+  .btn.primary{background:var(--accent);color:#0b0f1a;border-color:transparent}
+  .muted{color:var(--muted)}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
+<div class="wrap">
+  <!-- Encabezado -->
+  <div class="card">
+    <header>
       <div class="brand">VITAMINAK.OF</div>
-      <nav class="menu">
-        <a href="#sigeme">Sígueme</a>
-        <a href="#encuesta">Encuesta</a>
-        <a href="#posts">Últimas</a>
-        <a class="cta" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Seguir en IG</a>
-      </nav>
-    </div>
-  </header>
+      <div class="social-mini">
+        <a href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">IG</a>
+        <a href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏</a>
+      </div>
+    </header>
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Encuesta + últimas piezas</h1>
+      <p>Vota y después léete lo último. Todo claro, corto y con impacto.</p>
 
-  <main class="container">
-    <!-- HERO -->
-    <section class="hero glass">
-      <div class="wrap">
-        <div>
-          <span class="badge">Piezas breves · Datos claros · Criterio propio</span>
-          <h1>La vitamina que falta en tu feed: datos incómodos y contexto real</h1>
-          <p class="lede">Aquí no vendemos humo. Selecciono datos, los comprimo y te los dejo listos para pensar y compartir.</p>
-          <div class="cta-row">
-            <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">🔥 Sígueme en Instagram</a>
-            <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 Sígueme en X</a>
+      <!-- ===== ENCUESTA de intención de voto ===== -->
+      <div class="poll" id="poll"></div>
+      <div class="legend"><span id="legendNote">Porcentaje sobre el total de votos guardados.</span></div>
+
+      <!-- ===== Últimas piezas ===== -->
+      <div class="grid" id="ultimas">
+        <!-- 1) Granada -->
+        <article class="post">
+          <h3>Granada: polémica tras retención de migrantes en la playa</h3>
+          <p>Un grupo de bañistas retuvo a varios migrantes recién llegados en Castell de Ferro. El episodio encendió el debate social y político por el trato a personas que llegan por mar.</p>
+          <div class="chips">
+            <span class="chip"><a href="https://elpais.com/espana/2025-08-05/un-grupo-de-banistas-retiene-por-la-fuerza-a-migrantes-llegados-a-una-playa-de-granada.html" target="_blank" rel="noopener">Fuente: El País</a></span>
+            <span class="chip"><a href="https://cadenaser.com/nacional/2025/08/05/pobres-persiguiendo-a-pobres-ismael-serrano-da-en-el-clavo-sobre-la-imagen-mas-triste-del-verano-cadena-ser/" target="_blank" rel="noopener">Cadena SER (reacciones)</a></span>
           </div>
-        </div>
+        </article>
+
+        <!-- 2) IRPF/OCDE -->
+        <article class="post">
+          <h3>IRPF e impuestos al trabajo: la cuña fiscal sube al 40,6%</h3>
+          <p>La OCDE confirma que, al no actualizar tramos del IRPF con la inflación, la carga sobre los salarios aumentó en 2024. En España, la cuña fiscal (coste total vs. salario neto) alcanzó el 40,6%.</p>
+          <div class="chips">
+            <span class="chip"><a href="https://elpais.com/economia/2025-04-30/la-ocde-constata-los-efectos-de-la-inflacion-en-el-irpf-los-trabajadores-soportan-una-mayor-carga-fiscal-sobre-su-sueldo.html" target="_blank" rel="noopener">Fuente: El País / OCDE</a></span>
+          </div>
+        </article>
+
+        <!-- 3) IPC julio -->
+        <article class="post">
+          <h3>IPC de julio: 2,7% interanual, la cesta sigue apretando</h3>
+          <p>El INE avanzó un 2,7% para julio: la inflación se modera pero la alimentación continúa empujando el coste de vida por encima de lo cómodo para muchos hogares.</p>
+          <div class="chips">
+            <span class="chip"><a href="https://theobjective.com/economia/2025-08-13/ine-inflacion-julio-espana-2025/" target="_blank" rel="noopener">Fuente: The Objective / INE</a></span>
+          </div>
+        </article>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta">
+        <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 Instagram</a>
+        <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 Seguir</a>
+        <a class="btn primary" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">🔥 No te pierdas lo siguiente</a>
       </div>
     </section>
+  </div>
+</div>
 
-    <!-- REDES -->
-    <section id="sigeme" class="social glass">
-      <h2 style="margin:0 0 12px">Súmate y no te pierdas lo que viene</h2>
-      <div class="social-grid">
-        <a class="social-card" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">
-          <span class="logo">
-            <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#dd2a7b" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="#dd2a7b" stroke-width="2"/></svg>
-          </span>
-          <div><h3>Instagram</h3><div class="muted">@vitaminak.of</div></div>
-        </a>
-        <a class="social-card" href="https://x.com/vitaminakof" target="_blank" rel="noopener">
-          <span class="logo"><svg viewBox="0 0 24 24" fill="#000"><path d="M3 3l8.6 10.2L3.9 21H7l5.5-6.4L18.8 21H21l-9-10.7L20.5 3H17.4L12.3 8.8 8.2 3H3z"/></svg></span>
-          <div><h3>X (Twitter)</h3><div class="muted">@vitaminakof</div></div>
-        </a>
-      </div>
-    </section>
+<script>
+/* ====== ENCUESTA con backend Apps Script ======
+   Mantengo tu endpoint /exec. Si falla, guarda en localStorage para que no se rompa la UI.
+   Estructura de payload:
+   { action:"vote", option:"PSOE" }
+   Para leer recuento:
+   { action:"tally" }  -> { ok:true, votes:{nombre:numero,...}, total:n }
+*/
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxfxtW-bLzKb2uPp9IImq4Ng2LhyzE8MyfQdaBSQAUr5SZmK78bf6jgD0lbwx70FKkv/exec';
+const OPTIONS = ['PSOE','Sumar','PP','Vox','Se Acabó la Fiesta','Abstención','Voto nulo','Otros'];
+const KEY = 'vk_vote_cache_v2'; // caché local de emergencia
 
-    <!-- ENCUESTA EN VIVO -->
-    <section id="encuesta" class="poll glass">
-      <span class="pill">Participa</span>
-      <h2 style="margin:10px 0 6px">Encuesta rápida · ¿A quién votarías hoy?</h2>
-      <p class="muted" style="margin:0 0 14px">Vota una sola vez. La lista se ordena sola por apoyo. Mira cómo suben las barras en tiempo real.</p>
+const $poll = document.getElementById('poll');
+let state = { votes:Object.fromEntries(OPTIONS.map(n=>[n,0])), total:0, voted:false, choice:'' };
 
-      <div class="rows" id="pollRows"></div>
+// -------- helpers
+const saveLocal=()=>localStorage.setItem(KEY,JSON.stringify(state));
+const loadLocal=()=>{ try{ const s=JSON.parse(localStorage.getItem(KEY)||'{}'); if(s && s.votes) state=s; }catch{} };
+loadLocal();
 
-      <div class="status">
-        <span id="pollNote">Porcentaje sobre el total de votos de esta encuesta.</span>
-        <span class="you" id="youBadge">Tu voto registrado ✓</span>
-      </div>
-    </section>
+function pct(name){ const t = Math.max(1, state.total); return Math.round((state.votes[name]||0)*10000/t)/100; }
+function order(){ return [...OPTIONS].sort((a,b)=> (state.votes[b]-state.votes[a]) || a.localeCompare(b)); }
 
-    <!-- RAZONES -->
-    <section class="reasons glass">
-      <h2 style="margin:6px 0 14px">¿Por qué seguir VITAMINA K?</h2>
-      <div class="grid-3">
-        <div class="reason"><h4>Claro y directo</h4><p class="muted">Datos, contexto y una conclusión útil.</p></div>
-        <div class="reason"><h4>Temporal y vivo</h4><p class="muted">Contenido que premia a quien llega primero.</p></div>
-        <div class="reason"><h4>Comunidad</h4><p class="muted">Encuestas y feedback real para tomar el pulso fuera del ruido.</p></div>
-      </div>
-    </section>
+function render(){
+  $poll.innerHTML='';
+  const t = state.total;
+  order().forEach(name=>{
+    const row = document.createElement('div'); row.className='row';
+    if(state.voted && state.choice===name) row.classList.add('voted');
 
-    <!-- ÚLTIMAS PIEZAS -->
-    <section id="posts" class="posts glass">
-      <h2 style="margin:6px 0 14px">Últimas piezas</h2>
-      <div class="cards">
-        <a class="card glass" href="#"><div class="thumb"></div><div class="card-body"><h5>Título de ejemplo #1</h5><p>Resumen breve.</p></div></a>
-        <a class="card glass" href="#"><div class="thumb"></div><div class="card-body"><h5>Título de ejemplo #2</h5><p>Otro resumen.</p></div></a>
-        <a class="card glass" href="#"><div class="thumb"></div><div class="card-body"><h5>Título de ejemplo #3</h5><p>Texto corto.</p></div></a>
-      </div>
-    </section>
-  </main>
+    const nm = document.createElement('div'); nm.className='name'; nm.textContent = name;
+    const bar= document.createElement('div'); bar.className='bar';
+    const fill=document.createElement('div'); fill.className='fill';
+    const p = t ? pct(name) : 0; requestAnimationFrame(()=>{ fill.style.width = p+'%'; });
+    bar.appendChild(fill);
 
-  <footer class="container">
-    <div class="glass" style="padding:14px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-      <div>© <span id="y"></span> VITAMINAK.OF — Hecho con criterio.</div>
-      <div class="links">
-        <a href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://x.com/vitaminakof" target="_blank" rel="noopener">X</a>
-        <a href="#encuesta">Encuesta</a>
-      </div>
-    </div>
-  </footer>
+    const pctEl=document.createElement('div'); pctEl.className='pct';
+    pctEl.textContent = (t?p.toFixed(1):'0.0')+'%';
 
-  <script>
-    // ============ CONFIG ============
-    const BACKEND_URL = "https://script.google.com/macros/s/AKfycbxfxtW-bLzKb2uPp9IImq4Ng2LhyzE8MyfQdaBSQAUr5SZmK78bf6jgD0lbwx70FKkv/exec";
-    const OPTIONS = ['PSOE','Sumar','PP','Vox','Se Acabó la Fiesta','Abstención','Voto nulo','Otros'];
-    const STORAGE_KEY = 'vk_poll_uuid';
-    const CHOICE_KEY  = 'vk_poll_choice';
+    row.append(nm,bar,pctEl);
+    row.addEventListener('click',()=> vote(name),{passive:true});
+    $poll.appendChild(row);
+  });
+}
 
-    // UUID simple persistente en este navegador
-    function getUUID(){
-      let id = localStorage.getItem(STORAGE_KEY);
-      if(!id){ id = crypto.randomUUID ? crypto.randomUUID() : (Date.now()+'-'+Math.random().toString(16).slice(2)); localStorage.setItem(STORAGE_KEY,id); }
-      return id;
+// -------- backend calls
+async function fetchTally(){
+  try{
+    const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'tally'})});
+    const json = await res.json();
+    if(json && json.ok && json.votes){
+      state.votes = Object.assign(Object.fromEntries(OPTIONS.map(n=>[n,0])), json.votes);
+      state.total = json.total||Object.values(state.votes).reduce((a,b)=>a+b,0);
+      render();
+      saveLocal();
+      return true;
     }
+  }catch(e){}
+  // fallback local
+  render();
+  return false;
+}
 
-    const $ = (id)=> document.getElementById(id);
-    const rowsEl   = $('pollRows');
-    const youBadge = $('youBadge');
-
-    function sortByVotes(votes){
-      return [...OPTIONS].sort((a,b)=>{
-        const va = votes[b]||0, vb = votes[a]||0;
-        if(va!==vb) return va - vb;
-        return a.localeCompare(b);
-      });
+async function vote(option){
+  if(state.voted) return;
+  try{
+    const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'vote', option})});
+    const json = await res.json();
+    if(json && json.ok){
+      // servidor devuelve recuento actualizado
+      state.votes = Object.assign(Object.fromEntries(OPTIONS.map(n=>[n,0])), json.votes||state.votes);
+      state.total = json.total || (state.total+1);
+      state.voted = true; state.choice = option;
+      saveLocal(); render(); return;
     }
-    function totalVotes(v){ return Object.values(v).reduce((a,b)=>a+(+b||0),0); }
-    function pct(v,t){ return t? Math.round((v*1000)/t)/10 : 0; } // 0.1%
+  }catch(e){}
+  // fallback local (si server cae)
+  state.votes[option] = (state.votes[option]||0)+1;
+  state.total += 1; state.voted = true; state.choice = option;
+  saveLocal(); render();
+}
 
-    function render(votes, myChoice){
-      rowsEl.innerHTML = '';
-      const total = totalVotes(votes);
-      const ordered = sortByVotes(votes);
-
-      ordered.forEach(name=>{
-        const row  = document.createElement('div'); row.className='row';
-        if(myChoice===name) row.classList.add('voted');
-
-        const nm   = document.createElement('div'); nm.className='name'; nm.textContent=name;
-        const bar  = document.createElement('div'); bar.className='bar';
-        const fill = document.createElement('div'); fill.className='fill';
-        const pc   = document.createElement('div'); pc.className='pct';
-
-        const pval = pct(votes[name]||0, total);
-        pc.textContent = pval.toFixed(1)+'%';
-        requestAnimationFrame(()=> fill.style.width = pval+'%');
-
-        bar.appendChild(fill);
-        row.appendChild(nm); row.appendChild(bar); row.appendChild(pc);
-
-        // votar
-        row.addEventListener('click', async ()=>{
-          if(localStorage.getItem(CHOICE_KEY)) return; // ya votó en este navegador
-          try{
-            const res = await fetch(BACKEND_URL, {
-              method:'POST',
-              headers:{'Content-Type':'application/json'},
-              body: JSON.stringify({ action:'vote', option:name, voter:getUUID() })
-            });
-            const data = await res.json();
-            if(!data.ok) throw new Error(data.error||'Error');
-            localStorage.setItem(CHOICE_KEY, name);
-            youBadge.style.display='inline';
-            await refresh(); // recarga conteo
-          }catch(e){
-            alert('No se pudo registrar tu voto. Inténtalo de nuevo.');
-          }
-        }, {passive:true});
-
-        rowsEl.appendChild(row);
-      });
-
-      youBadge.style.display = localStorage.getItem(CHOICE_KEY) ? 'inline' : 'none';
-    }
-
-    async function refresh(){
-      try{
-        const res = await fetch(BACKEND_URL + '?action=stats', {method:'GET', cache:'no-store'});
-        const data = await res.json();
-        if(!data.ok) throw 0;
-        // Asegura todas las opciones
-        const votes = Object.assign(Object.fromEntries(OPTIONS.map(o=>[o,0])), data.votes||{});
-        render(votes, localStorage.getItem(CHOICE_KEY)||'');
-      }catch(_){
-        // Si falla el backend, muestra 0s pero UI activa
-        const empty = Object.fromEntries(OPTIONS.map(o=>[o,0]));
-        render(empty, localStorage.getItem(CHOICE_KEY)||'');
-      }
-    }
-
-    document.getElementById('y').textContent = new Date().getFullYear();
-    refresh();
-  </script>
+fetchTally();
+render();
+</script>
 </body>
 </html>
