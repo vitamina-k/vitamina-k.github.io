@@ -1,124 +1,99 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VITAMINA K · Encuesta + Piezas</title>
-<meta name="description" content="Encuestas, piezas cortas y llamadas a la acción. Claro, directo y con impacto.">
-<meta property="og:title" content="VITAMINA K · Encuesta + Piezas">
-<meta property="og:description" content="Vota y lee las últimas piezas. Sígueme en IG y X.">
-<meta property="og:type" content="website">
-<style>
-  :root{
-    --bg1:#141a27; --bg2:#0f1422; --glass:rgba(255,255,255,.10);
-    --stroke:rgba(255,255,255,.16); --fg:#fff; --muted:#cfd7ffcc;
-    --accent:#4ecdc4; --accent2:#7dd3fc; --chip:#ffffff1a;
-    --bar:#4ecdc4; --barbg:#ffffff22;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;min-height:100%;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:var(--fg);
-            font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
-  a{color:#aee7ff;text-decoration:none} a:hover{text-decoration:underline}
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>VITAMINA K · Noticias y Piezas</title>
+  <meta name="description" content="Piezas cortas y llamadas a la acción. Claro, directo y con impacto.">
+  <link rel="canonical" href="https://vitaminak.of/">
 
-  /* Layout base */
-  .wrap{max-width:1100px;margin:0 auto;padding:22px}
-  .card{background:var(--glass);backdrop-filter:blur(18px) saturate(1.2);border:1px solid var(--stroke);
-        border-radius:22px;box-shadow:0 20px 60px #00000055}
+  <!-- Social -->
+  <meta property="og:title" content="VITAMINA K · Noticias y Piezas">
+  <meta property="og:description" content="Lee las últimas piezas. Sígueme en IG y X.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
-  /* Header/nav */
-  header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px}
-  .brand{font-weight:900;letter-spacing:.4px}
-  nav{display:flex;gap:10px;flex-wrap:wrap}
-  nav a{display:inline-block;padding:8px 12px;border:1px solid var(--stroke);border-radius:12px;background:var(--chip)}
-  .social-mini a{display:inline-block;padding:8px 12px;border:1px solid var(--stroke);border-radius:12px;background:var(--chip);margin-left:8px}
+  <!-- Theming -->
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    :root{
+      --bg:#ffffff; --fg:#111; --muted:#555;
+      --glass:#ffffff; --stroke:#e0e0e0;
+      --accent:#4ecdc4; --accent2:#0ea5e9; --chip:#f6f6f6;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);
+              font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    a{color:#0ea5e9;text-decoration:none}
+    a:hover{text-decoration:underline}
 
-  /* Hero/presentación */
-  .hero{padding:28px 24px}
-  .hero h1{margin:2px 0 6px;font-size:clamp(22px,4.5vw,36px)}
-  .hero p{margin:0;color:var(--muted)}
-  .hero-cta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
-  .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid #ffffff55;background:#ffffff29;color:#fff;text-decoration:none;font-weight:800}
-  .btn.primary{background:var(--accent);color:#0b0f1a;border-color:transparent}
+    .wrap{max-width:1100px;margin:0 auto;padding:22px}
+    .card{background:var(--glass);border:1px solid var(--stroke);
+          border-radius:12px;box-shadow:0 4px 20px #00000010}
 
-  /* Sección genérica */
-  .section{margin-top:18px;padding:22px}
-  .section h2{margin:0 0 10px;font-size:clamp(18px,3.6vw,26px)}
-  .muted{color:var(--muted)}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;border-bottom:1px solid var(--stroke)}
+    .brand{font-weight:900;letter-spacing:.4px;font-size:18px}
+    nav{display:flex;gap:10px;flex-wrap:wrap}
+    nav a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);font-weight:600}
+    .social-mini a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);margin-left:8px;font-weight:600}
 
-  /* ENCUESTA */
-  .poll{margin-top:10px;display:flex;flex-direction:column;gap:10px}
-  .row{display:grid;grid-template-columns:1.1fr 3.2fr 70px;gap:12px;align-items:center;
-       padding:10px 12px;border:1px solid #ffffff1f;border-radius:12px;background:#ffffff12;cursor:pointer;
-       transition:transform .08s ease, background .2s, border-color .2s}
-  .row:hover{transform:translateY(-1px);background:#ffffff22;border-color:#ffffff3a}
-  .row.voted{outline:2px solid var(--accent);background:#4ecdc41a}
-  .name{font-weight:800}
-  .bar{position:relative;height:12px;border-radius:999px;background:var(--barbg);overflow:hidden}
-  .fill{position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg,var(--bar),var(--accent2));
-        transition:width .45s cubic-bezier(.2,.8,.2,1)}
-  .pct{text-align:right;font-variant-numeric:tabular-nums;font-weight:800}
-  /* total oculto (toggle con Shift+T) */
-  #adminTotal{display:none;margin-top:8px;text-align:right;font-size:12px;color:#cfe9ff}
+    .hero{padding:28px 24px}
+    .hero h1{margin:2px 0 10px;font-size:clamp(24px,4.5vw,38px)}
+    .hero p{margin:0;color:var(--muted)}
+    .hero-cta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:10px 14px;border-radius:6px;border:1px solid var(--stroke);background:#f4f4f4;color:#111;text-decoration:none;font-weight:700}
+    .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
 
-  /* Últimas piezas */
-  .grid{display:grid;grid-template-columns:1fr;gap:16px}
-  @media(min-width:860px){ .grid{grid-template-columns:1fr 1fr 1fr} }
-  .post{padding:18px;border:1px solid var(--stroke);border-radius:16px;background:var(--glass)}
-  .post h3{margin:0 0 6px;font-size:18px}
-  .post p{margin:0 0 10px;color:var(--muted)}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-  .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--stroke);background:var(--chip);font-size:12px}
+    .section{margin-top:18px;padding:22px}
+    .section h2{margin:0 0 10px;font-size:clamp(18px,3.6vw,26px)}
+    .muted{color:var(--muted)}
 
-  /* Sobre/manifesto */
-  .cols{display:grid;grid-template-columns:1fr;gap:14px}
-  @media(min-width:860px){ .cols{grid-template-columns:1.2fr 1fr} }
-  .box{padding:16px;border:1px solid var(--stroke);border-radius:14px;background:var(--glass)}
+    .grid{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:860px){ .grid{grid-template-columns:1fr 1fr 1fr} }
+    .post{padding:18px;border:1px solid var(--stroke);border-radius:8px;background:var(--glass)}
+    .post h3{margin:0 0 6px;font-size:18px}
+    .post p{margin:0 0 10px;color:var(--muted)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--stroke);background:var(--chip);font-size:12px}
 
-  /* Footer */
-  footer{margin-top:18px;padding:18px;text-align:center;color:#aab8ffcc}
-</style>
+    .cols{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:860px){ .cols{grid-template-columns:1.2fr 1fr} }
+    .box{padding:16px;border:1px solid var(--stroke);border-radius:8px;background:var(--glass)}
+
+    footer{margin-top:18px;padding:18px;text-align:center;color:#777;border-top:1px solid var(--stroke)}
+  </style>
 </head>
 <body>
 <div class="wrap">
   <div class="card">
-    <!-- ================= Header ================= -->
     <header>
       <div class="brand">VITAMINAK.OF</div>
-      <nav>
-        <a href="#encuesta">Encuesta</a>
+      <nav aria-label="Secciones">
         <a href="#piezas">Últimas piezas</a>
         <a href="#sobre">Sobre</a>
       </nav>
-      <div class="social-mini">
+      <div class="social-mini" aria-label="Redes sociales">
         <a href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">IG</a>
         <a href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏</a>
       </div>
     </header>
 
-    <!-- ================= Presentación ================= -->
     <section class="hero">
       <h1>Claro, corto y con impacto.</h1>
-      <p>Encuestas para tomar el pulso y piezas que te ponen en contexto en 60 segundos. Sin humo.</p>
+      <p>Piezas que te ponen en contexto en 60 segundos. Sin humo.</p>
       <div class="hero-cta">
-        <a class="btn primary" href="#encuesta">🔻 Votar ahora</a>
-        <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 Sígueme en IG</a>
-        <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 Sígueme en X</a>
+        <a class="btn primary" href="#piezas">Ver piezas</a>
+        <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 IG</a>
+        <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 X</a>
       </div>
     </section>
 
-    <!-- ================= Encuesta ================= -->
-    <section id="encuesta" class="section">
-      <h2>Encuesta rápida · ¿A quién votarías hoy?</h2>
-      <p class="muted" id="encuestaNota">Vota una sola vez desde este dispositivo. La lista se ordena sola por apoyo.</p>
-      <div class="poll" id="poll"></div>
-      <div id="adminTotal">Total de votos: <span id="totalCount">0</span></div>
-    </section>
-
-    <!-- ================= Últimas piezas ================= -->
     <section id="piezas" class="section">
       <h2>Últimas piezas</h2>
       <div class="grid">
-        <!-- 1) Granada -->
         <article class="post">
           <h3>Granada: bañistas, rescate y debate encendido</h3>
           <p>Un grupo de bañistas retuvo a migrantes recién llegados en Castell de Ferro. El episodio abrió un choque social y político sobre seguridad, humanidad y legalidad.</p>
@@ -128,7 +103,6 @@
           </div>
         </article>
 
-        <!-- 2) IRPF / cuña fiscal -->
         <article class="post">
           <h3>IRPF: cuando el tramo no sube, lo pagas tú</h3>
           <p>La OCDE advierte: sin deflactar tramos con la inflación, sube la carga real sobre tu nómina. La cuña fiscal en España ronda el 40% del coste laboral.</p>
@@ -137,7 +111,6 @@
           </div>
         </article>
 
-        <!-- 3) IPC -->
         <article class="post">
           <h3>IPC de julio: respiro corto, cesta tensa</h3>
           <p>El INE avanzó un 2,7% interanual: la inflación cede, pero la compra semanal sigue apretando a los hogares con menos margen.</p>
@@ -148,7 +121,6 @@
       </div>
     </section>
 
-    <!-- ================= Sobre ================= -->
     <section id="sobre" class="section">
       <h2>Sobre VITAMINA K</h2>
       <div class="cols">
@@ -164,14 +136,13 @@
           <h3 style="margin-top:0">Manifiesto</h3>
           <p class="muted">Informar no es gritar. Es ordenar, comparar y explicar. Aquí no hay humo: hay contexto, fuentes y criterio.</p>
           <div style="margin-top:10px">
-            <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 Sígueme en IG</a>
-            <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 Sígueme en X</a>
+            <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 IG</a>
+            <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 X</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= Footer ================= -->
     <footer>
       © <span id="y"></span> VITAMINA K · Hecho para leerse rápido.
     </footer>
@@ -179,111 +150,7 @@
 </div>
 
 <script>
-/* ====== utilidades ====== */
-document.getElementById('y').textContent = new Date().getFullYear();
-
-/* ====== ENCUESTA con backend Apps Script ======
-   Endpoint: tu /exec (POST JSON)
-   - { action:"tally" } -> { ok:true, votes:{nombre:numero,...}, total:n }
-   - { action:"vote", option:"..." } -> { ok:true, votes:{...}, total:n }
-   Si el backend falla, la UI usa caché local para no romperse (no suma global).
-*/
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxfxtW-bLzKb2uPp9IImq4Ng2LhyzE8MyfQdaBSQAUr5SZmK78bf6jgD0lbwx70FKkv/exec';
-const OPTIONS = ['PSOE','Sumar','PP','Vox','Se Acabó la Fiesta','Abstención','Voto nulo','Otros'];
-const KEY = 'vk_vote_cache_v3'; // caché local
-
-const $poll = document.getElementById('poll');
-const $total = document.getElementById('totalCount');
-const $admin = document.getElementById('adminTotal');
-
-let state = { votes:Object.fromEntries(OPTIONS.map(n=>[n,0])), total:0, voted:false, choice:'' };
-
-/* ----- helpers ----- */
-const saveLocal=()=>{ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch{} };
-const loadLocal=()=>{ try{ const s=JSON.parse(localStorage.getItem(KEY)||'{}'); if(s && s.votes){ state=s; } }catch{} };
-loadLocal();
-
-const pct = (name)=> {
-  const t = Math.max(1, state.total);
-  return Math.round(( (state.votes[name]||0) * 10000 ) / t)/100;
-};
-const order = ()=> [...OPTIONS].sort((a,b)=>(state.votes[b]-state.votes[a]) || a.localeCompare(b));
-
-function render(){
-  $poll.innerHTML='';
-  const t = state.total;
-  $total.textContent = t;
-
-  order().forEach(name=>{
-    const row = document.createElement('div'); row.className='row';
-    if(state.voted && state.choice===name) row.classList.add('voted');
-
-    const nm = document.createElement('div'); nm.className='name'; nm.textContent = name;
-
-    const bar = document.createElement('div'); bar.className='bar';
-    const fill= document.createElement('div'); fill.className='fill';
-    const p = t ? pct(name) : 0;
-    requestAnimationFrame(()=>{ fill.style.width = p + '%'; });
-    bar.appendChild(fill);
-
-    const pc = document.createElement('div'); pc.className='pct'; pc.textContent = (t?p.toFixed(1):'0.0') + '%';
-
-    row.append(nm, bar, pc);
-    row.addEventListener('click', ()=> castVote(name), {passive:true});
-    $poll.appendChild(row);
-  });
-}
-
-/* ----- backend ----- */
-async function getTally(){
-  try{
-    const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'tally'})});
-    const json = await res.json();
-    if(json && json.ok && json.votes){
-      // normaliza opciones
-      const normalized = Object.fromEntries(OPTIONS.map(n=>[n,0]));
-      for(const k in json.votes){ if(k in normalized) normalized[k] = json.votes[k]|0; }
-      state.votes = normalized;
-      state.total = json.total || Object.values(normalized).reduce((a,b)=>a+b,0);
-      saveLocal(); render(); return true;
-    }
-  }catch(e){}
-  render(); return false; // fallback
-}
-
-async function castVote(option){
-  if(state.voted) return;
-  try{
-    const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'vote', option})});
-    const json = await res.json();
-    if(json && json.ok){
-      // servidor devuelve recuento actualizado
-      const normalized = Object.fromEntries(OPTIONS.map(n=>[n,0]));
-      const source = json.votes || {};
-      for(const k in source){ if(k in normalized) normalized[k] = source[k]|0; }
-      state.votes = normalized;
-      state.total = json.total || (state.total + 1);
-      state.voted = true; state.choice = option;
-      saveLocal(); render(); return;
-    }
-  }catch(e){}
-  // fallback local (no suma global)
-  state.votes[option] = (state.votes[option]||0) + 1;
-  state.total += 1; state.voted = true; state.choice = option;
-  saveLocal(); render();
-}
-
-/* ----- init ----- */
-getTally();
-render();
-
-/* ----- toggle contador oculto (Shift+T) ----- */
-window.addEventListener('keydown', (e)=>{
-  if(e.shiftKey && e.key.toLowerCase()==='t'){
-    const s = getComputedStyle($admin).display;
-    $admin.style.display = (s==='none') ? 'block' : 'none';
-  }
-});
+  document.getElementById('y').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
