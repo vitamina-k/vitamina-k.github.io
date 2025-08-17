@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>España arde: incendios, críticas y desigualdad en la emergencia · VITAMINA K</title>
+  <meta name="description" content="Más de 115.000 hectáreas calcinadas en España. Falta de medios, críticas al Gobierno y realojos indignos para los afectados.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://vitaminak.of/noticia-incendios.html">
+  <meta property="og:title" content="España arde: incendios, críticas y desigualdad en la emergencia">
+  <meta property="og:description" content="Más de 115.000 hectáreas calcinadas. Falta de medios y trato desigual a los afectados.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="assets/incendios-espana.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css"><!-- o usa el mismo CSS que tu index -->
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <!-- Header -->
+    <header>
+      <div class="brand"><a href="index.html">VITAMINAK.OF</a></div>
+      <nav>
+        <a href="index.html">Portada</a>
+        <a href="index.html#sobre">Sobre</a>
+      </nav>
+      <div class="social-mini">
+        <a href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">IG</a>
+        <a href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏</a>
+      </div>
+    </header>
+
+    <!-- Contenido de la noticia -->
+    <article class="section">
+      <h1>España arde: incendios, críticas y desigualdad en la emergencia</h1>
+      <p class="muted">Publicado el 17 de agosto de 2025 · 5 min lectura</p>
+      <img src="assets/incendios-espana.jpg" alt="Columna de humo de incendios en España" style="width:100%;border-radius:10px;margin:18px 0">
+
+      <p><strong>Más de 115.000 hectáreas</strong> se han calcinado en apenas unos días en Galicia, Extremadura y Castilla y León. El país vive su mayor emergencia medioambiental de la década, con evacuaciones masivas, pueblos enteros arrasados y miles de familias que lo han perdido todo.</p>
+
+      <h2>Situación crítica en Galicia y Extremadura</h2>
+      <p>En Ourense, el fuego ha devorado 46.000 hectáreas en una semana. Los vecinos describen la situación como <em>“intentar parar un tsunami”</em>. Extremadura, por su parte, sufre incendios descontrolados en Las Hurdes y Sierra de Gata, con miles de evacuados.</p>
+
+      <h2>Críticas por falta de medios</h2>
+      <p>La presidenta de Extremadura, María Guardiola, denunció que el Gobierno central <strong>rechazó su petición de más efectivos de la UME y refuerzos aéreos</strong>. Desde la oposición, Alberto Núñez Feijóo ha calificado la situación de “crisis nacional” y ha exigido la movilización inmediata del Ejército.</p>
+      <p>Los brigadistas advierten del <strong>agotamiento de equipos</strong> y de que trabajan con recursos limitados. Aunque el Gobierno asegura haber desplegado más de 3.400 efectivos, la sensación en el terreno es de <em>abandono y falta de coordinación</em>.</p>
+
+      <h2>Desigualdad en el trato a los afectados</h2>
+      <p>Mientras los evacuados por los incendios son realojados en <strong>pabellones deportivos</strong> con condiciones precarias, en redes sociales crece la indignación al compararlo con el alojamiento en hoteles de inmigrantes recién llegados. Más allá de la polémica, lo cierto es que <strong>las familias españolas pierden sus casas y reciben un trato indigno</strong>.</p>
+
+      <h2>Prevención olvidada</h2>
+      <p>Los expertos recuerdan que entre 2009 y 2022 la inversión en prevención cayó más de un 50 %. La consecuencia es clara: menos cortafuegos, menos limpieza de montes y una mayor vulnerabilidad ante olas de calor extremas.</p>
+
+      <p><strong>España arde no solo por el fuego, sino por la negligencia y la desigualdad</strong>. Un país que no protege a sus ciudadanos en la catástrofe, pero que presume de solidaridad hacia fuera, se consume en su propia incoherencia.</p>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+      © <span id="y"></span> VITAMINA K · Hecho para leerse rápido.
+    </footer>
+  </div>
+</div>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
