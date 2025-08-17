@@ -12,14 +12,14 @@
   <meta property="og:title" content="VITAMINA K · Noticias y Piezas">
   <meta property="og:description" content="Lee las últimas piezas. Sígueme en IG y X.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/fuego-1.jpg"><!-- cambia por una portada genérica si prefieres -->
+  <meta property="og:image" content="/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Theming -->
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#ffffff">
-  <base href="./">
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
   <style>
     :root{
       --bg:#ffffff; --fg:#111; --muted:#555;
@@ -43,10 +43,11 @@
     nav a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);font-weight:600}
     .social-mini a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);margin-left:8px;font-weight:600}
 
-    .hero{padding:28px 24px}
-    .hero h1{margin:2px 0 10px;font-size:clamp(24px,4.5vw,38px)}
+    .hero{padding:28px 24px;text-align:center}
+    .hero h1{margin:12px 0 10px;font-size:clamp(24px,4.5vw,38px)}
     .hero p{margin:0;color:var(--muted)}
-    .hero-cta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    .hero img{height:140px;margin:0 auto 18px;display:block}
+    .hero-cta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
     .btn{display:inline-block;padding:10px 14px;border-radius:6px;border:1px solid var(--stroke);background:#f4f4f4;color:#111;text-decoration:none;font-weight:700}
     .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
 
@@ -56,8 +57,9 @@
 
     .grid{display:grid;grid-template-columns:1fr;gap:16px}
     @media(min-width:860px){ .grid{grid-template-columns:1fr 1fr 1fr} }
-    .post{padding:18px;border:1px solid var(--stroke);border-radius:8px;background:var(--glass)}
-    .post img{width:100%;height:160px;object-fit:cover;border-radius:6px;border:1px solid var(--stroke);margin-bottom:10px}
+    .post{padding:0;border:1px solid var(--stroke);border-radius:8px;background:var(--glass);overflow:hidden}
+    .post img{width:100%;height:160px;object-fit:cover;display:block}
+    .post-content{padding:16px}
     .post h3{margin:0 0 6px;font-size:18px}
     .post p{margin:0 0 10px;color:var(--muted)}
     .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
@@ -91,6 +93,7 @@
     </header>
 
     <section class="hero">
+      <img src="assets/logo-vitaminak.png" alt="Logo VITAMINA K">
       <h1>Claro, corto y con impacto.</h1>
       <p>Piezas que te ponen en contexto en 60 segundos. Sin humo.</p>
       <div class="hero-cta">
@@ -103,31 +106,34 @@
     <section id="piezas" class="section">
       <h2>Últimas piezas</h2>
       <div class="grid">
-        <!-- Card 1: Incendios -->
         <article class="post">
-          <a href="noticia-incendios.html"><img src="assets/fuego-1.jpg" alt="Incendio forestal en España"></a>
-          <h3><a href="noticia-incendios.html">España arde: incendios, críticas y desigualdad en la emergencia</a></h3>
-          <p>Más de 115.000 hectáreas calcinadas, críticas por falta de medios y evacuados realojados en condiciones indignas.</p>
+          <a href="noticia-incendios.html">
+            <img src="assets/fuego-1.jpg" alt="Incendios en España">
+            <div class="post-content">
+              <h3>España arde: incendios, críticas y desigualdad en la emergencia</h3>
+              <p>Más de 115.000 hectáreas calcinadas, críticas por falta de medios y evacuados realojados en condiciones indignas.</p>
+            </div>
+          </a>
         </article>
 
-        <!-- Card 2: IRPF -->
         <article class="post">
-          <a href="#"><img src="assets/irpf-deflactacion-thumb.jpg" alt="Declaración del IRPF"></a>
-          <h3>IRPF: cuando el tramo no sube, lo pagas tú</h3>
-          <p>La OCDE advierte: sin deflactar tramos con la inflación, sube la carga real sobre tu nómina. La cuña fiscal en España ronda el 40% del coste laboral.</p>
-          <div class="chips">
-            <span class="chip"><a href="https://elpais.com/economia/2025-04-30/la-ocde-constata-los-efectos-de-la-inflacion-en-el-irpf-los-trabajadores-soportan-una-mayor-carga-fiscal-sobre-su-sueldo.html" target="_blank" rel="noopener">El País · OCDE</a></span>
-          </div>
+          <a href="#">
+            <img src="assets/irpf-deflactacion-thumb.jpg" alt="IRPF y deflactación">
+            <div class="post-content">
+              <h3>IRPF: cuando el tramo no sube, lo pagas tú</h3>
+              <p>La OCDE advierte: sin deflactar tramos con la inflación, sube la carga real sobre tu nómina. La cuña fiscal en España ronda el 40% del coste laboral.</p>
+            </div>
+          </a>
         </article>
 
-        <!-- Card 3: IPC -->
         <article class="post">
-          <a href="#"><img src="assets/ipc-julio-thumb.jpg" alt="Cesta de la compra"></a>
-          <h3>IPC de julio: respiro corto, cesta tensa</h3>
-          <p>El INE avanzó un 2,7% interanual: la inflación cede, pero la compra semanal sigue apretando a los hogares con menos margen.</p>
-          <div class="chips">
-            <span class="chip"><a href="https://theobjective.com/economia/2025-08-13/ine-inflacion-julio-espana-2025/" target="_blank" rel="noopener">The Objective · INE</a></span>
-          </div>
+          <a href="#">
+            <img src="assets/ipc-julio-thumb.jpg" alt="Inflación julio">
+            <div class="post-content">
+              <h3>IPC de julio: respiro corto, cesta tensa</h3>
+              <p>El INE avanzó un 2,7% interanual: la inflación cede, pero la compra semanal sigue apretando a los hogares con menos margen.</p>
+            </div>
+          </a>
         </article>
       </div>
     </section>
@@ -147,8 +153,8 @@
           <h3 style="margin-top:0">Manifiesto</h3>
           <p class="muted">Informar no es gritar. Es ordenar, comparar y explicar. Aquí no hay humo: hay contexto, fuentes y criterio.</p>
           <div style="margin-top:10px">
-            <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 Sígueme en IG</a>
-            <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 Sígueme en X</a>
+            <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 IG</a>
+            <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 X</a>
           </div>
         </div>
       </div>
