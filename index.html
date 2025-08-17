@@ -1,25 +1,25 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <img src="assets/logo-vitaminak.png" alt="Logo VITAMINA K">
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>España arde: incendios, críticas y desigualdad en la emergencia · VITAMINA K</title>
-  <meta name="description" content="Más de 115.000 hectáreas calcinadas en España. Falta de medios, críticas al Gobierno y realojos indignos para los afectados.">
-  <link rel="canonical" href="./noticia-incendios.html">
+  <title>VITAMINA K · Noticias y Piezas</title>
+  <meta name="description" content="Piezas cortas y llamadas a la acción. Claro, directo y con impacto.">
+  <link rel="canonical" href="https://vitaminak.of/">
 
   <!-- Social -->
-  <meta property="og:title" content="España arde: incendios, críticas y desigualdad en la emergencia">
-  <meta property="og:description" content="Más de 115.000 hectáreas calcinadas. Falta de medios y trato desigual a los afectados.">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="assets/incendios-espana.jpg">
+  <meta property="og:title" content="VITAMINA K · Noticias y Piezas">
+  <meta property="og:description" content="Lee las últimas piezas. Sígueme en IG y X.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/fuego-1.jpg"><!-- cambia por una portada genérica si prefieres -->
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Theming -->
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#ffffff">
   <base href="./">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <style>
     :root{
       --bg:#ffffff; --fg:#111; --muted:#555;
@@ -37,36 +37,52 @@
           border-radius:12px;box-shadow:0 4px 20px #00000010}
 
     header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;border-bottom:1px solid var(--stroke)}
-    .brand{font-weight:900;letter-spacing:.4px;font-size:18px}
+    .brand{display:flex;align-items:center;font-weight:900;letter-spacing:.4px;font-size:18px}
+    .brand img{height:28px;margin-right:8px}
     nav{display:flex;gap:10px;flex-wrap:wrap}
     nav a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);font-weight:600}
     .social-mini a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);margin-left:8px;font-weight:600}
 
-    .section{margin-top:0;padding:22px}
-    .section h1{margin:4px 0 10px;font-size:clamp(24px,4.5vw,34px)}
+    .hero{padding:28px 24px}
+    .hero h1{margin:2px 0 10px;font-size:clamp(24px,4.5vw,38px)}
+    .hero p{margin:0;color:var(--muted)}
+    .hero-cta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:10px 14px;border-radius:6px;border:1px solid var(--stroke);background:#f4f4f4;color:#111;text-decoration:none;font-weight:700}
+    .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+
+    .section{margin-top:18px;padding:22px}
+    .section h2{margin:0 0 10px;font-size:clamp(18px,3.6vw,26px)}
     .muted{color:var(--muted)}
-    figure{margin:18px 0}
-    figure img{width:100%;border-radius:10px;border:1px solid var(--stroke)}
-    figcaption{font-size:12px;color:#777;margin-top:6px}
 
-    .meta{font-size:13px;color:#777}
-    .hr{height:1px;background:var(--stroke);margin:18px 0}
-
+    .grid{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:860px){ .grid{grid-template-columns:1fr 1fr 1fr} }
+    .post{padding:18px;border:1px solid var(--stroke);border-radius:8px;background:var(--glass)}
+    .post img{width:100%;height:160px;object-fit:cover;border-radius:6px;border:1px solid var(--stroke);margin-bottom:10px}
+    .post h3{margin:0 0 6px;font-size:18px}
+    .post p{margin:0 0 10px;color:var(--muted)}
     .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
     .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--stroke);background:var(--chip);font-size:12px}
 
-    footer{margin-top:0;padding:18px;text-align:center;color:#777;border-top:1px solid var(--stroke)}
+    .cols{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:860px){ .cols{grid-template-columns:1.2fr 1fr} }
+    .box{padding:16px;border:1px solid var(--stroke);border-radius:8px;background:var(--glass)}
+
+    footer{margin-top:18px;padding:18px;text-align:center;color:#777;border-top:1px solid var(--stroke)}
   </style>
 </head>
 <body>
 <div class="wrap">
   <div class="card">
-    <!-- Header -->
     <header>
-      <div class="brand"><a href="index.html" style="text-decoration:none;color:inherit">VITAMINAK.OF</a></div>
+      <div class="brand">
+        <a href="index.html" style="text-decoration:none;color:inherit;display:flex;align-items:center">
+          <img src="assets/logo-vitaminak.png" alt="Logo VITAMINA K">
+          VITAMINA K
+        </a>
+      </div>
       <nav aria-label="Secciones">
-        <a href="index.html#piezas">Portada</a>
-        <a href="index.html#sobre">Sobre</a>
+        <a href="#piezas">Últimas piezas</a>
+        <a href="#sobre">Sobre</a>
       </nav>
       <div class="social-mini" aria-label="Redes sociales">
         <a href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">IG</a>
@@ -74,57 +90,69 @@
       </div>
     </header>
 
-    <!-- Noticia -->
-    <article class="section" itemscope itemtype="https://schema.org/NewsArticle">
-      <header>
-        <h1 itemprop="headline">España arde: incendios, críticas y desigualdad en la emergencia</h1>
-        <p class="meta"><time itemprop="datePublished" datetime="2025-08-17">17 de agosto de 2025</time> · 5 min de lectura</p>
-      </header>
-
-      <figure>
-        <img src="assets/incendios-espana.jpg" alt="Columna de humo y llamas en un incendio forestal" itemprop="image">
-        <figcaption>Imagen de archivo. Sube tu foto a <code>assets/incendios-espana.jpg</code>.</figcaption>
-      </figure>
-
-      <p><strong>Más de 115.000 hectáreas</strong> se han calcinado en pocos días en Galicia, Extremadura y Castilla y León. El país vive una de sus mayores emergencias medioambientales de la década, con evacuaciones masivas, pueblos arrasados y familias que lo han perdido todo.</p>
-
-      <h2>Situación crítica en Galicia y Extremadura</h2>
-      <p>En Ourense, los incendios han arrasado decenas de miles de hectáreas en una sola semana. Vecinos y brigadistas describen la situación como <em>“intentar parar un tsunami”</em>. En Extremadura, focos en Las Hurdes y Sierra de Gata han obligado a evacuaciones en cadena.</p>
-
-      <h2>Críticas por falta de medios y coordinación</h2>
-      <p>Desde gobiernos autonómicos y equipos sobre el terreno se denuncia el <strong>agotamiento de efectivos</strong> y la <strong>escasez de medios aéreos</strong>. La oposición habla de “crisis nacional” y exige la movilización máxima, mientras el Ejecutivo sostiene que ha desplegado UME y refuerzos. La percepción en el terreno, sin embargo, es de <em>coordinación insuficiente</em>.</p>
-
-      <h2>Desigualdad en el trato a los evacuados</h2>
-      <p>Numerosas familias son realojadas en <strong>pabellones municipales</strong> con recursos limitados durante días, lo que aviva la sensación de <strong>trato desigual</strong> frente a otros colectivos realojados con condiciones más favorables en otras situaciones. Más allá de debates en redes, la realidad es que <strong>hay españoles durmiendo en el suelo tras perderlo todo</strong>.</p>
-
-      <h2>Prevención olvidada</h2>
-      <p>Expertos llevan años advirtiendo: sin inversión sostenida en <strong>limpieza de montes, cortafuegos y gestión forestal</strong>, cada ola de calor dispara el riesgo. Reducir la estacionalidad del operativo y profesionalizar la prevención fuera del verano es clave para no repetir este escenario.</p>
-
-      <div class="hr"></div>
-      <div class="chips">
-        <span class="chip">Etiquetas: Incendios</span>
-        <span class="chip">Emergencias</span>
-        <span class="chip">España</span>
+    <section class="hero">
+      <h1>Claro, corto y con impacto.</h1>
+      <p>Piezas que te ponen en contexto en 60 segundos. Sin humo.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#piezas">Ver piezas</a>
+        <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 IG</a>
+        <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 X</a>
       </div>
+    </section>
 
-      <section aria-label="Galería" class="section" style="padding:0">
-        <figure>
-          <img src="assets/brigadistas-incendios.jpg" alt="Brigadistas trabajando contra el fuego">
-          <figcaption>Sug.: <code>assets/brigadistas-incendios.jpg</code></figcaption>
-        </figure>
-        <figure>
-          <img src="assets/evacuados-pabellon.jpg" alt="Evacuados en un pabellón municipal">
-          <figcaption>Sug.: <code>assets/evacuados-pabellon.jpg</code></figcaption>
-        </figure>
-      </section>
+    <section id="piezas" class="section">
+      <h2>Últimas piezas</h2>
+      <div class="grid">
+        <!-- Card 1: Incendios -->
+        <article class="post">
+          <a href="noticia-incendios.html"><img src="assets/fuego-1.jpg" alt="Incendio forestal en España"></a>
+          <h3><a href="noticia-incendios.html">España arde: incendios, críticas y desigualdad en la emergencia</a></h3>
+          <p>Más de 115.000 hectáreas calcinadas, críticas por falta de medios y evacuados realojados en condiciones indignas.</p>
+        </article>
 
-      <nav aria-label="Relacionados" class="section" style="padding:0">
-        <p class="muted">Relacionado:</p>
-        <ul>
-          <li><a href="index.html#piezas">Volver a la portada</a></li>
-        </ul>
-      </nav>
-    </article>
+        <!-- Card 2: IRPF -->
+        <article class="post">
+          <a href="#"><img src="assets/irpf-deflactacion-thumb.jpg" alt="Declaración del IRPF"></a>
+          <h3>IRPF: cuando el tramo no sube, lo pagas tú</h3>
+          <p>La OCDE advierte: sin deflactar tramos con la inflación, sube la carga real sobre tu nómina. La cuña fiscal en España ronda el 40% del coste laboral.</p>
+          <div class="chips">
+            <span class="chip"><a href="https://elpais.com/economia/2025-04-30/la-ocde-constata-los-efectos-de-la-inflacion-en-el-irpf-los-trabajadores-soportan-una-mayor-carga-fiscal-sobre-su-sueldo.html" target="_blank" rel="noopener">El País · OCDE</a></span>
+          </div>
+        </article>
+
+        <!-- Card 3: IPC -->
+        <article class="post">
+          <a href="#"><img src="assets/ipc-julio-thumb.jpg" alt="Cesta de la compra"></a>
+          <h3>IPC de julio: respiro corto, cesta tensa</h3>
+          <p>El INE avanzó un 2,7% interanual: la inflación cede, pero la compra semanal sigue apretando a los hogares con menos margen.</p>
+          <div class="chips">
+            <span class="chip"><a href="https://theobjective.com/economia/2025-08-13/ine-inflacion-julio-espana-2025/" target="_blank" rel="noopener">The Objective · INE</a></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="sobre" class="section">
+      <h2>Sobre VITAMINA K</h2>
+      <div class="cols">
+        <div class="box">
+          <h3 style="margin-top:0">Pilares</h3>
+          <ul>
+            <li><strong>Datos primero:</strong> antes de opinar, verifico y cito.</li>
+            <li><strong>Claro y corto:</strong> 60 segundos para entender lo esencial.</li>
+            <li><strong>Impacto:</strong> lo que afecta a tu bolsillo, tu seguridad y tu día a día.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3 style="margin-top:0">Manifiesto</h3>
+          <p class="muted">Informar no es gritar. Es ordenar, comparar y explicar. Aquí no hay humo: hay contexto, fuentes y criterio.</p>
+          <div style="margin-top:10px">
+            <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 Sígueme en IG</a>
+            <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 Sígueme en X</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer>
       © <span id="y"></span> VITAMINA K · Hecho para leerse rápido.
