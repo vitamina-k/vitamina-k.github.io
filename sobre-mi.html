@@ -1,49 +1,105 @@
-<section id="sobre-mi" class="section">
-  <h2>Sobre mí</h2>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sobre mí · VITAMINA K</title>
+  <meta name="description" content="Conoce quién está detrás de VITAMINA K: Kevin Pérez, su trayectoria, motivaciones y visión.">
+  <link rel="canonical" href="./sobre-mi.html">
 
-  <div class="kgrid">
-    <!-- Columna texto -->
-    <div class="box">
-      <h3 style="margin-top:0">Kevin Pérez</h3>
-      <p>Soy <strong>Kevin Pérez</strong>, creador de <strong>VITAMINA K</strong>. No vengo de una redacción: vengo de <strong>turnos rotativos</strong> en planta química y fábricas de producción. Mañanas, tardes y noches; festivos perdidos, cansancio real. Conozco la calle, el alquiler que aprieta y lo difícil que es mantener una vivienda cuando comprar ni siquiera entra en la ecuación.</p>
+  <!-- Social -->
+  <meta property="og:title" content="Sobre mí · VITAMINA K">
+  <meta property="og:description" content="Conoce quién está detrás de VITAMINA K: Kevin Pérez, su trayectoria, motivaciones y visión.">
+  <meta property="og:type" content="profile">
+  <meta property="og:image" content="assets/logo-vitaminak.png">
+  <meta name="twitter:card" content="summary_large_image">
 
-      <h3>Por qué empecé</h3>
-      <p>Durante la pandemia empecé a grabar vídeos. Probé la <strong>censura en redes</strong>: me borraron cuentas en TikTok e Instagram. No me hundí; me encendí. Y decidí seguir <strong>dando la cara</strong>.</p>
+  <!-- Theming -->
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff">
+  <base href="./">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 
-      <h3>De hablar… a hacer</h3>
-      <p>No quise ser solo “opinólogo”. Pasé de comentar a <strong>implicarme</strong>:</p>
-      <ul>
-        <li>Colaboré con una <strong>empresa de desocupación</strong> para entender el problema de la okupación y la odisea de un propietario para recuperar su casa.</li>
-        <li>Tras la <strong>DANA en Valencia</strong>, me uní a voluntarios para <strong>cocinar y repartir comida caliente</strong> a afectados y equipos de ayuda. En el terreno se hace más que frente a una cámara.</li>
-      </ul>
+  <style>
+    :root{
+      --bg:#ffffff; --fg:#111; --muted:#555;
+      --glass:#ffffff; --stroke:#e0e0e0;
+      --accent:#4ecdc4; --accent2:#0ea5e9; --chip:#f6f6f6;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);
+              font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    a{color:#0ea5e9;text-decoration:none}
+    a:hover{text-decoration:underline}
 
-      <h3>Qué quiero conseguir</h3>
-      <p>Estoy aquí por mi familia y por mi país. Quiero una España con <strong>seguridad, salud y futuro</strong>. Y <strong>política de sentido común</strong>: arreglar lo que no funciona, ser útil, dar ejemplo.</p>
+    .wrap{max-width:900px;margin:0 auto;padding:22px}
+    .card{background:var(--glass);border:1px solid var(--stroke);
+          border-radius:12px;box-shadow:0 4px 20px #00000010}
 
-      <h3>Cómo trabajo en VITAMINA K</h3>
-      <ul>
-        <li><strong>Datos primero</strong>: verifico y cito.</li>
-        <li><strong>Síntesis</strong>: lo importante, sin rodeos.</li>
-        <li><strong>Impacto</strong>: economía real, vivienda, seguridad, vida diaria.</li>
-        <li><strong>Acción</strong>: menos pose y más resultado.</li>
-      </ul>
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;border-bottom:1px solid var(--stroke)}
+    .brand{display:flex;align-items:center;font-weight:900;letter-spacing:.4px;font-size:18px}
+    .brand img{height:28px;margin-right:8px}
+    nav{display:flex;gap:10px;flex-wrap:wrap}
+    nav a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);font-weight:600}
+    .social-mini a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);margin-left:8px;font-weight:600}
 
-      <div class="badges">
-        <span class="badge">Datos primero</span>
-        <span class="badge">Síntesis</span>
-        <span class="badge">Impacto</span>
-        <span class="badge">Acción</span>
+    .section{padding:22px}
+    .section h1{margin:4px 0 16px;font-size:clamp(24px,4.5vw,34px)}
+    .muted{color:var(--muted)}
+
+    article p{margin-bottom:16px}
+
+    footer{margin-top:0;padding:18px;text-align:center;color:#777;border-top:1px solid var(--stroke)}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <a href="index.html" style="text-decoration:none;color:inherit;display:flex;align-items:center">
+          <img src="assets/logo-vitaminak.png" alt="Logo VITAMINA K">
+          VITAMINA K
+        </a>
       </div>
-    </div>
-
-    <!-- Columna lateral -->
-    <aside class="box" style="text-align:center">
-      <!-- Sube tu foto como assets/kevin.jpg (opcional). Si no tienes, elimina la imagen. -->
-      <img class="avatar" src="assets/kevin.jpg" alt="Retrato de Kevin Pérez">
-      <div class="quote">“No hace falta gritar para informar. Hace falta ordenar, comparar y explicar.”</div>
-      <div style="margin-top:12px;color:#555;font-size:14px">
-        VITAMINA K — Noticias claras. Contexto útil. Sentido común.
+      <nav aria-label="Secciones">
+        <a href="index.html#piezas">Portada</a>
+        <a href="sobre-mi.html">Sobre mí</a>
+      </nav>
+      <div class="social-mini" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">IG</a>
+        <a href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏</a>
       </div>
-    </aside>
+    </header>
+
+    <!-- Contenido principal -->
+    <article class="section" itemscope itemtype="https://schema.org/ProfilePage">
+      <header>
+        <h1>Sobre mí</h1>
+        <p class="muted">Conoce quién está detrás de VITAMINA K</p>
+      </header>
+
+      <p>Me llamo <strong>Kevin Pérez</strong>. No he trabajado para ningún medio tradicional. Mi experiencia viene de años en el sector privado, en control de calidad dentro de plantas químicas y fábricas de producción, con turnos rotativos de mañana, tarde y noche. Conozco el esfuerzo real, el cansancio de trabajar fines de semana y festivos mientras los demás disfrutan.</p>
+
+      <p>He vivido de cerca los problemas de la calle: la dificultad para acceder a una vivienda, el sacrificio que supone mantener un alquiler y la casi imposibilidad de comprar una casa. Durante la pandemia exploté y empecé a grabar vídeos: entendí lo que muchos sentían, pero pocos se atrevían a decir. Eso me llevó a conocer la <strong>censura en redes sociales</strong>. Me borraron cuentas en TikTok e Instagram, pero lejos de hundirme, me dio más fuerza para seguir.</p>
+
+      <p>Con el tiempo dejé de lado el papel de simple opinador. Pasé a la acción. Colaboré con una empresa de desocupación, conociendo en primera persona el problema de la okupación y la indefensión del propietario. También participé como voluntario durante la <strong>DANA en Valencia</strong>, ayudando en la preparación de comida caliente para los afectados y para quienes trabajaban sin descanso en la emergencia. Ahí confirmé que se logra más en el terreno que hablando desde una silla.</p>
+
+      <p>Hoy estoy aquí no solo por mi país, sino por mi familia. Porque quiero que lo que deseo para ellos —seguridad, salud y futuro— sea lo mismo para todos en España. Quiero una <strong>política de sentido común</strong>, que sirva de verdad a la gente.</p>
+
+      <p>Así soy yo: Kevin, <strong>Vitamina K</strong>. Igual que la vitamina K es esencial para la salud del cuerpo, quiero ser esencial para que la sociedad no se desangre por problemas que deberíamos haber resuelto hace tiempo.</p>
+    </article>
+
+    <footer>
+      © <span id="y"></span> VITAMINA K · Hecho para leerse rápido.
+    </footer>
   </div>
-</section>
+</div>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
