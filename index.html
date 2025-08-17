@@ -12,12 +12,13 @@
   <meta property="og:title" content="VITAMINA K · Noticias y Piezas">
   <meta property="og:description" content="Lee las últimas piezas. Sígueme en IG y X.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/og.jpg">
+  <meta property="og:image" content="assets/fuego-1.jpg"><!-- cámbialo si tienes una portada específica -->
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Theming -->
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#ffffff">
+  <base href="./">
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 
   <style>
@@ -43,11 +44,36 @@
     nav a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);font-weight:600}
     .social-mini a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);margin-left:8px;font-weight:600}
 
-    .hero{padding:28px 24px;text-align:center}
-    .hero h1{margin:12px 0 10px;font-size:clamp(24px,4.5vw,38px)}
-    .hero p{margin:0;color:var(--muted)}
-    .hero img{height:140px;margin:0 auto 18px;display:block}
-    .hero-cta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    /* HERO: degradado + texto XXL de fondo */
+    .hero {
+      position: relative;
+      padding: 60px 24px 70px;
+      text-align: center;
+      min-height: 52vh;
+      display: grid;
+      place-items: center;
+      border-bottom: 1px solid var(--stroke);
+      background: linear-gradient(135deg, #0ea5e9 0%, #4ecdc4 50%, #ffffff 100%);
+      overflow: hidden;
+      border-radius: 0 0 12px 12px; /* encaja con la card */
+    }
+    .hero::before {
+      content: "VITAMINA K";
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(60px, 18vw, 220px);
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.15);
+      letter-spacing: 4px;
+      z-index: 0;
+      user-select: none;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero img { height: 140px; margin: 0 auto 18px; display: block }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 5vw, 40px) }
+    .hero .lead{ margin-top: 6px; color: #1f2937 } /* un poco más oscuro sobre el degradado */
+    .hero-cta{ margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap }
+
     .btn{display:inline-block;padding:10px 14px;border-radius:6px;border:1px solid var(--stroke);background:#f4f4f4;color:#111;text-decoration:none;font-weight:700}
     .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
 
@@ -58,6 +84,7 @@
     .grid{display:grid;grid-template-columns:1fr;gap:16px}
     @media(min-width:860px){ .grid{grid-template-columns:1fr 1fr 1fr} }
     .post{padding:0;border:1px solid var(--stroke);border-radius:8px;background:var(--glass);overflow:hidden}
+    .post a{color:inherit;text-decoration:none;display:block}
     .post img{width:100%;height:160px;object-fit:cover;display:block}
     .post-content{padding:16px}
     .post h3{margin:0 0 6px;font-size:18px}
@@ -92,10 +119,11 @@
       </div>
     </header>
 
+    <!-- HERO -->
     <section class="hero">
       <img src="assets/logo-vitaminak.png" alt="Logo VITAMINA K">
       <h1>Claro, corto y con impacto.</h1>
-      <p>Piezas que te ponen en contexto en 60 segundos. Sin humo.</p>
+      <p class="lead">Piezas que te ponen en contexto en 60 segundos. Sin humo.</p>
       <div class="hero-cta">
         <a class="btn primary" href="#piezas">Ver piezas</a>
         <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 IG</a>
@@ -103,9 +131,11 @@
       </div>
     </section>
 
+    <!-- LISTADO -->
     <section id="piezas" class="section">
       <h2>Últimas piezas</h2>
       <div class="grid">
+        <!-- Card 1 -->
         <article class="post">
           <a href="noticia-incendios.html">
             <img src="assets/fuego-1.jpg" alt="Incendios en España">
@@ -116,28 +146,37 @@
           </a>
         </article>
 
+        <!-- Card 2 -->
         <article class="post">
           <a href="#">
             <img src="assets/irpf-deflactacion-thumb.jpg" alt="IRPF y deflactación">
             <div class="post-content">
               <h3>IRPF: cuando el tramo no sube, lo pagas tú</h3>
               <p>La OCDE advierte: sin deflactar tramos con la inflación, sube la carga real sobre tu nómina. La cuña fiscal en España ronda el 40% del coste laboral.</p>
+              <div class="chips">
+                <span class="chip"><a href="https://elpais.com/economia/2025-04-30/la-ocde-constata-los-efectos-de-la-inflacion-en-el-irpf-los-trabajadores-soportan-una-mayor-carga-fiscal-sobre-su-sueldo.html" target="_blank" rel="noopener">El País · OCDE</a></span>
+              </div>
             </div>
           </a>
         </article>
 
+        <!-- Card 3 -->
         <article class="post">
           <a href="#">
             <img src="assets/ipc-julio-thumb.jpg" alt="Inflación julio">
             <div class="post-content">
               <h3>IPC de julio: respiro corto, cesta tensa</h3>
               <p>El INE avanzó un 2,7% interanual: la inflación cede, pero la compra semanal sigue apretando a los hogares con menos margen.</p>
+              <div class="chips">
+                <span class="chip"><a href="https://theobjective.com/economia/2025-08-13/ine-inflacion-julio-espana-2025/" target="_blank" rel="noopener">The Objective · INE</a></span>
+              </div>
             </div>
           </a>
         </article>
       </div>
     </section>
 
+    <!-- SOBRE -->
     <section id="sobre" class="section">
       <h2>Sobre VITAMINA K</h2>
       <div class="cols">
