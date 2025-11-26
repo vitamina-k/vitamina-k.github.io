@@ -1,206 +1,428 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>VITAMINA K · Noticias y Piezas</title>
-  <meta name="description" content="Piezas cortas y llamadas a la acción. Claro, directo y con impacto.">
-  <link rel="canonical" href="https://vitaminak.of/">
-
-  <!-- Social -->
-  <meta property="og:title" content="VITAMINA K · Noticias y Piezas">
-  <meta property="og:description" content="Lee las últimas piezas. Sígueme en IG y X.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/fuego-1.jpg"><!-- cámbialo si tienes una portada específica -->
-  <meta name="twitter:card" content="summary_large_image">
-
-  <!-- Theming -->
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#ffffff">
-  <base href="./">
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-
+  <meta charset="UTF-8" />
+  <title>BOLCICA — Bolsos, Cinturones y Carteras de Piel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#ffffff; --fg:#111; --muted:#555;
-      --glass:#ffffff; --stroke:#e0e0e0;
-      --accent:#4ecdc4; --accent2:#0ea5e9; --chip:#f6f6f6;
+    :root {
+      --bg: #F5F1E9;
+      --text: #1E1E1E;
+      --brown-dark: #5A3A26;
+      --brown-light: #C89B68;
+      --accent: #D8C7A3;
+      --white: #ffffff;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);
-              font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
-    a{color:#0ea5e9;text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .wrap{max-width:1100px;margin:0 auto;padding:22px}
-    .card{background:var(--glass);border:1px solid var(--stroke);
-          border-radius:12px;box-shadow:0 4px 20px #00000010}
-
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;border-bottom:1px solid var(--stroke)}
-    .brand{display:flex;align-items:center;font-weight:900;letter-spacing:.4px;font-size:18px}
-    .brand img{height:28px;margin-right:8px}
-    nav{display:flex;gap:10px;flex-wrap:wrap}
-    nav a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);font-weight:600}
-    .social-mini a{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--chip);margin-left:8px;font-weight:600}
-
-    /* HERO: degradado + texto XXL de fondo */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Montserrat", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 241, 233, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--accent);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+    }
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.2em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+    }
+    .nav-icons {
+      display: flex;
+      gap: 12px;
+      font-size: 0.9rem;
+    }
     .hero {
-      position: relative;
-      padding: 60px 24px 70px;
-      text-align: center;
-      min-height: 52vh;
       display: grid;
-      place-items: center;
-      border-bottom: 1px solid var(--stroke);
-      background: linear-gradient(135deg, #0ea5e9 0%, #4ecdc4 50%, #ffffff 100%);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 32px;
+      padding: 48px 0 32px;
+      align-items: center;
+    }
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+      margin-bottom: 24px;
+      max-width: 460px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: var(--brown-dark);
+      color: var(--white);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--brown-dark);
+      color: var(--brown-dark);
+    }
+    .hero-note {
+      font-size: 0.85rem;
+      color: #555;
+    }
+    .hero-image-placeholder {
+      background: linear-gradient(135deg, var(--brown-dark), var(--brown-light));
+      border-radius: 18px;
+      min-height: 260px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 22px;
+      color: var(--white);
+      position: relative;
       overflow: hidden;
-      border-radius: 0 0 12px 12px; /* encaja con la card */
     }
-    .hero::before {
-      content: "VITAMINA K";
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: clamp(60px, 18vw, 220px);
-      font-weight: 900;
-      color: rgba(255, 255, 255, 0.15);
-      letter-spacing: 4px;
-      z-index: 0;
-      user-select: none;
+    .hero-image-placeholder span {
+      font-family: "Playfair Display", serif;
+      font-size: 1.2rem;
     }
-    .hero > * { position: relative; z-index: 1; }
-    .hero img { height: 140px; margin: 0 auto 18px; display: block }
-    .hero h1 { margin: 0 0 10px; font-size: clamp(26px, 5vw, 40px) }
-    .hero .lead{ margin-top: 6px; color: #1f2937 } /* un poco más oscuro sobre el degradado */
-    .hero-cta{ margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap }
+    .badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: rgba(0,0,0,0.25);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
 
-    .btn{display:inline-block;padding:10px 14px;border-radius:6px;border:1px solid var(--stroke);background:#f4f4f4;color:#111;text-decoration:none;font-weight:700}
-    .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+    .section {
+      padding: 24px 0;
+    }
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+    }
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+    .grid-4 {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card-image {
+      background: #eee;
+      border-radius: 10px;
+      height: 140px;
+      margin-bottom: 8px;
+    }
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+    .card-meta {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    .price {
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .trust {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      font-size: 0.9rem;
+    }
+    .trust-item {
+      background: rgba(255,255,255,0.6);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--accent);
+    }
+    .newsletter {
+      background: #e7ddcc;
+      border-radius: 18px;
+      padding: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+    .newsletter form {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .newsletter input[type="email"] {
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--brown-dark);
+      min-width: 220px;
+    }
 
-    .section{margin-top:18px;padding:22px}
-    .section h2{margin:0 0 10px;font-size:clamp(18px,3.6vw,26px)}
-    .muted{color:var(--muted)}
+    footer {
+      border-top: 1px solid var(--accent);
+      margin-top: 24px;
+      padding: 16px 0 24px;
+      font-size: 0.85rem;
+      color: #666;
+    }
 
-    .grid{display:grid;grid-template-columns:1fr;gap:16px}
-    @media(min-width:860px){ .grid{grid-template-columns:1fr 1fr 1fr} }
-    .post{padding:0;border:1px solid var(--stroke);border-radius:8px;background:var(--glass);overflow:hidden}
-    .post a{color:inherit;text-decoration:none;display:block}
-    .post img{width:100%;height:160px;object-fit:cover;display:block}
-    .post-content{padding:16px}
-    .post h3{margin:0 0 6px;font-size:18px}
-    .post p{margin:0 0 10px;color:var(--muted)}
-    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-    .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--stroke);background:var(--chip);font-size:12px}
+    /* Bloque carrito + upsell (idea visual) */
+    .cart-section {
+      margin-top: 32px;
+      padding: 18px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--accent);
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 18px;
+    }
+    .cart-items { font-size: 0.9rem; }
+    .cart-upsell {
+      background: #f9f3e7;
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 0.9rem;
+    }
+    .upsell-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+    .upsell-item button {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: none;
+      background: var(--brown-dark);
+      color: var(--white);
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
 
-    .cols{display:grid;grid-template-columns:1fr;gap:14px}
-    @media(min-width:860px){ .cols{grid-template-columns:1.2fr 1fr} }
-    .box{padding:16px;border:1px solid var(--stroke);border-radius:8px;background:var(--glass)}
-
-    footer{margin-top:18px;padding:18px;text-align:center;color:#777;border-top:1px solid var(--stroke)}
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .cart-section {
+        grid-template-columns: 1fr;
+      }
+      .nav-links { display: none; }
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="card">
-    <header>
-      <div class="brand">
-        <a href="index.html" style="text-decoration:none;color:inherit;display:flex;align-items:center">
-          <img src="assets/logo-vitaminak.png" alt="Logo VITAMINA K">
-          VITAMINA K
-        </a>
-      </div>
-      <nav aria-label="Secciones">
-        <a href="#piezas">Últimas piezas</a>
-        <a href="sobre-mi.html">Sobre mí</a>
+  <header>
+    <div class="container nav">
+      <div class="logo">BOLCICA</div>
+      <nav class="nav-links">
+        <a href="#">Inicio</a>
+        <a href="#">Hombre</a>
+        <a href="#">Mujer</a>
+        <a href="#">Colecciones</a>
+        <a href="#">Sobre BOLCICA</a>
+        <a href="#">Contacto</a>
       </nav>
-      <div class="social-mini" aria-label="Redes sociales">
-        <a href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">IG</a>
-        <a href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏</a>
+      <div class="nav-icons">
+        <span>🔍</span>
+        <span>👤</span>
+        <span>🛒</span>
       </div>
-    </header>
+    </div>
+  </header>
 
+  <main class="container">
     <!-- HERO -->
     <section class="hero">
-      <img src="assets/logo-vitaminak.png" alt="Logo VITAMINA K">
-      <h1>La información como debe ser contada</h1>
-      <div class="hero-cta">
-        <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 IG</a>
-        <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 X</a>
+      <div>
+        <h1 class="hero-title">Marroquinería de piel que se nota en la mano.</h1>
+        <p class="hero-subtitle">
+          Cinturones, carteras, bolsos y mochilas para quienes quieren calidad de verdad,
+          tanto para el día a día como para ocasiones especiales.
+        </p>
+        <div class="btn-group">
+          <a href="#" class="btn btn-primary">Colección de hombre</a>
+          <a href="#" class="btn btn-secondary">Colección de mujer</a>
+        </div>
+        <p class="hero-note">Tienda física en Castellón · Centro comercial · Envíos a toda España.</p>
+      </div>
+      <div class="hero-image-placeholder">
+        <span>Bolsos, cinturones y carteras de piel.</span>
+        <div class="badge">Top ventas en tienda física</div>
       </div>
     </section>
 
-    <!-- LISTADO -->
-    <section id="piezas" class="section">
-      <h2>Últimas piezas</h2>
-      <div class="grid">
-        <!-- Card 1 -->
-        <article class="post">
-          <a href="noticia-incendios.html">
-            <img src="assets/fuego-1.jpg" alt="Incendios en España">
-            <div class="post-content">
-              <h3>España arde: incendios, críticas y desigualdad en la emergencia</h3>
-              <p>Más de 115.000 hectáreas calcinadas, críticas por falta de medios y evacuados realojados en condiciones indignas.</p>
-            </div>
-          </a>
+    <!-- CATEGORÍAS PRINCIPALES -->
+    <section class="section">
+      <h2 class="section-title">Encuentra lo que necesitas</h2>
+      <div class="grid grid-4">
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-title">Carteras de hombre</div>
+          <p class="card-meta">Modelos clásicos y actuales, ajustados a bolsillo y estilo.</p>
+          <a href="#" class="btn btn-secondary">Ver carteras</a>
         </article>
-
-        <!-- Card 2 -->
-        <article class="post">
-          <a href="noticia-hectareas.html">
-            <img src="assets/mapa1.jpg" alt="Qué son 115mil hectareas?">
-            <div class="post-content">
-              <h3>¿Qué son 115.000 hectáreas arrasadas?</h3>
-              <p>Cuando se habla de 115.000 hectáreas quemadas, la cifra parece abstracta.</p>
-            </div>
-          </a>
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-title">Cinturones de hombre</div>
+          <p class="card-meta">Piel resistente, hebillas de calidad, para cada día.</p>
+          <a href="#" class="btn btn-secondary">Ver cinturones</a>
         </article>
-
-        <!-- Card 3 -->
-        <article class="post">
-          <a href="#">
-            <img src="assets/mapa1.jpg" alt="115.000 hectareas">
-            <div class="post-content">
-              <h3>¿Qué son 115.000 hectáreas arrasadas?</h3>
-              <p>Cuando se habla de 115.000 hectáreas quemadas, la cifra parece abstracta.</p>
-              <div class="chips">
-              </div>
-            </div>
-          </a>
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-title">Bolsos y mochilas de hombre</div>
+          <p class="card-meta">Para trabajo, viaje y uso diario.</p>
+          <a href="#" class="btn btn-secondary">Ver bolsos y mochilas</a>
+        </article>
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-title">Carteras y cinturones de mujer</div>
+          <p class="card-meta">Diseños prácticos sin renunciar a la elegancia.</p>
+          <a href="#" class="btn btn-secondary">Ver mujer</a>
         </article>
       </div>
     </section>
 
-    <!-- SOBRE -->
-    <section id="sobre" class="section">
-      <h2>Sobre VITAMINA K</h2>
-      <div class="cols">
-        <div class="box">
-          <h3 style="margin-top:0">Pilares</h3>
+    <!-- TOP VENTAS -->
+    <section class="section">
+      <h2 class="section-title">Top ventas BOLCICA</h2>
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-title">Cinturón clásico marrón</div>
+          <p class="price">39,90 €</p>
+          <button class="btn btn-primary">Añadir al carrito</button>
+        </article>
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-title">Cartera de piel negra</div>
+          <p class="price">29,90 €</p>
+          <button class="btn btn-primary">Añadir al carrito</button>
+        </article>
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-title">Mochila vintage cuero</div>
+          <p class="price">79,90 €</p>
+          <button class="btn btn-primary">Añadir al carrito</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- BLOQUE CONFIANZA -->
+    <section class="section">
+      <div class="trust">
+        <div class="trust-item">Tienda física en Castellón, con atención personalizada.</div>
+        <div class="trust-item">Piel seleccionada, pensada para durar años.</div>
+        <div class="trust-item">Cambios y devoluciones sencillas.</div>
+        <div class="trust-item">Más de 10 años vendiendo marroquinería.</div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="section">
+      <div class="newsletter">
+        <div>
+          <strong>Únete a BOLCICA.</strong><br/>
+          Recibe novedades, ofertas privadas y avisos de nuevas colecciones antes que nadie.
+        </div>
+        <form>
+          <input type="email" placeholder="Tu correo electrónico" />
+          <button class="btn btn-primary" type="submit">Quiero unirme</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- EJEMPLO BLOQUE CARRITO + UPSELL -->
+    <section class="section">
+      <h2 class="section-title">Tu carrito</h2>
+      <div class="cart-section">
+        <div class="cart-items">
+          <p><strong>Productos en tu carrito:</strong></p>
           <ul>
-            <li><strong>Datos primero:</strong> antes de opinar, verifico y cito.</li>
-            <li><strong>Claro y corto:</strong> 60 segundos para entender lo esencial.</li>
-            <li><strong>Impacto:</strong> lo que afecta a tu bolsillo, tu seguridad y tu día a día.</li>
+            <li>Cinturón clásico marrón · Talla 95 — 39,90 €</li>
+            <li>Cartera de piel negra — 29,90 €</li>
           </ul>
+          <p style="margin-top:8px;">Subtotal: 69,80 €</p>
         </div>
-        <div class="box">
-          <h3 style="margin-top:0">Manifiesto</h3>
-          <p class="muted">Informar no es gritar. Es ordenar, comparar y explicar. Aquí no hay humo: hay contexto, fuentes y criterio.</p>
-          <div style="margin-top:10px">
-            <a class="btn" href="https://www.instagram.com/vitaminak.of" target="_blank" rel="noopener">📸 IG</a>
-            <a class="btn" href="https://x.com/vitaminakof" target="_blank" rel="noopener">𝕏 X</a>
+        <aside class="cart-upsell">
+          <strong>Añade un último detalle a tu pedido</strong>
+          <p style="font-size:0.85rem; margin-top:4px;">
+            Estos complementos caben en el mismo paquete. Súmalos con un clic.
+          </p>
+          <div class="upsell-item">
+            <span>Pulsera de piel minimalista</span>
+            <span>4,95 € <button type="button">Añadir</button></span>
           </div>
-        </div>
+          <div class="upsell-item">
+            <span>Monedero compacto</span>
+            <span>5,00 € <button type="button">Añadir</button></span>
+          </div>
+          <div class="upsell-item">
+            <span>Hebilla extra para cinturón</span>
+            <span>6,50 € <button type="button">Añadir</button></span>
+          </div>
+        </aside>
       </div>
     </section>
+  </main>
 
-    <footer>
-      © <span id="y"></span> VITAMINA K · Hecho para leerse rápido.
-    </footer>
-  </div>
-</div>
-
-<script>
-  document.getElementById('y').textContent = new Date().getFullYear();
-</script>
+  <footer>
+    <div class="container">
+      BOLCICA — Bolsos, Cinturones y Carteras de Piel · Castellón<br/>
+      Visítanos en nuestro local del centro comercial o compra online cuando quieras.
+    </div>
+  </footer>
 </body>
 </html>
