@@ -1,628 +1,390 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>BOLCICA — Catálogo Hombre</title>
+  <meta charset="utf-8" />
+  <title>Hombre — BOLCICA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Mismo CSS que en index.html -->
   <style>
+    /* COPIA PEGADA DEL CSS DEL INDEX — MISMO QUE ARRIBA */
     :root {
-      --bg: #F5F1E9;
-      --bg-alt: #E7DFD1;
-      --text: #2B2118;
-      --muted: #7B6A58;
-      --accent: #C28A4B;
-      --accent-dark: #9C6A2E;
-      --border: #D1C2AE;
-      --card: #FFFFFF;
-      --danger: #B63A3A;
-      --success: #2E7D4F;
+      --bg: #0f1115;
+      --bg-alt: #11141a;
+      --card: #171a21;
+      --border: #242936;
+      --text: #f5f7fb;
+      --muted: #a3abbc;
+      --accent: #f0b35a;
+      --accent-soft: rgba(240,179,90,0.16);
+      --danger: #ff6b6b;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 14px 35px rgba(0,0,0,0.55);
+      --shadow-card: 0 10px 25px rgba(0,0,0,0.45);
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: "Montserrat", system-ui, -apple-system, sans-serif;
-      background: radial-gradient(circle at top left, #fdf9f2 0, #f3eadc 45%, #e6dccb 100%);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+      background:radial-gradient(circle at top,#191f2c 0,#05060a 60%,#000 100%);
+      color:var(--text);
     }
-
-    a { text-decoration: none; color: inherit; }
-
-    /* Header */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(16px);
-      background: rgba(245, 241, 233, 0.92);
-      border-bottom: 1px solid rgba(209, 194, 174, 0.7);
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1120px;margin:0 auto;padding:1.25rem 1.5rem}
+    .site-header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:blur(18px);
+      background:linear-gradient(to bottom,rgba(5,6,10,0.95),rgba(5,6,10,0.85),rgba(5,6,10,0.75));
+      border-bottom:1px solid rgba(255,255,255,0.04);
     }
-
-    .header-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:1.25rem}
+    .logo a{
+      font-weight:750;letter-spacing:.25em;font-size:.95rem;text-transform:uppercase;
+      padding:.45rem .8rem;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.16);
+      background:radial-gradient(circle at top left,#292f3e,#11141a 48%,#05060a 100%);
+      box-shadow:0 8px 22px rgba(0,0,0,0.65);
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+    .main-nav{
+      display:flex;align-items:center;gap:.9rem;font-size:.9rem;color:var(--muted);
+      flex-wrap:wrap;justify-content:flex-end;
     }
-
-    .brand-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 20%, #fdf6ec 0, #c28a4b 35%, #6b3d16 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fdf6ec;
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.22);
+    .main-nav a{
+      padding:.35rem .75rem;border-radius:999px;position:relative;
+      transition:all .18s ease-out;border:1px solid transparent;
     }
-
-    .brand-text h1 {
-      font-family: "Playfair Display", serif;
-      font-size: 1.35rem;
-      letter-spacing: 0.14em;
+    .main-nav a::after{
+      content:"";position:absolute;left:50%;bottom:.1rem;width:0;height:2px;border-radius:999px;
+      background:linear-gradient(90deg,#f0b35a,#ffdd88);transform:translateX(-50%);
+      transition:width .18s ease-out;
     }
-
-    .brand-text span {
-      display: block;
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      margin-top: 0.1rem;
+    .main-nav a:hover{
+      color:var(--text);border-color:rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);
     }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
+    .main-nav a:hover::after{width:70%}
+    .main-nav a.active{
+      color:var(--text);background:rgba(240,179,90,0.16);
+      border-color:rgba(240,179,90,0.5);box-shadow:0 0 0 1px rgba(240,179,90,0.25);
     }
-
-    .nav-link {
-      position: relative;
-      color: var(--muted);
-      font-weight: 500;
+    section{padding:1.75rem 0}
+    .hero{padding:2.2rem 0 1.9rem}
+    .hero-inner{
+      display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);
+      gap:2.4rem;align-items:center;
     }
-
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -0.25rem;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.2s ease;
+    @media(max-width:840px){.hero-inner{grid-template-columns:minmax(0,1fr)}}
+    .hero-text h1{
+      margin:0 0 .8rem;font-size:clamp(2rem,3.4vw,2.5rem);line-height:1.05;
     }
-
-    .nav-link:hover::after {
-      width: 100%;
+    .hero-text p{margin:0 0 .8rem;color:var(--muted);max-width:34rem;font-size:.96rem}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:.45rem;
+      padding:.4rem .75rem;border-radius:999px;
+      background:rgba(15,255,180,0.08);border:1px solid rgba(15,255,180,0.35);
+      color:#dafdf1;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;margin-top:.3rem;
     }
-
-    .nav-link.active {
-      color: var(--text);
+    .hero-image{position:relative}
+    .hero-placeholder{
+      border-radius:24px;min-height:220px;
+      background:radial-gradient(circle at top,#343b4c,#171b25 55%,#05060a 100%);
+      border:1px solid rgba(255,255,255,0.05);
+      box-shadow:var(--shadow-soft);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.88rem;color:var(--muted);
     }
-
-    .nav-link.active::after {
-      width: 100%;
+    .subnav-categoria{
+      padding-top:0;
     }
-
-    .nav-cta {
-      padding: 0.5rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid rgba(194, 138, 75, 0.5);
-      background: radial-gradient(circle at top left, #fdf6ec 0, #e2d4bf 40%, #d2c1aa 100%);
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
+    .subnav-inner{
+      display:flex;flex-wrap:wrap;gap:.5rem;
+      background:rgba(0,0,0,0.7);
+      border-radius:999px;
+      padding:.4rem;
+      border:1px solid rgba(255,255,255,0.08);
     }
-
-    /* Main layout */
-
-    main {
-      flex: 1;
+    .subnav-item{
+      flex:1 1 120px;
+      border-radius:999px;
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      padding:.45rem .8rem;
+      font-size:.85rem;
+      cursor:pointer;
+      transition:all .16s ease-out;
     }
-
-    .page {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 1.5rem 1.5rem 3rem;
+    .subnav-item:hover{
+      background:rgba(255,255,255,0.05);
+      color:var(--text);
     }
-
-    /* Hero de catálogo hombre */
-
-    .hero-hombre {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 2rem;
-      align-items: center;
-      margin: 1.5rem 0 2rem;
+    .productos-categoria .container>h2{
+      margin:0 0 .25rem;font-size:1.25rem;
     }
-
-    .hero-hombre-text h2 {
-      font-family: "Playfair Display", serif;
-      font-size: 2.25rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
+    .section-intro{
+      margin:0 0 1rem;font-size:.9rem;color:var(--muted);
+      max-width:30rem;
     }
-
-    .hero-hombre-text p {
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 32rem;
-      line-height: 1.5;
-      margin-bottom: 1rem;
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:1.25rem;
     }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
+    .product-card{
+      background:radial-gradient(circle at top left,#262b38,#11141a 55%,#05060a 100%);
+      border-radius:var(--radius-lg);
+      padding:1rem 1.05rem 1.1rem;
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:var(--shadow-card);
+      display:flex;
+      flex-direction:column;
+      gap:.3rem;
+      font-size:.9rem;
     }
-
-    .tag {
-      border-radius: 999px;
-      border: 1px solid rgba(160, 134, 103, 0.6);
-      padding: 0.2rem 0.8rem;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-      background: rgba(250,245,236,0.8);
+    .product-image{
+      border-radius:12px;
+      background:rgba(0,0,0,0.55);
+      padding:.7rem;
+      font-size:.8rem;
+      color:var(--muted);
+      text-align:center;
+      margin-bottom:.25rem;
     }
-
-    .hero-note {
-      font-size: 0.8rem;
-      color: var(--muted);
+    .product-desc{margin:0;color:var(--muted);font-size:.86rem}
+    .product-price{
+      margin:.25rem 0 0;
+      color:#ffd78b;
+      font-weight:600;
     }
-
-    .hero-hombre-visual {
-      border-radius: 22px;
-      padding: 1.25rem;
-      background: linear-gradient(135deg, #5c4332 0, #2f2118 45%, #8b6241 100%);
-      color: #f7eee2;
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:.55rem 1rem;border-radius:999px;
+      border:1px solid transparent;
+      font-size:.86rem;
+      cursor:pointer;
+      transition:all .18s ease-out;
+      text-decoration:none;
+      white-space:nowrap;
     }
-
-    .hero-hombre-visual h3 {
-      font-family: "Playfair Display", serif;
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      opacity: 0.9;
+    .btn-primary{
+      background:linear-gradient(130deg,#f0b35a,#ffdd88);
+      color:#2a2010;
+      box-shadow:0 10px 22px rgba(0,0,0,0.75);
     }
-
-    .hero-hombre-visual p {
-      font-size: 0.8rem;
-      opacity: 0.85;
-      line-height: 1.5;
+    .btn-primary:hover{
+      filter:brightness(1.03);
+      transform:translateY(-1px);
+      box-shadow:0 14px 28px rgba(0,0,0,0.85);
     }
-
-    .hero-usp-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.5rem;
-      font-size: 0.75rem;
+    .beneficios-categoria{padding-bottom:2.4rem}
+    .beneficios-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+      gap:1.2rem;
     }
-
-    .hero-usp-item {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
+    .beneficios-grid>div{
+      background:rgba(0,0,0,0.7);
+      border-radius:14px;
+      padding:.9rem 1rem;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:var(--shadow-card);
+      font-size:.9rem;
     }
-
-    .hero-usp-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #f5e2c2;
+    .beneficios-grid h3{margin:0 0 .3rem;font-size:.98rem}
+    .beneficios-grid p{margin:0;color:var(--muted);font-size:.86rem}
+    .site-footer{
+      border-top:1px solid rgba(255,255,255,0.06);
+      background:rgba(0,0,0,0.9);
+      padding:1.2rem 0 1.5rem;
+      margin-top:1rem;
     }
-
-    .hero-hombre-visual-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
-      border-top: 1px solid rgba(255,255,255,0.25);
-      padding-top: 0.6rem;
-      margin-top: 0.2rem;
+    .site-footer p{
+      margin:0;
+      font-size:.82rem;
+      color:var(--muted);
     }
-
-    .hero-hombre-visual-badge {
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(245, 226, 194, 0.8);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    /* Filtros de catálogo */
-
-    .catalog-filters {
-      margin: 2rem 0 1.25rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .catalog-filters-left {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-    }
-
-    .filter-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-    }
-
-    .filter-chip {
-      border-radius: 999px;
-      border: 1px solid rgba(160, 134, 103, 0.5);
-      padding: 0.25rem 0.8rem;
-      font-size: 0.8rem;
-      background: rgba(255, 255, 255, 0.8);
-      cursor: pointer;
-    }
-
-    .filter-chip.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent-dark);
-    }
-
-    .catalog-filters-right {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* Grid de productos */
-
-    .catalog-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1.25rem;
-    }
-
-    .product-card {
-      background: rgba(255,255,255,0.96);
-      border-radius: 16px;
-      padding: 0.85rem;
-      border: 1px solid rgba(209, 194, 174, 0.8);
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      box-shadow: 0 9px 24px rgba(0,0,0,0.06);
-      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
-    }
-
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 34px rgba(0,0,0,0.14);
-      border-color: var(--accent);
-    }
-
-    .product-image {
-      width: 100%;
-      border-radius: 12px;
-      aspect-ratio: 4 / 3;
-      background: linear-gradient(135deg, #d6c7b4, #c3b29c);
-      overflow: hidden;
-      margin-bottom: 0.4rem;
-    }
-
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .product-name {
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .product-meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .product-bottom {
-      margin-top: 0.35rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-    }
-
-    .product-price {
-      font-weight: 700;
-      font-size: 1rem;
-    }
-
-    .product-cta {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      padding: 0.45rem 0.75rem;
-      border-radius: 999px;
-      border: 1px solid rgba(194, 138, 75, 0.85);
-      background: radial-gradient(circle at top left, #fdf6ec 0, #e8d6bf 40%, #d1b18a 100%);
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    /* Footer */
-
-    footer {
-      border-top: 1px solid rgba(209, 194, 174, 0.7);
-      padding: 1rem 1.5rem 1.8rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    /* Responsive */
-
-    @media (max-width: 900px) {
-      .hero-hombre {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .catalog-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      nav {
-        flex-wrap: wrap;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .page {
-        padding-inline: 1rem;
-      }
-      .catalog-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
+    .site-footer p + p{margin-top:.2rem}
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <a href="index.html" class="brand">
-        <div class="brand-mark">B</div>
-        <div class="brand-text">
-          <h1>BOLCICA</h1>
-          <span>Bolsos · Cinturones · Carteras</span>
-        </div>
-      </a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html">BOLCICA</a>
+      </div>
       <nav class="main-nav">
-         <a href="index.html">Inicio</a>
-          <a href="hombre.html" class="active">Hombre</a>
-          <a href="mujer.html">Mujer</a>
-          <a href="colecciones.html">Colecciones</a>
-          <a href="#sobre">Sobre BOLCICA</a>
-          <a href="#contacto">Contacto</a>
+        <a href="index.html">Inicio</a>
+        <a href="hombre.html" class="active">Hombre</a>
+        <a href="mujer.html">Mujer</a>
+        <a href="colecciones.html">Colecciones</a>
+        <a href="#sobre">Sobre BOLCICA</a>
+        <a href="#contacto">Contacto</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="page">
-      <!-- HERO HOMBRE -->
-      <div class="hero-hombre">
-        <div class="hero-hombre-text">
-          <h2>Colección hombre</h2>
+    <!-- HERO CATEGORÍA HOMBRE -->
+    <section class="hero hero--categoria">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1>Colección de hombre</h1>
           <p>
-            Cinturones, carteras, bolsos y mochilas de piel pensados para el día a día:
-            trabajo, ocio y ocasiones especiales. Piel auténtica, acabados cuidados y
-            diseños que aguantan años, no temporadas.
+            Cinturones, carteras, bolsos y mochilas de piel auténtica para uso
+            diario, trabajo y ocasiones especiales. Piezas pensadas para durar años.
           </p>
-          <div class="hero-tags">
-            <span class="tag">Cinturones 100% piel</span>
-            <span class="tag">Carteras compactas</span>
-            <span class="tag">Bolsos & mochilas</span>
-          </div>
-          <p class="hero-note">
-            Todo el catálogo de hombre que ves aquí está disponible en nuestra tienda física
-            BOLCICA del centro comercial.
+          <p class="hero-badge">
+            Tienda física en Castellón · Envíos a toda España
           </p>
         </div>
-        <div class="hero-hombre-visual">
-          <h3>Selección BOLCICA · Hombre</h3>
-          <p>
-            Trabajamos con pieles seleccionadas y herrajes de calidad para que cada cinturón,
-            cartera o bolso aguante uso real: trabajo, viajes, reuniones y fines de semana.
-          </p>
-          <div class="hero-usp-list">
-            <div class="hero-usp-item">
-              <span class="hero-usp-dot"></span>
-              <span>Cinturones ajustables y recortables.</span>
-            </div>
-            <div class="hero-usp-item">
-              <span class="hero-usp-dot"></span>
-              <span>Carteras con espacio real para tarjetas.</span>
-            </div>
-            <div class="hero-usp-item">
-              <span class="hero-usp-dot"></span>
-              <span>Bolsos y mochilas para portátil y documentos.</span>
-            </div>
-            <div class="hero-usp-item">
-              <span class="hero-usp-dot"></span>
-              <span>Pieles en tonos negro, marrón, cognac y más.</span>
-            </div>
-          </div>
-          <div class="hero-hombre-visual-footer">
-            <span>Ver catálogo completo abajo</span>
-            <span class="hero-hombre-visual-badge">Hombre · Piel auténtica</span>
-          </div>
+        <div class="hero-image">
+          <div class="hero-placeholder">Foto colección hombre</div>
         </div>
       </div>
+    </section>
 
-      <!-- FILTROS -->
-      <div class="catalog-filters">
-        <div class="catalog-filters-left">
-          <span class="filter-label">Filtrar por:</span>
-          <button class="filter-chip active">Todo</button>
-          <button class="filter-chip">Cinturones</button>
-          <button class="filter-chip">Carteras</button>
-          <button class="filter-chip">Bolsos</button>
-          <button class="filter-chip">Mochilas</button>
-        </div>
-        <div class="catalog-filters-right">
-          Mostrando <strong>8</strong> productos de hombre
+    <!-- SUBMENÚ INTERNO: TIPOS DE PRODUCTO -->
+    <section class="subnav-categoria">
+      <div class="container subnav-inner">
+        <button type="button" class="subnav-item">Cinturones</button>
+        <button type="button" class="subnav-item">Carteras</button>
+        <button type="button" class="subnav-item">Bolsos</button>
+        <button type="button" class="subnav-item">Mochilas</button>
+      </div>
+    </section>
+
+    <!-- LISTADO DE PRODUCTOS PRINCIPALES -->
+    <section class="productos-categoria">
+      <div class="container">
+        <h2>Cinturones de hombre</h2>
+        <p class="section-intro">
+          Hebillas de calidad, piel gruesa pero flexible, y tallas reales.
+        </p>
+
+        <div class="product-grid">
+          <article class="product-card">
+            <div class="product-image">Foto cinturón clásico</div>
+            <h3>Cinturón clásico marrón</h3>
+            <p class="product-desc">
+              Acabado mate, ideal para vaqueros y pantalón de vestir.
+            </p>
+            <p class="product-price">39,90 €</p>
+            <button type="button" class="btn btn-primary">Añadir al carrito</button>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">Foto cinturón negro</div>
+            <h3>Cinturón negro formal</h3>
+            <p class="product-desc">
+              Perfecto para traje y eventos, hebilla pulida.
+            </p>
+            <p class="product-price">42,90 €</p>
+            <button type="button" class="btn btn-primary">Añadir al carrito</button>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">Foto cinturón casual</div>
+            <h3>Cinturón casual piel envejecida</h3>
+            <p class="product-desc">
+              Estilo desenfadado con piel envejecida, muy cómodo de llevar.
+            </p>
+            <p class="product-price">37,90 €</p>
+            <button type="button" class="btn btn-primary">Añadir al carrito</button>
+          </article>
         </div>
       </div>
+    </section>
 
-      <!-- GRID DE PRODUCTOS (EJEMPLO) -->
-      <div class="catalog-grid">
-        <!-- PRODUCTO 1 -->
-        <article class="product-card">
-          <div class="product-image">
-            <!-- Sustituye por tu foto real -->
-            <img src="https://via.placeholder.com/400x300?text=Cinturon+piel" alt="Cinturón de piel clásico negro">
-          </div>
-          <h3 class="product-name">Cinturón piel clásico negro</h3>
-          <p class="product-meta">Hebilla metálica · Ajustable · Disponible en varias tallas.</p>
-          <div class="product-bottom">
-            <span class="product-price">34,90€</span>
-            <button class="product-cta">Ver detalles</button>
-          </div>
-        </article>
+    <!-- BLOQUE CARTERAS -->
+    <section class="productos-categoria">
+      <div class="container">
+        <h2>Carteras de hombre</h2>
+        <p class="section-intro">
+          Modelos compactos, con buena capacidad y piel que mejora con el uso.
+        </p>
 
-        <!-- PRODUCTO 2 -->
-        <article class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/400x300?text=Carreta+piel" alt="Cartera de piel marrón con tarjetero">
-          </div>
-          <h3 class="product-name">Cartera piel marrón compacto</h3>
-          <p class="product-meta">Múltiples ranuras para tarjetas · Bolsillo para billetes · Tacto suave.</p>
-          <div class="product-bottom">
-            <span class="product-price">29,90€</span>
-            <button class="product-cta">Ver detalles</button>
-          </div>
-        </article>
+        <div class="product-grid">
+          <article class="product-card">
+            <div class="product-image">Foto cartera negra</div>
+            <h3>Cartera de piel negra</h3>
+            <p class="product-price">29,90 €</p>
+            <button type="button" class="btn btn-primary">Añadir al carrito</button>
+          </article>
 
-        <!-- PRODUCTO 3 -->
-        <article class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/400x300?text=Bolso+bandolera" alt="Bolso bandolera de piel para hombre">
-          </div>
-          <h3 class="product-name">Bolso bandolera piel</h3>
-          <p class="product-meta">Ideal para diario · Compartimentos interiores · Bandolera regulable.</p>
-          <div class="product-bottom">
-            <span class="product-price">59,90€</span>
-            <button class="product-cta">Ver detalles</button>
-          </div>
-        </article>
+          <article class="product-card">
+            <div class="product-image">Foto cartera marrón</div>
+            <h3>Cartera marrón clásica</h3>
+            <p class="product-price">32,90 €</p>
+            <button type="button" class="btn btn-primary">Añadir al carrito</button>
+          </article>
 
-        <!-- PRODUCTO 4 -->
-        <article class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/400x300?text=Mochila+piel" alt="Mochila de piel para portátil">
-          </div>
-          <h3 class="product-name">Mochila piel para portátil</h3>
-          <p class="product-meta">Compartimento acolchado · Ideal para trabajo y viaje.</p>
-          <div class="product-bottom">
-            <span class="product-price">89,90€</span>
-            <button class="product-cta">Ver detalles</button>
-          </div>
-        </article>
+          <article class="product-card">
+            <div class="product-image">Foto tarjetero</div>
+            <h3>Tarjetero minimalista</h3>
+            <p class="product-price">19,90 €</p>
+            <button type="button" class="btn btn-primary">Añadir al carrito</button>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        <!-- PRODUCTO 5 -->
-        <article class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/400x300?text=Cinturon+marron" alt="Cinturón de piel color coñac">
-          </div>
-          <h3 class="product-name">Cinturón piel color coñac</h3>
-          <p class="product-meta">Acabado envejecido · Perfecto para vaqueros o chinos.</p>
-          <div class="product-bottom">
-            <span class="product-price">36,90€</span>
-            <button class="product-cta">Ver detalles</button>
-          </div>
-        </article>
+    <!-- BLOQUE BOLSOS/MOCHILAS -->
+    <section class="productos-categoria">
+      <div class="container">
+        <h2>Bolsos y mochilas de hombre</h2>
+        <p class="section-intro">
+          Para trabajo, viaje y uso diario. Diseños prácticos sin perder estilo.
+        </p>
 
-        <!-- PRODUCTO 6 -->
-        <article class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/400x300?text=Carreta+seguridad" alt="Cartera de piel con clic de seguridad">
-          </div>
-          <h3 class="product-name">Cartera piel con cierre</h3>
-          <p class="product-meta">Cierre con clic · Doble cuerpo · Espacio para DNI y tarjetas.</p>
-          <div class="product-bottom">
-            <span class="product-price">32,90€</span>
-            <button class="product-cta">Ver detalles</button>
-          </div>
-        </article>
+        <div class="product-grid">
+          <article class="product-card">
+            <div class="product-image">Foto mochila cuero</div>
+            <h3>Mochila vintage cuero</h3>
+            <p class="product-price">79,90 €</p>
+            <button type="button" class="btn btn-primary">Añadir al carrito</button>
+          </article>
 
-        <!-- PRODUCTO 7 -->
-        <article class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/400x300?text=Bolsa+viaje" alt="Bolsa de viaje de piel">
-          </div>
-          <h3 class="product-name">Bolsa de viaje piel</h3>
-          <p class="product-meta">Fin de semana · Asas reforzadas · Bandolera desmontable.</p>
-          <div class="product-bottom">
-            <span class="product-price">119,90€</span>
-            <button class="product-cta">Ver detalles</button>
-          </div>
-        </article>
+          <article class="product-card">
+            <div class="product-image">Foto bandolera</div>
+            <h3>Bandolera de piel</h3>
+            <p class="product-price">59,90 €</p>
+            <button type="button" class="btn btn-primary">Añadir al carrito</button>
+          </article>
 
-        <!-- PRODUCTO 8 -->
-        <article class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/400x300?text=Monedero+hombre" alt="Monedero de piel para hombre">
-          </div>
-          <h3 class="product-name">Monedero piel hombre</h3>
-          <p class="product-meta">Tamaño compacto · Cierre con cremallera · Piel resistente.</p>
-          <div class="product-bottom">
-            <span class="product-price">14,90€</span>
-            <button class="product-cta">Ver detalles</button>
-          </div>
-        </article>
+          <article class="product-card">
+            <div class="product-image">Foto maletín</div>
+            <h3>Maletín de trabajo</h3>
+            <p class="product-price">89,90 €</p>
+            <button type="button" class="btn btn-primary">Añadir al carrito</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOQUE BENEFICIOS -->
+    <section class="beneficios-categoria">
+      <div class="container beneficios-grid">
+        <div>
+          <h3>Piel que se nota en la mano</h3>
+          <p>Piezas que no son de usar y tirar: son de usar y disfrutar.</p>
+        </div>
+        <div>
+          <h3>Ajustamos tallas en tienda</h3>
+          <p>Si el cinturón no encaja perfecto, te lo ajustamos.</p>
+        </div>
+        <div>
+          <h3>Cambios sencillos</h3>
+          <p>Si no es lo que esperabas, hablamos y lo arreglamos.</p>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    BOLCICA · Catálogo hombre · Todos los productos mostrados están disponibles en tienda física (salvo rotura de stock).
+  <footer class="site-footer">
+    <div class="container">
+      <p>BOLCICA — Bolsos, Cinturones y Carteras de Piel · Castellón</p>
+      <p>Visítanos en nuestro local del centro comercial o compra online cuando quieras.</p>
+    </div>
   </footer>
 </body>
 </html>
